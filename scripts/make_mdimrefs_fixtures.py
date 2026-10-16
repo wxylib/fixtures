@@ -1,4 +1,5 @@
-"""An mdim-refs/0.2 byte-reference table over three tiny OISST-shaped
+"""An mdim-refs/0.2 byte-reference table (spec: wxylib/design,
+specs/mdim-refs-0.2.md) over three tiny OISST-shaped
 netCDF4 files, and what GDAL reads for a few windows of the mosaic, so a
 table reader can be checked against GDAL (mdimrefs/oracle/*.bin).
 
@@ -8,8 +9,10 @@ Steps, as the full OISST archive table is built:
    lat 36, lon 72, int16, shuffle then deflate level 1, one chunk each);
 2. `gdal mdim mosaic` them to a multidimensional VRT;
 3. scan each source chunk's byte range with stock GDAL
-   (MDArray.GetRawBlockInfo), placed in the global chunk grid by the VRT's
-   DestSlab offsets, into an mdim-refs/0.2 SQLite table;
+   (MDArray.GetRawBlockInfo), keyed within its source (physical layer),
+   copy the VRT's SourceSlab and DestSlab into `placements` (plan layer),
+   and define each `refs_<array>` view from the two (view layer), in an
+   mdim-refs/0.2 SQLite table;
 4. export each `refs_<array>` view to Parquet plus `arrays.json`, the
    form the Rust reader (wxy-virtual) takes;
 5. read windows of the mosaic with GDAL into oracle/*.bin (little-endian,
@@ -32,6 +35,7 @@ numpy and pyarrow, for example:
 Content is ASCII only.
 """
 
+import datetime
 import json
 import os
 import shutil
@@ -168,8 +172,9 @@ def coord_rows(vrt_path, vrt_root):
 
 
 def scan(vrt_path, vrt_root):
-    """The global chunk index of each data array: one row per chunk of the
-    mosaic, from each source's raw block info."""
+    """The physical and plan layers of each data array: one row per chunk of
+    each source, keyed on its position within the source, from the source's
+    raw block info; and one placement per VRT <Source>."""
     out = {}
     group = vrt_root.find("Group")
     for arr in group.findall("Array"):
@@ -177,12 +182,25 @@ def scan(vrt_path, vrt_root):
         if name not in DATA:
             continue
         chunks = [int(x) for x in arr.find("BlockSize").text.split(",")]
-        rows = []
+        dims = [d.get("ref") for d in arr.findall("DimensionRef")]
+        gshape = [int(group.find(f"Dimension[@name='{d}']").get("size")) for d in dims]
+        rows, placements, infos = [], [], set()
         for src in arr.findall("Source"):
             fname = src.find("SourceFilename").text
+            source = MIRROR + fname[len("nc/"):]
+            slab = src.find("SourceSlab")
+            src_offset = [int(x) for x in slab.get("offset").split(",")]
+            count = [int(x) for x in slab.get("count").split(",")]
+            step = [int(x) for x in slab.get("step").split(",")]
             dest = [int(x) for x in src.find("DestSlab").get("offset").split(",")]
-            if any(o % c for o, c in zip(dest, chunks)):
-                raise ValueError(f"{fname}: DestSlab {dest} is not on the chunk grid {chunks}")
+            # Chunk-aligned plan (spec rule).
+            if (any(x != 1 for x in step)
+                    or any(o % c for o, c in zip(src_offset + dest, chunks + chunks))
+                    or any((d + n) % c and d + n != g for d, n, c, g in zip(dest, count, chunks, gshape))):
+                raise ValueError(f"{fname}: placement is not on the chunk grid {chunks}")
+            placements.append(dict(source=source, source_array=src.find("SourceArray").text,
+                                   src_offset=src_offset, count=count,
+                                   dest=dict(offset=dest, count=count)))
             ds = gdal.OpenEx(os.path.join(os.path.dirname(vrt_path), fname), gdal.OF_MULTIDIM_RASTER)
             a = ds.GetRootGroup().OpenMDArray(name)
             if a.GetBlockSize() != chunks:
@@ -190,45 +208,66 @@ def scan(vrt_path, vrt_root):
             shape = [d.GetSize() for d in a.GetDimensions()]
             counts = [-(-s // c) for s, c in zip(shape, chunks)]
             for local in np.ndindex(*counts):
-                key = [o // c + i for o, c, i in zip(dest, chunks, local)]
                 try:
                     info = a.GetRawBlockInfo(list(local))
                 except RuntimeError:
                     # GDAL 3.13 raises for an unallocated HDF5 chunk. Call it
                     # absent only if GDAL reads that block as all fill.
                     start = [i * c for i, c in zip(local, chunks)]
-                    count = [min(c, s - o) for c, s, o in zip(chunks, shape, start)]
-                    block = a.ReadAsArray(array_start_idx=start, count=count)
+                    n = [min(c, s - o) for c, s, o in zip(chunks, shape, start)]
+                    block = a.ReadAsArray(array_start_idx=start, count=n)
                     if not np.all(block == FILL):
                         raise
                     info = None
                 if info is None or info.GetOffset() is None or info.GetSize() == 0:
-                    rows.append(dict(key=key, present=0, path=None, offset=None, size=None, info=None))
+                    rows.append(dict(source=source, key=list(local), present=0,
+                                     offset=None, size=None, info=None))
                 else:
-                    rows.append(dict(key=key, present=1, path=MIRROR + fname[len("nc/"):],
-                                     offset=info.GetOffset(), size=info.GetSize(),
-                                     info=json.dumps(list(info.GetInfo() or []))))
+                    text = json.dumps(list(info.GetInfo() or []))
+                    infos.add(text)
+                    rows.append(dict(source=source, key=list(local), present=1,
+                                     offset=info.GetOffset(), size=info.GetSize(), info=text))
+        if len(infos) > 1:
+            raise ValueError(f"{name}: chunks disagree on codec info {infos}")
         first = gdal.OpenEx(os.path.join(os.path.dirname(vrt_path), arr.find("Source/SourceFilename").text),
                             gdal.OF_MULTIDIM_RASTER).GetRootGroup().OpenMDArray(name)
-        dims = [d.get("ref") for d in arr.findall("DimensionRef")]
-        shape = [int(group.find(f"Dimension[@name='{d}']").get("size")) for d in dims]
         out[name] = dict(
-            meta=dict(array=name, kind="data", storage="referenced", dims=dims, shape=shape,
+            meta=dict(array=name, kind="data", storage="referenced", dims=dims, shape=gshape,
                       chunks=chunks, dtype="<i2", fill=str(FILL), codec=CODEC,
                       attrs={k: v for k, v in attrs_of(first).items() if k != "_FillValue"},
                       affine=None, values=None),
-            rows=sorted(rows, key=lambda r: r["key"]),
+            rows=rows,
+            placements=placements,
         )
     return out
 
 
-def write_sqlite(path, coords, data):
+def view_sql(name, n, chunks):
+    """refs_<name>: chunk table joined to its placement, keys made global,
+    restricted to source chunks inside the slab."""
+    jx = lambda col, i: f"json_extract(p.{col}, '$[{i}]')"
+    jd = lambda i: f"json_extract(p.dest, '$.offset[{i}]')"
+    dims = ", ".join(f"t.dim_{i} - {jx('src_offset', i)} / {c} + {jd(i)} / {c} AS dim_{i}"
+                     for i, c in enumerate(chunks))
+    inside = " AND ".join(f"t.dim_{i} * {c} >= {jx('src_offset', i)} AND "
+                          f"t.dim_{i} * {c} < {jx('src_offset', i)} + {jx('count', i)}"
+                          for i, c in enumerate(chunks))
+    return (f'CREATE VIEW "refs_{name}" AS SELECT {dims}, t.present, '
+            f'CASE WHEN t."offset" IS NULL THEN NULL ELSE s.source END AS path, '
+            f't."offset", t.size, t.info, t.data '
+            f'FROM "{name}" t JOIN placements p ON p.array = \'{name}\' AND p.source_id = t.source_id '
+            f'JOIN sources s ON s.source_id = t.source_id WHERE {inside}')
+
+
+def write_sqlite(path, coords, data, files):
     if os.path.exists(path):
         os.remove(path)
     con = sqlite3.connect(path)
     con.execute("CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT)")
-    con.execute("INSERT INTO meta VALUES('format_version', ?)", (FORMAT,))
-    con.execute("CREATE TABLE remap(target TEXT, prefix TEXT, replacement TEXT)")
+    con.executemany("INSERT INTO meta VALUES(?, ?)",
+                    [("format_version", FORMAT), ("plan", "oisst.vrt")])
+    con.execute("CREATE TABLE remap(target TEXT, prefix TEXT, replacement TEXT, "
+                "PRIMARY KEY(target, prefix)) WITHOUT ROWID")
     con.execute("INSERT INTO remap VALUES('fixture', ?, 'nc/')", (MIRROR,))
     con.execute('CREATE TABLE arrays(array TEXT PRIMARY KEY, kind TEXT, storage TEXT, dims TEXT, '
                 'shape TEXT, chunks TEXT, dtype TEXT, fill TEXT, codec TEXT, attrs TEXT, '
@@ -240,25 +279,36 @@ def write_sqlite(path, coords, data):
                     (r["array"], r["kind"], r["storage"], j(r["dims"]), j(r["shape"]),
                      j(r["chunks"]), r["dtype"], r["fill"], j(r["codec"]), j(r["attrs"]),
                      j(r["affine"]), blob))
-    sources = sorted({row["path"] for d in data.values() for row in d["rows"] if row["path"]})
-    con.execute("CREATE TABLE sources(source_id INTEGER PRIMARY KEY, source TEXT)")
-    con.executemany("INSERT INTO sources VALUES(?, ?)", [(i + 1, s) for i, s in enumerate(sources)])
-    sid = {s: i + 1 for i, s in enumerate(sources)}
+    con.execute("CREATE TABLE sources(source_id INTEGER PRIMARY KEY, source TEXT UNIQUE, "
+                "size BIGINT, mtime BIGINT, etag TEXT)")
+    sid = {}
+    for i, (source, local) in enumerate(sorted(files.items())):
+        st = os.stat(local)
+        con.execute("INSERT INTO sources VALUES(?, ?, ?, ?, NULL)",
+                    (i + 1, source, st.st_size, int(st.st_mtime)))
+        sid[source] = i + 1
+    con.execute("CREATE TABLE placements(array TEXT, dest TEXT, source_id INTEGER, "
+                "source_array TEXT, src_offset TEXT, count TEXT, "
+                "PRIMARY KEY(array, dest)) WITHOUT ROWID")
     for name, d in data.items():
+        for p in d["placements"]:
+            con.execute("INSERT INTO placements VALUES(?,?,?,?,?,?)",
+                        (name, j(p["dest"]), sid[p["source"]], p["source_array"],
+                         j(p["src_offset"]), j(p["count"])))
         n = len(d["meta"]["dims"])
         dimcols = ", ".join(f"dim_{i} INTEGER" for i in range(n))
+        key = ", ".join(["source_id"] + [f"dim_{i}" for i in range(n)])
         con.execute(f'CREATE TABLE "{name}"(source_id INTEGER, {dimcols}, present INTEGER, '
-                    f'"offset" BIGINT, size BIGINT, info TEXT, data BLOB)')
+                    f'"offset" BIGINT, size BIGINT, info TEXT, data BLOB, '
+                    f'PRIMARY KEY({key})) WITHOUT ROWID')
         for r in d["rows"]:
             con.execute(f'INSERT INTO "{name}" VALUES({",".join("?" * (n + 6))})',
-                        (sid.get(r["path"]), *r["key"], r["present"], r["offset"], r["size"],
+                        (sid[r["source"]], *r["key"], r["present"], r["offset"], r["size"],
                          r["info"], None))
-        sel = ", ".join(f"dim_{i}" for i in range(n))
-        con.execute(f'CREATE VIEW "refs_{name}" AS SELECT {sel}, present, '
-                    f'CASE WHEN "offset" IS NULL THEN NULL ELSE s.source END AS path, '
-                    f'"offset", size, info, data FROM "{name}" LEFT JOIN sources s USING(source_id)')
+        con.execute(view_sql(name, n, d["meta"]["chunks"]))
     con.commit()
     con.execute("VACUUM")
+    con.execute("PRAGMA journal_mode=DELETE")
     con.close()
 
 
@@ -284,8 +334,9 @@ def export(sqlite_path):
         cols = [c[0] for c in cur.description]
         vals = list(zip(*cur.fetchall()))
         types = {**{f"dim_{i}": pa.int64() for i in range(n)}, "present": pa.int8(),
-                 "path": pa.string(), "offset": pa.int64(), "size": pa.int64(), "info": pa.string()}
-        table = pa.table({c: pa.array(v, types[c]) for c, v in zip(cols, vals) if c != "data"})
+                 "path": pa.string(), "offset": pa.int64(), "size": pa.int64(), "info": pa.string(),
+                 "data": pa.binary()}
+        table = pa.table({c: pa.array(v, types[c]) for c, v in zip(cols, vals)})
         pq.write_table(table, os.path.join(OUT, f"refs_{r['array']}.parquet"), compression="zstd")
     remap = [dict(target=t, prefix=p, replacement=s)
              for t, p, s in con.execute("SELECT target, prefix, replacement FROM remap")]
@@ -303,6 +354,10 @@ def main():
         p = os.path.join(NC, source_name(day))
         os.makedirs(os.path.dirname(p), exist_ok=True)
         write_day(p, d)
+        # A fixed mtime (the day itself), so sources.mtime is reproducible.
+        t = int(datetime.datetime(int(day[:4]), int(day[4:6]), int(day[6:]),
+                                  tzinfo=datetime.timezone.utc).timestamp())
+        os.utime(p, (t, t))
         files.append(p)
 
     vrt = os.path.join(OUT, "oisst.vrt")
@@ -312,7 +367,8 @@ def main():
     coords = coord_rows(vrt, root)
     data = scan(vrt, root)
     sqlite_path = os.path.join(OUT, "oisst.sqlite")
-    write_sqlite(sqlite_path, coords, data)
+    write_sqlite(sqlite_path, coords, data,
+                 {MIRROR + source_name(day): f for day, f in zip(DAYS, files)})
     export(sqlite_path)
 
     ds = gdal.OpenEx(vrt, gdal.OF_MULTIDIM_RASTER)

@@ -45,15 +45,17 @@ are the oracle for Zarr readers too. `zarr/manifest.json` lists each case.
 
 ## mdimrefs/
 
-An [mdim-refs/0.2](https://github.com/hypertidy/zaro/pull/5) byte-reference
-table over three tiny netCDF4 files shaped like NOAA OISST v2.1 daily
+An [mdim-refs/0.2](https://github.com/wxylib/design/blob/main/specs/mdim-refs-0.2.md)
+byte-reference table over three tiny netCDF4 files shaped like NOAA OISST v2.1 daily
 (time 1, zlev 1, lat 36, lon 72, int16, shuffle then deflate, one chunk per
 file), made by `scripts/make_mdimrefs_fixtures.py`:
 
 1. writes `nc/198109/oisst-avhrr-v02r01.1981090{1,2,3}.nc` (netCDF4);
 2. runs `gdal mdim mosaic` over them to `oisst.vrt`;
-3. scans each chunk's byte range with stock GDAL (`GetRawBlockInfo`), placed
-   by the VRT's DestSlab offsets, into `oisst.sqlite` (the spec form);
+3. scans each chunk's byte range with stock GDAL (`GetRawBlockInfo`), keyed
+   within its source, copies the VRT's slabs into `placements`, and defines
+   the global `refs_<array>` views from the two, in `oisst.sqlite` (the spec
+   form);
 4. exports each `refs_<array>` view to `refs_<array>.parquet` and the
    `arrays`, `remap` and `meta` tables to `arrays.json` (the form wxy-virtual
    reads);
