@@ -44,6 +44,10 @@ cases = [
          bounds=(0, 0, 200, 150), crs="EPSG:3857",
          profile=dict(driver="GTiff", tiled=True, blockxsize=64, blockysize=64,
                       compress="DEFLATE", interleave="band")),
+    dict(file="rgb-u8-deflate-pixel.tif", w=230, h=170, bands=3, dtype="uint8",
+         bounds=(1000, 2000, 3300, 3700), crs="EPSG:3577",
+         profile=dict(driver="GTiff", tiled=True, blockxsize=64, blockysize=64,
+                      compress="DEFLATE", interleave="pixel")),
 ]
 
 windows = [(0, 0, 50, 40), (97, 61, 130, 77), (None, None, None, None)]

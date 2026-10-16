@@ -306,6 +306,52 @@
    "epsg": 3857,
    "nodata": null,
    "interleave": "BAND"
+  },
+  {
+   "file": "rgb-u8-deflate-pixel.tif",
+   "windows": [
+    {
+     "col": 0,
+     "row": 0,
+     "width": 50,
+     "height": 40,
+     "file": "oracle/rgb-u8-deflate-pixel-w0.bin"
+    },
+    {
+     "col": 97,
+     "row": 61,
+     "width": 130,
+     "height": 77,
+     "file": "oracle/rgb-u8-deflate-pixel-w1.bin"
+    },
+    {
+     "col": 160,
+     "row": 125,
+     "width": 70,
+     "height": 45,
+     "file": "oracle/rgb-u8-deflate-pixel-w2.bin"
+    }
+   ],
+   "width": 230,
+   "height": 170,
+   "count": 3,
+   "dtype": "uint8",
+   "block": [
+    64,
+    64
+   ],
+   "overviews": [],
+   "geotransform": [
+    1000.0,
+    10.0,
+    0.0,
+    3700.0,
+    0.0,
+    -10.0
+   ],
+   "epsg": 3577,
+   "nodata": null,
+   "interleave": "PIXEL"
   }
  ]
 }
