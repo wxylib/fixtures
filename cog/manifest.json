@@ -1,0 +1,311 @@
+{
+ "gdal": "3.12.2",
+ "rasterio": "1.5.2",
+ "cases": [
+  {
+   "file": "world-int16-deflate.tif",
+   "windows": [
+    {
+     "col": 0,
+     "row": 0,
+     "width": 50,
+     "height": 40,
+     "file": "oracle/world-int16-deflate-w0.bin"
+    },
+    {
+     "col": 97,
+     "row": 61,
+     "width": 130,
+     "height": 77,
+     "file": "oracle/world-int16-deflate-w1.bin"
+    },
+    {
+     "col": 650,
+     "row": 315,
+     "width": 70,
+     "height": 45,
+     "file": "oracle/world-int16-deflate-w2.bin"
+    }
+   ],
+   "width": 720,
+   "height": 360,
+   "count": 1,
+   "dtype": "int16",
+   "block": [
+    128,
+    128
+   ],
+   "overviews": [
+    2,
+    4,
+    8
+   ],
+   "geotransform": [
+    -180.0,
+    0.5,
+    0.0,
+    90.0,
+    0.0,
+    -0.5
+   ],
+   "epsg": 4326,
+   "nodata": null,
+   "interleave": "BAND",
+   "levels": [
+    {
+     "factor": 2,
+     "width": 360,
+     "height": 180,
+     "geotransform": [
+      -180.0,
+      1.0,
+      0.0,
+      90.0,
+      0.0,
+      -1.0
+     ]
+    },
+    {
+     "factor": 4,
+     "width": 180,
+     "height": 90,
+     "geotransform": [
+      -180.0,
+      2.0,
+      0.0,
+      90.0,
+      0.0,
+      -2.0
+     ]
+    },
+    {
+     "factor": 8,
+     "width": 90,
+     "height": 45,
+     "geotransform": [
+      -180.0,
+      4.0,
+      0.0,
+      90.0,
+      0.0,
+      -4.0
+     ]
+    }
+   ]
+  },
+  {
+   "file": "polar-f32-zstd-bigtiff.tif",
+   "windows": [
+    {
+     "col": 0,
+     "row": 0,
+     "width": 50,
+     "height": 40,
+     "file": "oracle/polar-f32-zstd-bigtiff-w0.bin"
+    },
+    {
+     "col": 97,
+     "row": 61,
+     "width": 130,
+     "height": 77,
+     "file": "oracle/polar-f32-zstd-bigtiff-w1.bin"
+    },
+    {
+     "col": 430,
+     "row": 355,
+     "width": 70,
+     "height": 45,
+     "file": "oracle/polar-f32-zstd-bigtiff-w2.bin"
+    }
+   ],
+   "width": 500,
+   "height": 400,
+   "count": 1,
+   "dtype": "float32",
+   "block": [
+    128,
+    128
+   ],
+   "overviews": [
+    2,
+    4
+   ],
+   "geotransform": [
+    -3000000.0,
+    12000.0,
+    0.0,
+    2400000.0,
+    0.0,
+    -12000.0
+   ],
+   "epsg": 3031,
+   "nodata": -9999.0,
+   "interleave": "BAND",
+   "levels": [
+    {
+     "factor": 2,
+     "width": 250,
+     "height": 200,
+     "geotransform": [
+      -3000000.0,
+      24000.0,
+      0.0,
+      2400000.0,
+      0.0,
+      -24000.0
+     ]
+    },
+    {
+     "factor": 4,
+     "width": 125,
+     "height": 100,
+     "geotransform": [
+      -3000000.0,
+      48000.0,
+      0.0,
+      2400000.0,
+      0.0,
+      -48000.0
+     ]
+    }
+   ]
+  },
+  {
+   "file": "utm-u16-lzw-pred2-3band.tif",
+   "windows": [
+    {
+     "col": 0,
+     "row": 0,
+     "width": 50,
+     "height": 40,
+     "file": "oracle/utm-u16-lzw-pred2-3band-w0.bin"
+    },
+    {
+     "col": 97,
+     "row": 61,
+     "width": 130,
+     "height": 77,
+     "file": "oracle/utm-u16-lzw-pred2-3band-w1.bin"
+    },
+    {
+     "col": 230,
+     "row": 155,
+     "width": 70,
+     "height": 45,
+     "file": "oracle/utm-u16-lzw-pred2-3band-w2.bin"
+    }
+   ],
+   "width": 300,
+   "height": 200,
+   "count": 3,
+   "dtype": "uint16",
+   "block": [
+    64,
+    64
+   ],
+   "overviews": [
+    2,
+    4,
+    8
+   ],
+   "geotransform": [
+    499980.0,
+    10.0,
+    0.0,
+    5192220.0,
+    0.0,
+    -10.0
+   ],
+   "epsg": 32755,
+   "nodata": null,
+   "interleave": "PIXEL",
+   "levels": [
+    {
+     "factor": 2,
+     "width": 150,
+     "height": 100,
+     "geotransform": [
+      499980.0,
+      20.0,
+      0.0,
+      5192220.0,
+      0.0,
+      -20.0
+     ]
+    },
+    {
+     "factor": 4,
+     "width": 75,
+     "height": 50,
+     "geotransform": [
+      499980.0,
+      40.0,
+      0.0,
+      5192220.0,
+      0.0,
+      -40.0
+     ]
+    },
+    {
+     "factor": 8,
+     "width": 37,
+     "height": 25,
+     "geotransform": [
+      499980.0,
+      81.0810810810811,
+      0.0,
+      5192220.0,
+      0.0,
+      -80.0
+     ]
+    }
+   ]
+  },
+  {
+   "file": "planar-u8-deflate-2band.tif",
+   "windows": [
+    {
+     "col": 0,
+     "row": 0,
+     "width": 50,
+     "height": 40,
+     "file": "oracle/planar-u8-deflate-2band-w0.bin"
+    },
+    {
+     "col": 97,
+     "row": 61,
+     "width": 130,
+     "height": 77,
+     "file": "oracle/planar-u8-deflate-2band-w1.bin"
+    },
+    {
+     "col": 130,
+     "row": 105,
+     "width": 70,
+     "height": 45,
+     "file": "oracle/planar-u8-deflate-2band-w2.bin"
+    }
+   ],
+   "width": 200,
+   "height": 150,
+   "count": 2,
+   "dtype": "uint8",
+   "block": [
+    64,
+    64
+   ],
+   "overviews": [],
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    150.0,
+    0.0,
+    -1.0
+   ],
+   "epsg": 3857,
+   "nodata": null,
+   "interleave": "BAND"
+  }
+ ]
+}
