@@ -60,10 +60,6 @@ FORMAT = "mdim-refs/0.2"
 DAYS = ["19810901", "19810902", "19810903"]
 NLAT, NLON = 36, 72
 FILL = -999
-CODEC = {
-    "compressor": {"id": "zlib", "level": 1},
-    "filters": [{"id": "shuffle", "elementsize": 2}],
-}
 DATA = ["sst", "ice"]
 
 # Windows as (array, start, count) over (time, zlev, lat, lon).
@@ -151,7 +147,7 @@ def coord_rows(vrt_path, vrt_root):
     group = vrt_root.find("Group")
     for arr in group.findall("Array"):
         name = arr.get("name")
-        if name in DATA:
+        if arr.find("Source") is not None:
             continue
         dim = arr.find("DimensionRef").get("ref")
         size = int(group.find(f"Dimension[@name='{dim}']").get("size"))
@@ -171,15 +167,37 @@ def coord_rows(vrt_path, vrt_root):
     return rows
 
 
-def scan(vrt_path, vrt_root):
+NUMPY = {gdal.GDT_Int16: "<i2", gdal.GDT_UInt16: "<u2", gdal.GDT_Int32: "<i4",
+         gdal.GDT_Float32: "<f4", gdal.GDT_Float64: "<f8", gdal.GDT_Byte: "|u1"}
+
+
+def codec_of(info, elementsize):
+    """Zarr v2 codec ids from GDAL raw block info (netCDF4/HDF5 filters).
+    The deflate level is not reported and does not matter for decoding;
+    1 is recorded, as OISST uses."""
+    info = set(info)
+    known = {"COMPRESSION=DEFLATE", "FILTER=SHUFFLE", "ENDIANNESS=LITTLE"}
+    if info - known:
+        raise ValueError(f"unsupported block info {sorted(info - known)}")
+    filters = [{"id": "shuffle", "elementsize": elementsize}] if "FILTER=SHUFFLE" in info else None
+    compressor = {"id": "zlib", "level": 1} if "COMPRESSION=DEFLATE" in info else None
+    return {"compressor": compressor, "filters": filters}
+
+
+def mirror_source(fname):
+    return MIRROR + fname[len("nc/"):]
+
+
+def scan(vrt_path, vrt_root, data=DATA, source_of=mirror_source):
     """The physical and plan layers of each data array: one row per chunk of
     each source, keyed on its position within the source, from the source's
-    raw block info; and one placement per VRT <Source>."""
+    raw block info; and one placement per VRT <Source>. `source_of` turns a
+    VRT SourceFilename into the verbatim source recorded in the table."""
     out = {}
     group = vrt_root.find("Group")
     for arr in group.findall("Array"):
         name = arr.get("name")
-        if name not in DATA:
+        if name not in data:
             continue
         chunks = [int(x) for x in arr.find("BlockSize").text.split(",")]
         dims = [d.get("ref") for d in arr.findall("DimensionRef")]
@@ -187,7 +205,7 @@ def scan(vrt_path, vrt_root):
         rows, placements, infos = [], [], set()
         for src in arr.findall("Source"):
             fname = src.find("SourceFilename").text
-            source = MIRROR + fname[len("nc/"):]
+            source = source_of(fname)
             slab = src.find("SourceSlab")
             src_offset = [int(x) for x in slab.get("offset").split(",")]
             count = [int(x) for x in slab.get("count").split(",")]
@@ -216,7 +234,7 @@ def scan(vrt_path, vrt_root):
                     start = [i * c for i, c in zip(local, chunks)]
                     n = [min(c, s - o) for c, s, o in zip(chunks, shape, start)]
                     block = a.ReadAsArray(array_start_idx=start, count=n)
-                    if not np.all(block == FILL):
+                    if not np.all(block == a.GetNoDataValue()):
                         raise
                     info = None
                 if info is None or info.GetOffset() is None or info.GetSize() == 0:
@@ -231,9 +249,13 @@ def scan(vrt_path, vrt_root):
             raise ValueError(f"{name}: chunks disagree on codec info {infos}")
         first = gdal.OpenEx(os.path.join(os.path.dirname(vrt_path), arr.find("Source/SourceFilename").text),
                             gdal.OF_MULTIDIM_RASTER).GetRootGroup().OpenMDArray(name)
+        dtype = NUMPY[first.GetDataType().GetNumericDataType()]
+        nodata = first.GetNoDataValue()
+        fill = None if nodata is None else (str(int(nodata)) if dtype[1] in "iu" else repr(nodata))
         out[name] = dict(
             meta=dict(array=name, kind="data", storage="referenced", dims=dims, shape=gshape,
-                      chunks=chunks, dtype="<i2", fill=str(FILL), codec=CODEC,
+                      chunks=chunks, dtype=dtype, fill=fill,
+                      codec=codec_of(json.loads(next(iter(infos))) if infos else [], int(dtype[2:])),
                       attrs={k: v for k, v in attrs_of(first).items() if k != "_FillValue"},
                       affine=None, values=None),
             rows=rows,
@@ -259,16 +281,18 @@ def view_sql(name, n, chunks):
             f'JOIN sources s ON s.source_id = t.source_id WHERE {inside}')
 
 
-def write_sqlite(path, coords, data, files):
+def write_sqlite(path, coords, data, files, remap, plan):
+    """`files` maps each verbatim source to the path GDAL opens it by (for
+    size and mtime); `remap` is (target, prefix, replacement) rows."""
     if os.path.exists(path):
         os.remove(path)
     con = sqlite3.connect(path)
     con.execute("CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT)")
     con.executemany("INSERT INTO meta VALUES(?, ?)",
-                    [("format_version", FORMAT), ("plan", "oisst.vrt")])
+                    [("format_version", FORMAT), ("plan", plan)])
     con.execute("CREATE TABLE remap(target TEXT, prefix TEXT, replacement TEXT, "
                 "PRIMARY KEY(target, prefix)) WITHOUT ROWID")
-    con.execute("INSERT INTO remap VALUES('fixture', ?, 'nc/')", (MIRROR,))
+    con.executemany("INSERT INTO remap VALUES(?, ?, ?)", remap)
     con.execute('CREATE TABLE arrays(array TEXT PRIMARY KEY, kind TEXT, storage TEXT, dims TEXT, '
                 'shape TEXT, chunks TEXT, dtype TEXT, fill TEXT, codec TEXT, attrs TEXT, '
                 'affine TEXT, "values" BLOB)')
@@ -282,10 +306,10 @@ def write_sqlite(path, coords, data, files):
     con.execute("CREATE TABLE sources(source_id INTEGER PRIMARY KEY, source TEXT UNIQUE, "
                 "size BIGINT, mtime BIGINT, etag TEXT)")
     sid = {}
-    for i, (source, local) in enumerate(sorted(files.items())):
-        st = os.stat(local)
+    for i, (source, opened) in enumerate(sorted(files.items())):
+        st = gdal.VSIStatL(opened)
         con.execute("INSERT INTO sources VALUES(?, ?, ?, ?, NULL)",
-                    (i + 1, source, st.st_size, int(st.st_mtime)))
+                    (i + 1, source, st.size, st.mtime))
         sid[source] = i + 1
     con.execute("CREATE TABLE placements(array TEXT, dest TEXT, source_id INTEGER, "
                 "source_array TEXT, src_offset TEXT, count TEXT, "
@@ -312,7 +336,7 @@ def write_sqlite(path, coords, data, files):
     con.close()
 
 
-def export(sqlite_path):
+def export(sqlite_path, out=OUT):
     """Parquet of each refs_ view plus arrays.json, read back from the
     SQLite table so the export is the table, not a second copy of the scan."""
     con = sqlite3.connect(sqlite_path)
@@ -337,12 +361,12 @@ def export(sqlite_path):
                  "path": pa.string(), "offset": pa.int64(), "size": pa.int64(), "info": pa.string(),
                  "data": pa.binary()}
         table = pa.table({c: pa.array(v, types[c]) for c, v in zip(cols, vals)})
-        pq.write_table(table, os.path.join(OUT, f"refs_{r['array']}.parquet"), compression="zstd")
+        pq.write_table(table, os.path.join(out, f"refs_{r['array']}.parquet"), compression="zstd")
     remap = [dict(target=t, prefix=p, replacement=s)
              for t, p, s in con.execute("SELECT target, prefix, replacement FROM remap")]
     fmt = con.execute("SELECT value FROM meta WHERE key = 'format_version'").fetchone()[0]
     con.close()
-    with open(os.path.join(OUT, "arrays.json"), "w") as f:
+    with open(os.path.join(out, "arrays.json"), "w") as f:
         json.dump(dict(format_version=fmt, arrays=arrays, remap=remap), f, indent=1)
 
 
@@ -368,7 +392,8 @@ def main():
     data = scan(vrt, root)
     sqlite_path = os.path.join(OUT, "oisst.sqlite")
     write_sqlite(sqlite_path, coords, data,
-                 {MIRROR + source_name(day): f for day, f in zip(DAYS, files)})
+                 {MIRROR + source_name(day): f for day, f in zip(DAYS, files)},
+                 [("fixture", MIRROR, "nc/")], "oisst.vrt")
     export(sqlite_path)
 
     ds = gdal.OpenEx(vrt, gdal.OF_MULTIDIM_RASTER)

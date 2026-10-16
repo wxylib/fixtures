@@ -67,6 +67,10 @@ written, so its row has `present = 0` and readers must give the fill value
 (-999) there. Coordinates: `lat` and `lon` are affine (`{start, step}`,
 latitude ascending as in OISST), `time` and `zlev` are inline.
 
+`oisst.sqlite` is not read by the wxylib tests; it is kept because it is the
+spec form of the table (what zaro and GDAL's OGR driver read), and the
+Parquet export is made from it.
+
 Source paths are recorded as if mirrored at `/mirror/oisst/`; the `fixture`
 remap target rewrites that prefix to `nc/`, relative to the table.
 
@@ -80,3 +84,13 @@ python scripts/make_mdimrefs_fixtures.py
 
 The output is byte-for-byte reproducible with the versions in
 `mdimrefs/manifest.json`.
+
+### mdimrefs/oisst-198109/
+
+The same table for 30 days of real NOAA OISST v2.1 (September 1981, four
+arrays), scanned over HTTP from the public NOAA bucket by
+`scripts/make_mdimrefs_oisst_198109.py`. Sources are the `/vsicurl/https://`
+URIs GDAL opened; the `public` remap target makes them plain `https://`.
+`manifest.json` holds the SHA-256 of what GDAL reads for day 30 of each
+array, for the wxylib/core demo `cargo run -p wxy-virtual --example
+oisst_refs`. Not used in CI; regenerating needs network access.

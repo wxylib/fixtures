@@ -1,0 +1,72 @@
+{
+ "gdal": "3.13.3",
+ "format_version": "mdim-refs/0.2",
+ "remap_target": "public",
+ "days": [
+  "19810901",
+  "19810930"
+ ],
+ "oracle_source": "/vsicurl/https://noaa-cdr-sea-surface-temp-optimum-interpolation-pds.s3.amazonaws.com/data/v2.1/avhrr/198109/oisst-avhrr-v02r01.19810930.nc",
+ "oracle": {
+  "sst": {
+   "start": [
+    29,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    720,
+    1440
+   ],
+   "sha256": "a683cbee5476c1ef6242d1436c53e0b572557ecfb26375f3035b2f386792cb2a"
+  },
+  "anom": {
+   "start": [
+    29,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    720,
+    1440
+   ],
+   "sha256": "430365c19d7d7b5aae9b2fd753b06c5daa5daf8819f502c237c9c200cdea3df2"
+  },
+  "err": {
+   "start": [
+    29,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    720,
+    1440
+   ],
+   "sha256": "d049d27146253e2816da68d717563201547a9729904f515dded6275baee5646d"
+  },
+  "ice": {
+   "start": [
+    29,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    720,
+    1440
+   ],
+   "sha256": "521743fe87d7dddea5e628c1203a048da9a704ee746cc3fd0e3a3cf6ad05c0cc"
+  }
+ }
+}
