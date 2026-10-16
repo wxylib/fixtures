@@ -1,0 +1,149 @@
+{
+ "gdal": "3.13.3",
+ "netCDF4": "1.7.4",
+ "format_version": "mdim-refs/0.2",
+ "sources": [
+  "198109/oisst-avhrr-v02r01.19810901.nc",
+  "198109/oisst-avhrr-v02r01.19810902.nc",
+  "198109/oisst-avhrr-v02r01.19810903.nc"
+ ],
+ "remap_target": "fixture",
+ "arrays": {
+  "sst": {
+   "shape": [
+    3,
+    1,
+    36,
+    72
+   ],
+   "chunks": [
+    1,
+    1,
+    36,
+    72
+   ],
+   "dtype": "int16",
+   "fill": -999,
+   "present": 3,
+   "absent": 0
+  },
+  "ice": {
+   "shape": [
+    3,
+    1,
+    36,
+    72
+   ],
+   "chunks": [
+    1,
+    1,
+    36,
+    72
+   ],
+   "dtype": "int16",
+   "fill": -999,
+   "present": 2,
+   "absent": 1
+  }
+ },
+ "coords": {
+  "time": [
+   1339.0,
+   1340.0,
+   1341.0
+  ],
+  "zlev": [
+   0.0
+  ],
+  "lat": {
+   "start": -87.5,
+   "step": 5.0
+  },
+  "lon": {
+   "start": 2.5,
+   "step": 5.0
+  }
+ },
+ "windows": [
+  {
+   "array": "sst",
+   "start": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    36,
+    72
+   ],
+   "file": "oracle/sst-w0.bin"
+  },
+  {
+   "array": "sst",
+   "start": [
+    0,
+    0,
+    5,
+    10
+   ],
+   "count": [
+    3,
+    1,
+    20,
+    33
+   ],
+   "file": "oracle/sst-w1.bin"
+  },
+  {
+   "array": "sst",
+   "start": [
+    2,
+    0,
+    30,
+    60
+   ],
+   "count": [
+    1,
+    1,
+    6,
+    12
+   ],
+   "file": "oracle/sst-w2.bin"
+  },
+  {
+   "array": "ice",
+   "start": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    3,
+    1,
+    36,
+    72
+   ],
+   "file": "oracle/ice-w3.bin"
+  },
+  {
+   "array": "ice",
+   "start": [
+    1,
+    0,
+    28,
+    0
+   ],
+   "count": [
+    2,
+    1,
+    8,
+    20
+   ],
+   "file": "oracle/ice-w4.bin"
+  }
+ ]
+}
