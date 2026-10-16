@@ -69,6 +69,8 @@ for i, c in enumerate(cases):
             if col is None:  # last window: the bottom-right corner, crossing tile edges
                 w, h = 70, 45
                 col, row = ds.width - w, ds.height - h
+            # keep every window inside the image
+            w, h = min(w, ds.width - col), min(h, ds.height - row)
             arr = ds.read(window=Window(col, row, w, h))
             name = f"{os.path.splitext(c['file'])[0]}-w{k}.bin"
             arr.astype(arr.dtype.newbyteorder("<")).tofile(os.path.join(ORACLE, name))
