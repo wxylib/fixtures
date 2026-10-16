@@ -29,3 +29,15 @@ python3 scripts/make_cog_fixtures.py
 Design and roadmap: [wxylib/design](https://github.com/wxylib/design).
 
 License: MIT OR Apache-2.0.
+
+## zarr/
+
+Zarr v3 stores made from the COG fixtures by `scripts/make_zarr_fixtures.py`
+(zarr-python), holding the same pixels, so the GDAL windows in `cog/oracle`
+are the oracle for Zarr readers too. `zarr/manifest.json` lists each case.
+
+| Store | Georeferencing | Layout |
+|-------|----------------|--------|
+| world-int16-spatial.zarr | GeoZarr `spatial:` + `proj:` on the group, `spatial:dimensions` on the array | (y, x), chunks 100 x 100 |
+| polar-f32-cf.zarr | CF-style float32 `x`/`y` centre arrays, `proj:code` only | (y, x), chunks 64 x 96, nodata -9999 |
+| utm-u16-3band-node.zarr | `spatial:` + `proj:` on the array, node registration | (band, y, x), chunks 1 x 64 x 64 |

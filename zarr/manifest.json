@@ -1,0 +1,166 @@
+{
+  "gdal": "3.12.2",
+  "rasterio": "1.5.2",
+  "zarr": "3.4.1",
+  "cases": [
+    {
+      "store": "world-int16-spatial.zarr",
+      "array": "data",
+      "source": "world-int16-deflate.tif",
+      "georef": "spatial",
+      "dims": [
+        "y",
+        "x"
+      ],
+      "shape": [
+        360,
+        720
+      ],
+      "chunks": [
+        100,
+        100
+      ],
+      "dtype": "int16",
+      "geotransform": [
+        -180.0,
+        0.5,
+        0.0,
+        90.0,
+        0.0,
+        -0.5
+      ],
+      "epsg": 4326,
+      "nodata": null,
+      "windows": [
+        {
+          "col": 0,
+          "row": 0,
+          "width": 50,
+          "height": 40,
+          "file": "../cog/oracle/world-int16-deflate-w0.bin"
+        },
+        {
+          "col": 97,
+          "row": 61,
+          "width": 130,
+          "height": 77,
+          "file": "../cog/oracle/world-int16-deflate-w1.bin"
+        },
+        {
+          "col": 650,
+          "row": 315,
+          "width": 70,
+          "height": 45,
+          "file": "../cog/oracle/world-int16-deflate-w2.bin"
+        }
+      ]
+    },
+    {
+      "store": "polar-f32-cf.zarr",
+      "array": "data",
+      "source": "polar-f32-zstd-bigtiff.tif",
+      "georef": "cf",
+      "dims": [
+        "y",
+        "x"
+      ],
+      "shape": [
+        400,
+        500
+      ],
+      "chunks": [
+        64,
+        96
+      ],
+      "dtype": "float32",
+      "geotransform": [
+        -3000000.0,
+        12000.0,
+        0.0,
+        2400000.0,
+        0.0,
+        -12000.0
+      ],
+      "epsg": 3031,
+      "nodata": -9999.0,
+      "windows": [
+        {
+          "col": 0,
+          "row": 0,
+          "width": 50,
+          "height": 40,
+          "file": "../cog/oracle/polar-f32-zstd-bigtiff-w0.bin"
+        },
+        {
+          "col": 97,
+          "row": 61,
+          "width": 130,
+          "height": 77,
+          "file": "../cog/oracle/polar-f32-zstd-bigtiff-w1.bin"
+        },
+        {
+          "col": 430,
+          "row": 355,
+          "width": 70,
+          "height": 45,
+          "file": "../cog/oracle/polar-f32-zstd-bigtiff-w2.bin"
+        }
+      ]
+    },
+    {
+      "store": "utm-u16-3band-node.zarr",
+      "array": "data",
+      "source": "utm-u16-lzw-pred2-3band.tif",
+      "georef": "spatial",
+      "dims": [
+        "band",
+        "y",
+        "x"
+      ],
+      "shape": [
+        3,
+        200,
+        300
+      ],
+      "chunks": [
+        1,
+        64,
+        64
+      ],
+      "dtype": "uint16",
+      "geotransform": [
+        499980.0,
+        10.0,
+        0.0,
+        5192220.0,
+        0.0,
+        -10.0
+      ],
+      "epsg": 32755,
+      "nodata": null,
+      "windows": [
+        {
+          "col": 0,
+          "row": 0,
+          "width": 50,
+          "height": 40,
+          "file": "../cog/oracle/utm-u16-lzw-pred2-3band-w0.bin"
+        },
+        {
+          "col": 97,
+          "row": 61,
+          "width": 130,
+          "height": 77,
+          "file": "../cog/oracle/utm-u16-lzw-pred2-3band-w1.bin"
+        },
+        {
+          "col": 230,
+          "row": 155,
+          "width": 70,
+          "height": 45,
+          "file": "../cog/oracle/utm-u16-lzw-pred2-3band-w2.bin"
+        }
+      ]
+    }
+  ]
+}
