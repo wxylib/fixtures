@@ -1,0 +1,203 @@
+{
+ "format_version": "mdim-refs/0.2",
+ "arrays": [
+  {
+   "array": "ice",
+   "kind": "data",
+   "storage": "referenced",
+   "dims": [
+    "time",
+    "zlev",
+    "lat",
+    "lon"
+   ],
+   "shape": [
+    3,
+    1,
+    36,
+    72
+   ],
+   "chunks": [
+    1,
+    1,
+    36,
+    72
+   ],
+   "dtype": "<i2",
+   "fill": "-999",
+   "codec": {
+    "compressor": {
+     "id": "zlib",
+     "level": 1
+    },
+    "filters": [
+     {
+      "id": "shuffle",
+      "elementsize": 2
+     }
+    ]
+   },
+   "attrs": {
+    "long_name": "Sea ice concentration",
+    "units": "%",
+    "scale_factor": 0.009999999776482582,
+    "add_offset": 0.0
+   },
+   "affine": null,
+   "values": null
+  },
+  {
+   "array": "lat",
+   "kind": "coord",
+   "storage": "affine",
+   "dims": [
+    "lat"
+   ],
+   "shape": [
+    36
+   ],
+   "chunks": [
+    36
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "degrees_north"
+   },
+   "affine": {
+    "start": -87.5,
+    "step": 5.0
+   },
+   "values": null
+  },
+  {
+   "array": "lon",
+   "kind": "coord",
+   "storage": "affine",
+   "dims": [
+    "lon"
+   ],
+   "shape": [
+    72
+   ],
+   "chunks": [
+    72
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "degrees_east"
+   },
+   "affine": {
+    "start": 2.5,
+    "step": 5.0
+   },
+   "values": null
+  },
+  {
+   "array": "sst",
+   "kind": "data",
+   "storage": "referenced",
+   "dims": [
+    "time",
+    "zlev",
+    "lat",
+    "lon"
+   ],
+   "shape": [
+    3,
+    1,
+    36,
+    72
+   ],
+   "chunks": [
+    1,
+    1,
+    36,
+    72
+   ],
+   "dtype": "<i2",
+   "fill": "-999",
+   "codec": {
+    "compressor": {
+     "id": "zlib",
+     "level": 1
+    },
+    "filters": [
+     {
+      "id": "shuffle",
+      "elementsize": 2
+     }
+    ]
+   },
+   "attrs": {
+    "long_name": "Daily sea surface temperature",
+    "units": "Celsius",
+    "scale_factor": 0.009999999776482582,
+    "add_offset": 0.0
+   },
+   "affine": null,
+   "values": null
+  },
+  {
+   "array": "time",
+   "kind": "coord",
+   "storage": "inline",
+   "dims": [
+    "time"
+   ],
+   "shape": [
+    3
+   ],
+   "chunks": [
+    3
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "calendar": "standard",
+    "units": "days since 1978-01-01 12:00:00"
+   },
+   "affine": null,
+   "values": [
+    1339.0,
+    1340.0,
+    1341.0
+   ]
+  },
+  {
+   "array": "zlev",
+   "kind": "coord",
+   "storage": "inline",
+   "dims": [
+    "zlev"
+   ],
+   "shape": [
+    1
+   ],
+   "chunks": [
+    1
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "meters"
+   },
+   "affine": null,
+   "values": [
+    0.0
+   ]
+  }
+ ],
+ "remap": [
+  {
+   "target": "fixture",
+   "prefix": "/mirror/oisst/",
+   "replacement": "nc/"
+  }
+ ]
+}

@@ -42,3 +42,39 @@ are the oracle for Zarr readers too. `zarr/manifest.json` lists each case.
 | world-int16-spatial.zarr | GeoZarr `spatial:` + `proj:` on the group, `spatial:dimensions` on the array | (y, x), chunks 100 x 100 |
 | polar-f32-cf.zarr | CF-style float32 `x`/`y` centre arrays, `proj:code` only | (y, x), chunks 64 x 96, nodata -9999 |
 | utm-u16-3band-node.zarr | `spatial:` + `proj:` on the array, node registration | (band, y, x), chunks 1 x 64 x 64 |
+
+## mdimrefs/
+
+An [mdim-refs/0.2](https://github.com/hypertidy/zaro/pull/5) byte-reference
+table over three tiny netCDF4 files shaped like NOAA OISST v2.1 daily
+(time 1, zlev 1, lat 36, lon 72, int16, shuffle then deflate, one chunk per
+file), made by `scripts/make_mdimrefs_fixtures.py`:
+
+1. writes `nc/198109/oisst-avhrr-v02r01.1981090{1,2,3}.nc` (netCDF4);
+2. runs `gdal mdim mosaic` over them to `oisst.vrt`;
+3. scans each chunk's byte range with stock GDAL (`GetRawBlockInfo`), placed
+   by the VRT's DestSlab offsets, into `oisst.sqlite` (the spec form);
+4. exports each `refs_<array>` view to `refs_<array>.parquet` and the
+   `arrays`, `remap` and `meta` tables to `arrays.json` (the form wxy-virtual
+   reads);
+5. records what GDAL reads from the mosaic for five windows in
+   `oracle/*.bin` (little-endian int16, C order over time, zlev, lat, lon).
+
+Two arrays, `sst` and `ice`. The `ice` chunk of the second day is never
+written, so its row has `present = 0` and readers must give the fill value
+(-999) there. Coordinates: `lat` and `lon` are affine (`{start, step}`,
+latitude ascending as in OISST), `time` and `zlev` are inline.
+
+Source paths are recorded as if mirrored at `/mirror/oisst/`; the `fixture`
+remap target rewrites that prefix to `nc/`, relative to the table.
+
+Regenerate with GDAL >= 3.12 (Python bindings and netCDF driver), netCDF4,
+numpy and pyarrow, for example:
+
+```sh
+micromamba create -n wxy -c conda-forge "gdal>=3.12" libgdal-netcdf netcdf4 numpy pyarrow
+python scripts/make_mdimrefs_fixtures.py
+```
+
+The output is byte-for-byte reproducible with the versions in
+`mdimrefs/manifest.json`.
