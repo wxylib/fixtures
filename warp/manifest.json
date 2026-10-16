@@ -20,6 +20,7 @@
       "count": 1,
       "dtype": "int16",
       "nodata": null,
+      "wrap_globe": false,
       "results": [
         {
           "resampling": "near",
@@ -52,6 +53,7 @@
       "count": 1,
       "dtype": "float32",
       "nodata": -9999.0,
+      "wrap_globe": false,
       "results": [
         {
           "resampling": "near",
@@ -64,6 +66,31 @@
         {
           "resampling": "cubic",
           "file": "polar-to-4326-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "world360-to-3031",
+      "source": "warp/world360-int16.tif",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        -4000000.0,
+        20000.0,
+        0.0,
+        4000000.0,
+        0.0,
+        -20000.0
+      ],
+      "width": 400,
+      "height": 400,
+      "count": 1,
+      "dtype": "int16",
+      "nodata": null,
+      "wrap_globe": true,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "world360-to-3031-near.bin"
         }
       ]
     },
@@ -84,6 +111,7 @@
       "count": 3,
       "dtype": "uint16",
       "nodata": null,
+      "wrap_globe": false,
       "results": [
         {
           "resampling": "near",

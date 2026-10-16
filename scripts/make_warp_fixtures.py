@@ -31,6 +31,12 @@ CASES = [
     # polar stereographic back to lon/lat, about 11 km in latitude
     dict(name="polar-to-4326", source="polar-f32-zstd-bigtiff.tif",
          crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, -62.0), size=(1800, 140)),
+    # a 0..360 source (made below) to south polar stereographic: the 0/360
+    # seam runs through the target, where the approximate transformer must
+    # see the longitude wrap's jump
+    dict(name="world360-to-3031", source="world360-int16.tif", made=True,
+         crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(400, 400),
+         methods=["near"]),
     # UTM 55S, three bands, to lon/lat at about 10 m
     dict(name="utm-to-4326", source="utm-u16-lzw-pred2-3band.tif",
          crs="EPSG:4326", bounds=(147.000, -43.440, 147.036, -43.424), size=(290, 180)),
@@ -38,19 +44,33 @@ CASES = [
 METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
 
 
+def make_world360(path):
+    """The world fixture at 1 degree, columns rolled to start at lon 0."""
+    with rasterio.open(os.path.join(COG, "world-int16-deflate.tif")) as src:
+        a = src.read(1, out_shape=(180, 360), resampling=Resampling.average)
+    a = np.roll(a, -180, axis=1)
+    profile = dict(driver="GTiff", width=360, height=180, count=1, dtype="int16",
+                   crs="EPSG:4326", transform=from_bounds(0, -90, 360, 90, 360, 180),
+                   tiled=True, blockxsize=256, blockysize=256, compress="deflate")
+    with rasterio.open(path, "w", **profile) as dst:
+        dst.write(a, 1)
+
+
 def main():
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(OUT)
+    make_world360(os.path.join(OUT, "world360-int16.tif"))
     out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
            "error_threshold": 0.125, "cases": []}
     for c in CASES:
         w, h = c["size"]
         dst_transform = from_bounds(*c["bounds"], w, h)
-        with rasterio.open(os.path.join(COG, c["source"])) as src:
+        folder, prefix = (OUT, "warp/") if c.get("made") else (COG, "cog/")
+        with rasterio.open(os.path.join(folder, c["source"])) as src:
             count, dtype, nodata = src.count, src.dtypes[0], src.nodata
             rec = {
                 "name": c["name"],
-                "source": "cog/" + c["source"],
+                "source": prefix + c["source"],
                 "crs": c["crs"],
                 "geotransform": list(dst_transform.to_gdal()),
                 "width": w,
@@ -58,9 +78,15 @@ def main():
                 "count": count,
                 "dtype": dtype,
                 "nodata": nodata,
+                # GDAL wraps longitude for a source that starts at 0 (the
+                # whole western hemisphere would be empty otherwise), so
+                # wxylib compares this case with its own wrap on
+                "wrap_globe": bool(c.get("made")),
                 "results": [],
             }
             for m, alg in METHODS.items():
+                if m not in c.get("methods", METHODS):
+                    continue
                 dst = np.full((count, h, w), nodata if nodata is not None else 0, dtype=dtype)
                 for b in range(count):
                     reproject(
