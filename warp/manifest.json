@@ -1,0 +1,103 @@
+{
+  "gdal": "3.12.2",
+  "rasterio": "1.5.2",
+  "error_threshold": 0.125,
+  "cases": [
+    {
+      "name": "world-to-3031",
+      "source": "cog/world-int16-deflate.tif",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        -4000000.0,
+        55172.41379310345,
+        0.0,
+        4000000.0,
+        0.0,
+        -55172.41379310345
+      ],
+      "width": 145,
+      "height": 145,
+      "count": 1,
+      "dtype": "int16",
+      "nodata": null,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "world-to-3031-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "world-to-3031-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "world-to-3031-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "polar-to-4326",
+      "source": "cog/polar-f32-zstd-bigtiff.tif",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        -180.0,
+        0.2,
+        0.0,
+        -62.0,
+        0.0,
+        -0.2
+      ],
+      "width": 1800,
+      "height": 140,
+      "count": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "polar-to-4326-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "polar-to-4326-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "polar-to-4326-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "utm-to-4326",
+      "source": "cog/utm-u16-lzw-pred2-3band.tif",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        147.0,
+        0.00012413793103448746,
+        0.0,
+        -43.424,
+        0.0,
+        -8.88888888888791e-05
+      ],
+      "width": 290,
+      "height": 180,
+      "count": 3,
+      "dtype": "uint16",
+      "nodata": null,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "utm-to-4326-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "utm-to-4326-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "utm-to-4326-cubic.bin"
+        }
+      ]
+    }
+  ]
+}
