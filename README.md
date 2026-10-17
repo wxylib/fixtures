@@ -110,3 +110,13 @@ float32) next to the GeoTIFFs GDAL read; `manifest.json` lists the cases.
 Cases with `"cell": "edge"` place the swath by its cell corners instead:
 `*-edges-lon.bin` and `*-edges-lat.bin` are one row and column larger
 than the grid, read by GDAL with `GEOREFERENCING_CONVENTION=TOP_LEFT_CORNER`.
+
+## cf/
+
+CF Zarr oracles (wxylib stage S5b), made by `scripts/make_cf_fixtures.py`
+(needs xarray and zarr 3): `oisst-like.zarr` is laid out as xarray writes
+an OISST-style month (time x zlev x lat x lon, packed int16 with
+`scale_factor` and `_FillValue`, float32 1D coordinates, latitude
+ascending, longitude 0 to 360, chunked two days deep). The `.bin` files
+hold what GDAL's warper writes for every day, from a north-up GeoTIFF of
+that day, to EPSG:3031 with nearest and bilinear (int16, days stacked).

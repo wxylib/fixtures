@@ -1,0 +1,31 @@
+{
+  "gdal": "3.12.2",
+  "rasterio": "1.5.2",
+  "xarray": "2026.9.0",
+  "store": "oisst-like.zarr",
+  "array": "/sst",
+  "crs": "EPSG:3031",
+  "geotransform": [
+    -4000000.0,
+    80000.0,
+    0.0,
+    4000000.0,
+    0.0,
+    -80000.0
+  ],
+  "width": 100,
+  "height": 100,
+  "dtype": "int16",
+  "nodata": -999,
+  "days": 3,
+  "results": [
+    {
+      "resampling": "near",
+      "file": "oisst-like-to-3031-near.bin"
+    },
+    {
+      "resampling": "bilinear",
+      "file": "oisst-like-to-3031-bilinear.bin"
+    }
+  ]
+}
