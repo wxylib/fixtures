@@ -91,6 +91,80 @@
         {
           "resampling": "near",
           "file": "world360-to-3031-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "world360-to-3031-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "world360-to-3031-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "worldnd-to-3031",
+      "source": "warp/worldnd-int16.tif",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        -4000000.0,
+        40000.0,
+        0.0,
+        4000000.0,
+        0.0,
+        -40000.0
+      ],
+      "width": 200,
+      "height": 200,
+      "count": 1,
+      "dtype": "int16",
+      "nodata": -32768.0,
+      "wrap_globe": false,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "worldnd-to-3031-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "worldnd-to-3031-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "worldnd-to-3031-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "polar-to-4326-global",
+      "source": "cog/polar-f32-zstd-bigtiff.tif",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        -180.0,
+        0.5,
+        0.0,
+        90.0,
+        0.0,
+        -0.5
+      ],
+      "width": 720,
+      "height": 360,
+      "count": 1,
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "wrap_globe": false,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "polar-to-4326-global-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "polar-to-4326-global-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "polar-to-4326-global-cubic.bin"
         }
       ]
     },
@@ -124,6 +198,72 @@
         {
           "resampling": "cubic",
           "file": "utm-to-4326-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "utm-to-4326-coarse",
+      "source": "cog/utm-u16-lzw-pred2-3band.tif",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        147.0,
+        0.0006206896551724374,
+        0.0,
+        -43.424,
+        0.0,
+        -0.0003555555555555164
+      ],
+      "width": 58,
+      "height": 45,
+      "count": 3,
+      "dtype": "uint16",
+      "nodata": null,
+      "wrap_globe": false,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "utm-to-4326-coarse-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "utm-to-4326-coarse-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "utm-to-4326-coarse-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "rgb-to-3857-coarse",
+      "source": "cog/rgb-u8-deflate-pixel.tif",
+      "crs": "EPSG:3857",
+      "geotransform": [
+        14695200.0,
+        30.158730158730158,
+        0.0,
+        3900.0,
+        0.0,
+        -30.18867924528302
+      ],
+      "width": 63,
+      "height": 53,
+      "count": 3,
+      "dtype": "uint8",
+      "nodata": null,
+      "wrap_globe": false,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "rgb-to-3857-coarse-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "rgb-to-3857-coarse-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "rgb-to-3857-coarse-cubic.bin"
         }
       ]
     }

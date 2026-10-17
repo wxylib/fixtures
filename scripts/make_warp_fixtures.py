@@ -2,9 +2,9 @@
 the approximate transformer at its default 0.125 pixel error threshold)
 writes for a few source fixtures, target grids and resampling methods.
 
-Target grids are near 1:1 with the source resolution, which is the bar
-rwarp is validated at (downsampled interpolated warps differ by design
-until overview selection and kernel scaling land, stage S5).
+Some target grids are near 1:1 with the source resolution; others are
+coarser, where GDAL stretches its interpolation kernels (wxylib's scaled
+warp, stage S5), or need the source window split into chunks.
 
 Run from the repository root after make_cog_fixtures.py:
 
@@ -35,11 +35,25 @@ CASES = [
     # seam runs through the target, where the approximate transformer must
     # see the longitude wrap's jump
     dict(name="world360-to-3031", source="world360-int16.tif", made=True,
-         crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(400, 400),
-         methods=["near"]),
+         crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(400, 400)),
+    # the world at 1 degree with the ocean as nodata (int16), to south polar
+    # stereographic: kernels that skip invalid cells, and target values
+    # stepped off nodata
+    dict(name="worldnd-to-3031", source="worldnd-int16.tif", made=True,
+         crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(200, 200)),
+    # the polar fixture to the whole globe: most of the target misses the
+    # source, so GDAL splits the target into chunks with their own windows
+    dict(name="polar-to-4326-global", source="polar-f32-zstd-bigtiff.tif",
+         crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, 90.0), size=(720, 360)),
     # UTM 55S, three bands, to lon/lat at about 10 m
     dict(name="utm-to-4326", source="utm-u16-lzw-pred2-3band.tif",
          crs="EPSG:4326", bounds=(147.000, -43.440, 147.036, -43.424), size=(290, 180)),
+    # the same at about 50 m: uint16 kernels stretched over 5 by 4 cells
+    dict(name="utm-to-4326-coarse", source="utm-u16-lzw-pred2-3band.tif",
+         crs="EPSG:4326", bounds=(147.000, -43.440, 147.036, -43.424), size=(58, 45)),
+    # Australian Albers, three uint8 bands, to EPSG:3857 at about 3 cells to 1
+    dict(name="rgb-to-3857-coarse", source="rgb-u8-deflate-pixel.tif",
+         crs="EPSG:3857", bounds=(14695200.0, 2300.0, 14697100.0, 3900.0), size=(63, 53)),
 ]
 METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
 
@@ -56,10 +70,24 @@ def make_world360(path):
         dst.write(a, 1)
 
 
+def make_worldnd(path):
+    """The world fixture at 1 degree, values below 0 set to nodata."""
+    with rasterio.open(os.path.join(COG, "world-int16-deflate.tif")) as src:
+        a = src.read(1, out_shape=(180, 360), resampling=Resampling.average)
+    a[a < 0] = -32768
+    profile = dict(driver="GTiff", width=360, height=180, count=1, dtype="int16",
+                   crs="EPSG:4326", transform=from_bounds(-180, -90, 180, 90, 360, 180),
+                   tiled=True, blockxsize=256, blockysize=256, compress="deflate",
+                   nodata=-32768)
+    with rasterio.open(path, "w", **profile) as dst:
+        dst.write(a, 1)
+
+
 def main():
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(OUT)
     make_world360(os.path.join(OUT, "world360-int16.tif"))
+    make_worldnd(os.path.join(OUT, "worldnd-int16.tif"))
     out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
            "error_threshold": 0.125, "cases": []}
     for c in CASES:
@@ -81,7 +109,7 @@ def main():
                 # GDAL wraps longitude for a source that starts at 0 (the
                 # whole western hemisphere would be empty otherwise), so
                 # wxylib compares this case with its own wrap on
-                "wrap_globe": bool(c.get("made")),
+                "wrap_globe": c["source"].startswith("world360"),
                 "results": [],
             }
             for m, alg in METHODS.items():
