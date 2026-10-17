@@ -135,3 +135,15 @@ through ctypes in the GDAL rasterio bundles: `*-bilinear.bin`,
 `*-cubic.bin`, `*-cubicspline.bin` (float64, bands x n, NaN where GDAL has
 no value), with GDAL's (pixel, line) for each point in `*-pixel.bin` and
 `*-line.bin`.
+
+## polygons/
+
+Polygon-to-cell oracles (wxylib stage S4c), made by
+`scripts/make_polygon_fixtures.py`: random star-shaped polygons (some
+with holes, both windings) over each COG in `cog/`, in EPSG:4326 and in
+the file's own CRS (plus, in the native cases, a rectangle on cell edges
+and one through cell centres), and the cells GDAL's rasterizer burns for
+each polygon alone, by cell centre and with ALL_TOUCHED. Per case:
+`*-coords.bin` (float64 x, y pairs), `*-rings.json` (ring point counts
+per polygon) and `*-cells.json` (flat cell indices as [start, length]
+runs, per mode and polygon).
