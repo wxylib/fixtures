@@ -1,0 +1,39 @@
+{
+ "format_version": "mdim-refs/0.2",
+ "source_index": "https://raw.githubusercontent.com/mdsumner/virtualized/d0b9c23317d2de07c3851eb9dfc968be1761d5b8/zarr/ocean_temp.zarr",
+ "files": [
+  "https://thredds.nci.org.au/thredds/fileServer/gb6/BRAN/BRAN2023/daily/ocean_temp_2010_01.nc",
+  "https://thredds.nci.org.au/thredds/fileServer/gb6/BRAN/BRAN2023/daily/ocean_temp_2010_02.nc"
+ ],
+ "chunks": 97920,
+ "oracle": {
+  "chunk-t0-z0-y4-x0": {
+   "start": [
+    0,
+    0,
+    1200,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    300,
+    300
+   ]
+  },
+  "row-t31-z10-y750": {
+   "start": [
+    31,
+    10,
+    750,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    1,
+    3600
+   ]
+  }
+ }
+}

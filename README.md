@@ -120,6 +120,23 @@ URIs GDAL opened; the `public` remap target makes them plain `https://`.
 array, for the wxylib/core demo `cargo run -p wxy-virtual --example
 oisst_refs`. Not used in CI; regenerating needs network access.
 
+### mdimrefs/bran2023-temp-201001/
+
+32 days of BRAN2023 `temp` (CSIRO Bluelink reanalysis, 2010-01-01 to
+2010-02-01, 51 depths, 1500 x 3600), the many-chunks-per-file case: 300 x
+300 int16 chunks, 3060 per file per day, 97,920 rows over two netCDF files
+on NCI's THREDDS server. Converted by
+`scripts/make_mdimrefs_bran2023_temp.py` from the kerchunk Parquet index in
+[mdsumner/virtualized](https://github.com/mdsumner/virtualized) (pinned
+commit; built on NCI with R, rhdf5 and GDAL multidim), not scanned here.
+Attributes are as the index has them, including its rounded
+`scale_factor` (0.0078; the netCDF says 0.007782219909131527).
+`manifest.json` names two oracle windows (one chunk, and one row across 12
+chunks); `--oracle` adds the SHA-256 of what GDAL reads for each from the
+source netCDF, which needs network access to thredds.nci.org.au. For the
+wxylib/core demo `cargo run -p wxy-virtual --example bran_refs`. Not used
+in CI.
+
 ## curvilinear/
 
 Curvilinear warp oracles (wxylib stage S5b), made by
