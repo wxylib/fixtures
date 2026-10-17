@@ -354,6 +354,41 @@
       ]
     },
     {
+      "name": "world-to-3857-origin",
+      "source": "cog/world-int16-deflate.tif",
+      "crs": "EPSG:3857",
+      "geotransform": [
+        -2000000.0,
+        108108.1081081081,
+        0.0,
+        2000000.0,
+        0.0,
+        -108108.1081081081
+      ],
+      "width": 37,
+      "height": 37,
+      "count": 1,
+      "dtype": "int16",
+      "nodata": null,
+      "wrap_globe": false,
+      "overview": "none",
+      "overview_level": null,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "world-to-3857-origin-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "world-to-3857-origin-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "world-to-3857-origin-cubic.bin"
+        }
+      ]
+    },
+    {
       "name": "rgb-to-3857-coarse",
       "source": "cog/rgb-u8-deflate-pixel.tif",
       "crs": "EPSG:3857",

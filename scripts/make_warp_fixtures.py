@@ -59,6 +59,12 @@ CASES = [
          crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, 90.0), size=(100, 50)),
     dict(name="polar-to-4326-ovr", source="polar-f32-zstd-bigtiff.tif", overview="auto",
          crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, -60.0), size=(90, 15)),
+    # lon/lat to web mercator around (0, 0): GDAL's special points for a
+    # geographic source pass lon 0, lat +-89.9999 through the target
+    # geotransform without reprojection, so here they land in the target
+    # and switch source windows to grid sampling
+    dict(name="world-to-3857-origin", source="world-int16-deflate.tif",
+         crs="EPSG:3857", bounds=(-2.0e6, -2.0e6, 2.0e6, 2.0e6), size=(37, 37)),
     # Australian Albers, three uint8 bands, to EPSG:3857 at about 3 cells to 1
     dict(name="rgb-to-3857-coarse", source="rgb-u8-deflate-pixel.tif",
          crs="EPSG:3857", bounds=(14695200.0, 2300.0, 14697100.0, 3900.0), size=(63, 53)),
