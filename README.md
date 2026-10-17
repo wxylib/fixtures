@@ -3,6 +3,21 @@
 Test data and GDAL oracle outputs for wxylib, kept out of
 [wxylib/core](https://github.com/wxylib/core) so it stays small.
 
+Every case is a small input plus what GDAL gives for it; the wxylib/core
+tests must reproduce GDAL's numbers exactly. Each directory has a script
+in `scripts/` that regenerates it and a `manifest.json` listing its cases.
+
+| Directory | Inputs | Oracle | Checks |
+|-----------|--------|--------|--------|
+| [cog/](#cog) | five small GeoTIFFs (COG and plain) | GDAL window reads | `wxy-tiff`, `wxy-virtual` |
+| [zarr/](#zarr) | three of the COGs as Zarr v3 | the same windows | `wxy-zarr` |
+| [warp/](#warp) | target grids over the COGs | GDAL warps (near, bilinear, cubic) | `wxy-warp`, `wxy-cli` |
+| [mdimrefs/](#mdimrefs) | byte-reference tables over netCDF4 (OISST) | GDAL reads of the mosaic | `wxy-virtual` |
+| [curvilinear/](#curvilinear) | swaths placed by 2D lon/lat | GDAL geolocation-array warps | `wxy-warp` |
+| [cf/](#cf) | an OISST-style store as xarray writes it | GDAL warps per day | `wxy-warp`, `wxy-cli` |
+| [points/](#points) | random points over each COG | GDAL point reads, by cell and interpolated | `wxy-warp` |
+| [polygons/](#polygons) | random polygons with holes | the cells GDAL's rasterizer burns | `wxy-warp` |
+
 ## cog/
 
 Small Cloud Optimized GeoTIFFs with synthetic pixel values, made by
@@ -27,9 +42,16 @@ python3 -m pip install rasterio numpy
 python3 scripts/make_cog_fixtures.py
 ```
 
-Design and roadmap: [wxylib/design](https://github.com/wxylib/design).
+## warp/
 
-License: MIT OR Apache-2.0.
+Warp oracles, made by `scripts/make_warp_fixtures.py` after the COGs: what
+GDAL's warper (through `rasterio.warp.reproject`, approximate transformer
+at 0.125 pixels) writes for COG sources onto target grids, with nearest,
+bilinear and cubic. Some targets are near 1:1 with the source; others are
+coarser, where GDAL scales its kernels (stage S5), read an overview, or
+need the source window split into chunks. `manifest.json` gives each
+case's source, target CRS, geotransform, size and overview; each result is
+a raw little-endian `.bin` file of the target's cell type, C order (band, row, col).
 
 ## zarr/
 
@@ -147,3 +169,7 @@ each polygon alone, by cell centre and with ALL_TOUCHED. Per case:
 `*-coords.bin` (float64 x, y pairs), `*-rings.json` (ring point counts
 per polygon) and `*-cells.json` (flat cell indices as [start, length]
 runs, per mode and polygon).
+
+Design and roadmap: [wxylib/design](https://github.com/wxylib/design).
+
+License: MIT OR Apache-2.0.
