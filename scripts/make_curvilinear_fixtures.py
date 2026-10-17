@@ -6,8 +6,8 @@ transformer.
 The source is a GeoTIFF with no geotransform, wrapped in a VRT whose
 GEOLOCATION metadata points at a two-band longitude/latitude GeoTIFF with
 GEOREFERENCING_CONVENTION=PIXEL_CENTER (what GDAL's netCDF driver sets
-for CF coordinates). rasterio.warp.reproject then warps it as gdalwarp
-does, with the approximate transformer at 0.125 pixels.
+for CF coordinates). osgeo.gdal's gdal.Warp then warps it with the
+geolocation transformer, approximated at 0.125 pixels.
 
 For wxylib, each case's arrays are also written raw (little-endian
 float64 longitude and latitude, the source values in their own type).
@@ -15,7 +15,8 @@ Cases with "cell": "edge" place the grid by its cell corners instead:
 arrays one row and column larger than the grid, read by GDAL with
 GEOREFERENCING_CONVENTION=TOP_LEFT_CORNER.
 
-Run from the repository root:
+Run from the repository root, with a Python that has GDAL's bindings and
+numpy (e.g. a conda-forge env):
 
     python scripts/make_curvilinear_fixtures.py
 """
@@ -25,15 +26,35 @@ import os
 import shutil
 
 import numpy as np
-import rasterio
-from rasterio.crs import CRS
-from rasterio.transform import from_bounds
-from rasterio.warp import Resampling, reproject
+import osgeo
+from osgeo import gdal, osr
+
+gdal.UseExceptions()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "curvilinear")
 
-METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
+METHODS = ("near", "bilinear", "cubic")
+
+
+def srs_wkt(crs):
+    srs = osr.SpatialReference()
+    srs.SetFromUserInput(crs)
+    return srs.ExportToWkt()
+
+
+def geotransform(bounds, w, h):
+    xmin, ymin, xmax, ymax = bounds
+    return [xmin, (xmax - xmin) / w, 0.0, ymax, 0.0, -(ymax - ymin) / h]
+
+
+def write_tif(path, bands, dtype):
+    """A plain GeoTIFF (no georeferencing) of 2D arrays, one per band."""
+    ny, nx = bands[0].shape
+    d = gdal.GetDriverByName("GTiff").Create(path, nx, ny, len(bands), dtype)
+    for k, a in enumerate(bands):
+        d.GetRasterBand(k + 1).WriteArray(a)
+    d = None
 
 
 def swath(ny, nx, shift=0.0):
@@ -80,7 +101,7 @@ CASES = [
 
 
 def write_geoloc_vrt(path, src_tif, lonlat_tif, ny, nx, convention):
-    wkt = CRS.from_epsg(4326).to_wkt()
+    wkt = srs_wkt("EPSG:4326")
     md = {
         "X_DATASET": lonlat_tif, "X_BAND": "1",
         "Y_DATASET": lonlat_tif, "Y_BAND": "2",
@@ -110,7 +131,7 @@ def write_geoloc_vrt(path, src_tif, lonlat_tif, ny, nx, convention):
 def main():
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(OUT)
-    out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
+    out = {"gdal": gdal.VersionInfo("RELEASE_NAME"), "osgeo": osgeo.__version__,
            "error_threshold": 0.125,
            "geolocation": "PIXEL_CENTER, or TOP_LEFT_CORNER for cell edges", "cases": []}
     grids = {}
@@ -124,16 +145,10 @@ def main():
             base = "%s-%dx%d" % key[:3] + ("-edges" if edge else "")
             if edge:
                 lon, lat = c["grid"](ny + 1, nx + 1, -0.5)
-            gy, gx = lon.shape
             src_tif = os.path.join(OUT, base + ".tif")
             lonlat_tif = os.path.join(OUT, base + "-lonlat.tif")
-            prof = dict(driver="GTiff", width=nx, height=ny, count=1, dtype="float32")
-            with rasterio.open(src_tif, "w", **prof) as d:
-                d.write(v, 1)
-            prof.update(count=2, dtype="float64", width=gx, height=gy)
-            with rasterio.open(lonlat_tif, "w", **prof) as d:
-                d.write(lon, 1)
-                d.write(lat, 2)
+            write_tif(src_tif, [v], gdal.GDT_Float32)
+            write_tif(lonlat_tif, [lon, lat], gdal.GDT_Float64)
             vrt = os.path.join(OUT, base + ".vrt")
             write_geoloc_vrt(vrt, src_tif, os.path.abspath(lonlat_tif), ny, nx,
                              "TOP_LEFT_CORNER" if edge else "PIXEL_CENTER")
@@ -143,7 +158,7 @@ def main():
             grids[key] = base
         base = grids[key]
         w, h = c["size"]
-        dst_transform = from_bounds(*c["bounds"], w, h)
+        gt = geotransform(c["bounds"], w, h)
         rec = {
             "name": c["name"],
             "source": base,
@@ -151,26 +166,27 @@ def main():
             "cell": "edge" if edge else "centre",
             "source_crs": "EPSG:4326",
             "crs": c["crs"],
-            "geotransform": list(dst_transform.to_gdal()),
+            "geotransform": gt,
             "width": w,
             "height": h,
             "dtype": "float32",
             "results": [],
         }
-        with rasterio.open(os.path.join(OUT, base + ".vrt")) as src:
-            for m, alg in METHODS.items():
-                dst = np.zeros((h, w), dtype="float32")
-                reproject(
-                    source=rasterio.band(src, 1),
-                    destination=dst,
-                    dst_transform=dst_transform,
-                    dst_crs=c["crs"],
-                    resampling=alg,
-                    num_threads=1,
-                )
-                name = "%s-%s.bin" % (c["name"], m)
-                dst.astype("<f4").tofile(os.path.join(OUT, name))
-                rec["results"].append({"resampling": m, "file": name})
+        src = gdal.Open(os.path.join(OUT, base + ".vrt"))
+        for m in METHODS:
+            # a zero-filled MEM target of the grid; no geotransform on the
+            # source, so gdal.Warp uses its GEOLOCATION arrays
+            dst = gdal.GetDriverByName("MEM").Create("", w, h, 1, gdal.GDT_Float32)
+            dst.SetGeoTransform(gt)
+            dst.SetProjection(srs_wkt(c["crs"]))
+            gdal.Warp(dst, src, options=gdal.WarpOptions(
+                resampleAlg=m, errorThreshold=0.125, multithread=False,
+                transformerOptions=["METHOD=GEOLOC_ARRAY"],
+                warpOptions=["INIT_DEST=0"]))
+            name = "%s-%s.bin" % (c["name"], m)
+            dst.ReadAsArray().astype("<f4").tofile(os.path.join(OUT, name))
+            rec["results"].append({"resampling": m, "file": name})
+        src = None
         out["cases"].append(rec)
     # the VRTs point at the lon/lat files by absolute path; they are for
     # regenerating here, not for use elsewhere

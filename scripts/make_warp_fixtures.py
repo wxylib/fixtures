@@ -1,4 +1,4 @@
-"""Warp oracles: what GDAL's warper (through rasterio.warp.reproject, with
+"""Warp oracles: what GDAL's warper (through osgeo.gdal's gdal.Warp, with
 the approximate transformer at its default 0.125 pixel error threshold)
 writes for a few source fixtures, target grids and resampling methods.
 
@@ -6,7 +6,8 @@ Some target grids are near 1:1 with the source resolution; others are
 coarser, where GDAL stretches its interpolation kernels (wxylib's scaled
 warp, stage S5), or need the source window split into chunks.
 
-Run from the repository root after make_cog_fixtures.py:
+Run from the repository root after make_cog_fixtures.py, with a Python
+that has GDAL's bindings and numpy (e.g. a conda-forge env):
 
     python scripts/make_warp_fixtures.py
 """
@@ -16,9 +17,10 @@ import os
 import shutil
 
 import numpy as np
-import rasterio
-from rasterio.transform import from_bounds
-from rasterio.warp import Resampling, reproject, transform
+import osgeo
+from osgeo import gdal, gdal_array, osr
+
+gdal.UseExceptions()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COG = os.path.join(ROOT, "cog")
@@ -75,68 +77,98 @@ CASES = [
          methods=("near", "cubic"),
          crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(1200, 1200)),
 ]
-METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
+METHODS = ("near", "bilinear", "cubic")
 
 
-def auto_overview(src, dst_transform, crs, w, h):
-    """gdalwarp's -ovr AUTO choice for an explicit target extent and size
-    (apps/gdalwarp_lib.cpp, GDAL 3.12): transform a 10 by 10 lattice of
-    target pixel corners to source pixels; the smaller of the x and y source
-    spans per target cell is the ratio to meet; the coarsest overview whose
-    width ratio stays below it (plus 0.1) wins. Returns the overview index,
-    or None for full resolution."""
-    cols, rows = [], []
-    for ix in range(10):
-        for iy in range(10):
-            cols.append(w * ix / 9.0)
-            rows.append(h * iy / 9.0)
-    gx = [dst_transform.c + c * dst_transform.a + r * dst_transform.b for c, r in zip(cols, rows)]
-    gy = [dst_transform.f + c * dst_transform.d + r * dst_transform.e for c, r in zip(cols, rows)]
-    sx, sy = transform(crs, src.crs, gx, gy)
-    inv = ~src.transform
-    px = [(inv * (x, y)) for x, y in zip(sx, sy) if np.isfinite(x) and np.isfinite(y)]
-    xs, ys = [p[0] for p in px], [p[1] for p in px]
-    target = min((max(xs) - min(xs)) / w, (max(ys) - min(ys)) / h)
-    if target <= 1.0:
-        return None
-    best, best_ratio = -1, 0.0
-    widths = []
-    for k in range(len(src.overviews(1))):
-        with rasterio.open(src.name, overview_level=k) as o:
-            widths.append(o.width)
-    for k in range(-1, len(widths)):
-        ratio = 1.0 if k < 0 else src.width / widths[k]
-        if ratio >= target + 0.1 or ratio <= best_ratio:
-            continue
-        best, best_ratio = k, ratio
-        if abs(target - ratio) < 0.1:
-            break
-    return best if best >= 0 else None
+def geotransform(bounds, w, h):
+    xmin, ymin, xmax, ymax = bounds
+    return [xmin, (xmax - xmin) / w, 0.0, ymax, 0.0, -(ymax - ymin) / h]
+
+
+def srs_wkt(crs):
+    srs = osr.SpatialReference()
+    srs.SetFromUserInput(crs)
+    return srs.ExportToWkt()
+
+
+def world_1deg():
+    """The world fixture averaged to 1 degree (360 by 180)."""
+    ds = gdal.Open(os.path.join(COG, "world-int16-deflate.tif"))
+    return ds.GetRasterBand(1).ReadAsArray(
+        buf_xsize=360, buf_ysize=180, resample_alg=gdal.GRIORA_Average)
+
+
+def write_1deg(path, a, xmin, nodata=None):
+    ds = gdal.GetDriverByName("GTiff").Create(
+        path, 360, 180, 1, gdal.GDT_Int16,
+        ["TILED=YES", "BLOCKXSIZE=256", "BLOCKYSIZE=256", "COMPRESS=DEFLATE"])
+    ds.SetGeoTransform([xmin, 1.0, 0.0, 90.0, 0.0, -1.0])
+    ds.SetProjection(srs_wkt("EPSG:4326"))
+    band = ds.GetRasterBand(1)
+    if nodata is not None:
+        band.SetNoDataValue(nodata)
+    band.WriteArray(a)
+    ds = None
 
 
 def make_world360(path):
     """The world fixture at 1 degree, columns rolled to start at lon 0."""
-    with rasterio.open(os.path.join(COG, "world-int16-deflate.tif")) as src:
-        a = src.read(1, out_shape=(180, 360), resampling=Resampling.average)
-    a = np.roll(a, -180, axis=1)
-    profile = dict(driver="GTiff", width=360, height=180, count=1, dtype="int16",
-                   crs="EPSG:4326", transform=from_bounds(0, -90, 360, 90, 360, 180),
-                   tiled=True, blockxsize=256, blockysize=256, compress="deflate")
-    with rasterio.open(path, "w", **profile) as dst:
-        dst.write(a, 1)
+    write_1deg(path, np.roll(world_1deg(), -180, axis=1), 0.0)
 
 
 def make_worldnd(path):
     """The world fixture at 1 degree, values below 0 set to nodata."""
-    with rasterio.open(os.path.join(COG, "world-int16-deflate.tif")) as src:
-        a = src.read(1, out_shape=(180, 360), resampling=Resampling.average)
+    a = world_1deg()
     a[a < 0] = -32768
-    profile = dict(driver="GTiff", width=360, height=180, count=1, dtype="int16",
-                   crs="EPSG:4326", transform=from_bounds(-180, -90, 180, 90, 360, 180),
-                   tiled=True, blockxsize=256, blockysize=256, compress="deflate",
-                   nodata=-32768)
-    with rasterio.open(path, "w", **profile) as dst:
-        dst.write(a, 1)
+    write_1deg(path, a, -180.0, nodata=-32768)
+
+
+class OverviewLog:
+    """Collects the overview level gdal.Warp reports choosing (its WARP
+    debug message "Selecting overview level N for ...")."""
+
+    def __init__(self):
+        self.level = None
+
+    def __call__(self, cls, num, msg):
+        if cls == gdal.CE_Debug and msg.startswith("WARP: Selecting overview level"):
+            self.level = int(msg.split()[4])
+
+
+def warp(src, c, w, h, gt, method, overview):
+    """One band-by-band warp to a MEM dataset of the target grid filled
+    with nodata (or 0) first: GDAL skips target chunks that miss the
+    source, so INIT_DEST alone leaves those at 0. Returns
+    the (count, h, w) array and the overview level gdal.Warp used."""
+    count = src.RasterCount
+    band1 = src.GetRasterBand(1)
+    nodata = band1.GetNoDataValue()
+    dst = gdal.GetDriverByName("MEM").Create("", w, h, count, band1.DataType)
+    dst.SetGeoTransform(gt)
+    dst.SetProjection(srs_wkt(c["crs"]))
+    log = OverviewLog()
+    gdal.PushErrorHandler(log)
+    gdal.SetConfigOption("CPL_DEBUG", "WARP")
+    try:
+        for b in range(1, count + 1):
+            band = dst.GetRasterBand(b)
+            if nodata is not None:
+                band.SetNoDataValue(nodata)
+            band.Fill(nodata if nodata is not None else 0)
+            opts = gdal.WarpOptions(
+                srcBands=[b], dstBands=[b],
+                resampleAlg=method,
+                srcNodata=nodata, dstNodata=nodata,
+                errorThreshold=0.125,
+                warpMemoryLimit=c.get("wm", 64),
+                multithread=False,
+                overviewLevel="AUTO" if overview else "NONE",
+                warpOptions=["INIT_DEST=NO_DATA"])
+            gdal.Warp(dst, src, options=opts)
+    finally:
+        gdal.SetConfigOption("CPL_DEBUG", None)
+        gdal.PopErrorHandler()
+    return dst.ReadAsArray().reshape(count, h, w), log.level
 
 
 def main():
@@ -144,61 +176,45 @@ def main():
     os.makedirs(OUT)
     make_world360(os.path.join(OUT, "world360-int16.tif"))
     make_worldnd(os.path.join(OUT, "worldnd-int16.tif"))
-    out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
+    out = {"gdal": gdal.VersionInfo("RELEASE_NAME"), "osgeo": osgeo.__version__,
            "error_threshold": 0.125, "cases": []}
     for c in CASES:
         w, h = c["size"]
-        dst_transform = from_bounds(*c["bounds"], w, h)
+        gt = geotransform(c["bounds"], w, h)
         folder, prefix = (OUT, "warp/") if c.get("made") else (COG, "cog/")
-        path = os.path.join(folder, c["source"])
-        level = None
-        if c.get("overview") == "auto":
-            with rasterio.open(path) as full:
-                level = auto_overview(full, dst_transform, c["crs"], w, h)
-        opener = {} if level is None else {"overview_level": level}
-        with rasterio.open(path, **opener) as src:
-            count, dtype, nodata = src.count, src.dtypes[0], src.nodata
-            rec = {
-                "name": c["name"],
-                "source": prefix + c["source"],
-                "crs": c["crs"],
-                "geotransform": list(dst_transform.to_gdal()),
-                "width": w,
-                "height": h,
-                "count": count,
-                "dtype": dtype,
-                "nodata": nodata,
-                # GDAL wraps longitude for a source that starts at 0 (the
-                # whole western hemisphere would be empty otherwise), so
-                # wxylib compares this case with its own wrap on
-                "wrap_globe": c["source"].startswith("world360"),
-                # gdalwarp's -ovr: "auto" cases warp from the overview its
-                # default choice picks (0 is the first overview)
-                "overview": c.get("overview", "none"),
-                "overview_level": level,
-                # gdalwarp's -wm, in MB (GDAL's default is 64)
-                "warp_memory_mb": c.get("wm", 64),
-                "results": [],
-            }
-            for m, alg in METHODS.items():
-                if m not in c.get("methods", METHODS):
-                    continue
-                dst = np.full((count, h, w), nodata if nodata is not None else 0, dtype=dtype)
-                for b in range(count):
-                    reproject(
-                        source=rasterio.band(src, b + 1),
-                        destination=dst[b],
-                        dst_transform=dst_transform,
-                        dst_crs=c["crs"],
-                        resampling=alg,
-                        src_nodata=nodata,
-                        dst_nodata=nodata,
-                        num_threads=1,
-                        warp_mem_limit=c.get("wm", 0),
-                    )
-                name = "%s-%s.bin" % (c["name"], m)
-                dst.astype(dst.dtype.newbyteorder("<")).tofile(os.path.join(OUT, name))
-                rec["results"].append({"resampling": m, "file": name})
+        src = gdal.Open(os.path.join(folder, c["source"]))
+        band1 = src.GetRasterBand(1)
+        nodata = band1.GetNoDataValue()
+        rec = {
+            "name": c["name"],
+            "source": prefix + c["source"],
+            "crs": c["crs"],
+            "geotransform": gt,
+            "width": w,
+            "height": h,
+            "count": src.RasterCount,
+            "dtype": np.dtype(gdal_array.GDALTypeCodeToNumericTypeCode(band1.DataType)).name,
+            "nodata": nodata,
+            # GDAL wraps longitude for a source that starts at 0 (the
+            # whole western hemisphere would be empty otherwise), so
+            # wxylib compares this case with its own wrap on
+            "wrap_globe": c["source"].startswith("world360"),
+            # gdalwarp's -ovr: "auto" cases warp from the overview its
+            # default choice picks (0 is the first overview)
+            "overview": c.get("overview", "none"),
+            "overview_level": None,
+            # gdalwarp's -wm, in MB (GDAL's default is 64)
+            "warp_memory_mb": c.get("wm", 64),
+            "results": [],
+        }
+        for m in METHODS:
+            if m not in c.get("methods", METHODS):
+                continue
+            dst, level = warp(src, c, w, h, gt, m, c.get("overview") == "auto")
+            rec["overview_level"] = level
+            name = "%s-%s.bin" % (c["name"], m)
+            dst.astype(dst.dtype.newbyteorder("<")).tofile(os.path.join(OUT, name))
+            rec["results"].append({"resampling": m, "file": name})
         out["cases"].append(rec)
     with open(os.path.join(OUT, "manifest.json"), "w") as f:
         json.dump(out, f, indent=2)

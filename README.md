@@ -21,7 +21,7 @@ in `scripts/` that regenerates it and a `manifest.json` listing its cases.
 ## cog/
 
 Small Cloud Optimized GeoTIFFs with synthetic pixel values, made by
-`scripts/make_cog_fixtures.py`, and what GDAL (through rasterio) reads for a
+`scripts/make_cog_fixtures.py`, and what GDAL (through osgeo.gdal) reads for a
 few windows of each. `cog/manifest.json` records the GDAL version, each
 file's size, blocks, overviews, geotransform (GDAL order), EPSG code and
 nodata, and the windows. Each window's oracle values are in
@@ -38,14 +38,14 @@ nodata, and the windows. Each window's oracle values are in
 Regenerate with:
 
 ```sh
-python3 -m pip install rasterio numpy
-python3 scripts/make_cog_fixtures.py
+micromamba create -n gdal -c conda-forge "gdal>=3.12" numpy zarr xarray pandas
+micromamba run -n gdal python scripts/make_cog_fixtures.py
 ```
 
 ## warp/
 
 Warp oracles, made by `scripts/make_warp_fixtures.py` after the COGs: what
-GDAL's warper (through `rasterio.warp.reproject`, approximate transformer
+GDAL's warper (through `gdal.Warp` in osgeo.gdal, approximate transformer
 at 0.125 pixels) writes for COG sources onto target grids, with nearest,
 bilinear and cubic. Some targets are near 1:1 with the source; others are
 coarser, where GDAL scales its kernels (stage S5), read an overview, or
@@ -156,7 +156,7 @@ file), and the values GDAL reads there as gdallocationinfo does
 `*-x.bin`, `*-y.bin` (float64), `*-values.bin` (float64, bands x n) and
 `*-found.bin` (uint8, 1 on the file); `manifest.json` lists the cases.
 Interpolated reads are GDAL's own InterpolateAtGeolocation, called
-through ctypes in the GDAL rasterio bundles: `*-bilinear.bin`,
+through osgeo.gdal: `*-bilinear.bin`,
 `*-cubic.bin`, `*-cubicspline.bin` (float64, bands x n, NaN where GDAL has
 no value), with GDAL's (pixel, line) for each point in `*-pixel.bin` and
 `*-line.bin`.

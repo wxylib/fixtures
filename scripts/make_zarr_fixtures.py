@@ -3,7 +3,10 @@ checked against the same GDAL oracle windows (cog/oracle/*.bin).
 
 Georeferencing follows the GeoZarr conventions (zarr-conventions/spatial and
 zarr-conventions/proj, v0.1) or plain CF-style 1D coordinate arrays, one
-case each. Run from the repository root after make_cog_fixtures.py:
+case each. The COGs are read with GDAL's own Python bindings (osgeo.gdal).
+Needs osgeo.gdal, numpy and zarr (3.x), for example from a conda-forge env
+(micromamba create -n gdal -c conda-forge gdal numpy zarr). Run from the
+repository root after make_cog_fixtures.py:
 
     python scripts/make_zarr_fixtures.py
 """
@@ -13,8 +16,10 @@ import os
 import shutil
 
 import numpy as np
-import rasterio
 import zarr
+from osgeo import gdal
+
+gdal.UseExceptions()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COG = os.path.join(ROOT, "cog")
@@ -82,17 +87,20 @@ def main():
     by_file = {c["file"]: c for c in cog["cases"]}
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(OUT)
-    out = {"gdal": cog["gdal"], "rasterio": cog["rasterio"], "zarr": zarr.__version__, "cases": []}
+    out = {"gdal": gdal.__version__, "zarr": zarr.__version__, "cases": []}
 
     for case in CASES:
         src = by_file[case["source"]]
-        with rasterio.open(os.path.join(COG, case["source"])) as ds:
-            data = ds.read()
-            gt = list(ds.transform.to_gdal())
-            epsg = ds.crs.to_epsg()
-            nodata = ds.nodata
-        if case["dims"][0] != "band":
-            data = data[0]
+        ds = gdal.Open(os.path.join(COG, case["source"]))
+        data = ds.ReadAsArray()  # (y, x) for one band, (band, y, x) for more
+        gt = list(ds.GetGeoTransform())
+        srs = ds.GetSpatialRef()
+        srs.AutoIdentifyEPSG()
+        epsg = int(srs.GetAuthorityCode(None))
+        nodata = ds.GetRasterBand(1).GetNoDataValue()
+        ds = None
+        if case["dims"][0] == "band" and data.ndim == 2:
+            data = data[np.newaxis]
 
         path = os.path.join(OUT, case["store"])
         group = zarr.open_group(path, mode="w", zarr_format=3)

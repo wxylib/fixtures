@@ -1,6 +1,5 @@
 {
-  "gdal": "3.12.2",
-  "rasterio": "1.5.2",
+  "gdal": "3.12.4",
   "interpolated": [
     "bilinear",
     "cubic",

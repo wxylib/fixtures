@@ -4,7 +4,10 @@ scale_factor and _FillValue, float32 1D coordinates, latitude ascending,
 longitude 0 to 360), and what GDAL's warper writes for each day from a
 north-up GeoTIFF of the same values.
 
-Needs xarray and zarr (3.x). Run from the repository root:
+The warps use GDAL's own Python bindings (osgeo.gdal). Needs osgeo.gdal,
+numpy, pandas, xarray and zarr (3.x), for example from a conda-forge env
+(micromamba create -n gdal -c conda-forge gdal numpy xarray zarr). Run from
+the repository root:
 
     python scripts/make_cf_fixtures.py
 """
@@ -15,17 +18,17 @@ import shutil
 
 import numpy as np
 import pandas as pd
-import rasterio
 import xarray as xr
-from rasterio.transform import from_bounds, from_origin
-from rasterio.warp import Resampling, reproject
+from osgeo import gdal
+
+gdal.UseExceptions()
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "cf")
 
 NT, STEP = 3, 1.0
 TARGET = dict(crs="EPSG:3031", bounds=(-4e6, -4e6, 4e6, 4e6), size=(100, 100))
-METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear}
+METHODS = ["near", "bilinear"]
 
 
 def main():
@@ -55,30 +58,35 @@ def main():
                encoding={"sst": {"chunks": (2, 1, lat.size, lon.size)}})
 
     w, h = TARGET["size"]
-    dst_transform = from_bounds(*TARGET["bounds"], w, h)
-    out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
+    xmin, ymin, xmax, ymax = TARGET["bounds"]
+    dst_gt = [xmin, (xmax - xmin) / w, 0.0, ymax, 0.0, (ymin - ymax) / h]
+    out = {"gdal": gdal.__version__,
            "xarray": xr.__version__, "store": "oisst-like.zarr", "array": "/sst",
-           "crs": TARGET["crs"], "geotransform": list(dst_transform.to_gdal()),
+           "crs": TARGET["crs"], "geotransform": dst_gt,
            "width": w, "height": h, "dtype": "int16", "nodata": -999,
            "days": NT, "results": []}
-    tif = os.path.join(OUT, "day.tif")
-    for m, alg in METHODS.items():
+    tif = "/vsimem/day.tif"
+    for m in METHODS:
         name = "oisst-like-to-3031-%s.bin" % m
         res = np.empty((NT, h, w), "int16")
         for t in range(NT):
-            with rasterio.open(tif, "w", driver="GTiff", width=lon.size, height=lat.size,
-                               count=1, dtype="int16", crs="EPSG:4326", nodata=-999,
-                               transform=from_origin(0, 90, STEP, STEP)) as d:
-                d.write(data[t, 0][::-1], 1)
-            dst = np.zeros((h, w), "int16")
-            with rasterio.open(tif) as src:
-                reproject(rasterio.band(src, 1), dst, dst_transform=dst_transform,
-                          dst_crs=TARGET["crs"], resampling=alg, dst_nodata=-999,
-                          num_threads=1)
-            res[t] = dst
+            # the day as a north-up GeoTIFF (in memory), 0 to 360 east, 90 to -90 north
+            src = gdal.GetDriverByName("GTiff").Create(tif, lon.size, lat.size, 1, gdal.GDT_Int16)
+            src.SetGeoTransform([0.0, STEP, 0.0, 90.0, 0.0, -STEP])
+            src.SetProjection("EPSG:4326")
+            src.GetRasterBand(1).SetNoDataValue(-999)
+            src.GetRasterBand(1).WriteArray(data[t, 0][::-1])
+            # approximate transformer at 0.125 pixels (gdalwarp's default),
+            # one thread, target starts as nodata
+            dst = gdal.Warp("", src, format="MEM", dstSRS=TARGET["crs"],
+                            outputBounds=TARGET["bounds"], width=w, height=h,
+                            resampleAlg=m, dstNodata=-999, errorThreshold=0.125,
+                            multithread=False, warpOptions=["INIT_DEST=NO_DATA"])
+            res[t] = dst.ReadAsArray()
+            src = dst = None
         res.astype("<i2").tofile(os.path.join(OUT, name))
         out["results"].append({"resampling": m, "file": name})
-    os.remove(tif)
+    gdal.Unlink(tif)
     with open(os.path.join(OUT, "manifest.json"), "w") as f:
         json.dump(out, f, indent=2)
         f.write("\n")
