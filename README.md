@@ -17,6 +17,7 @@ in `scripts/` that regenerates it and a `manifest.json` listing its cases.
 | [cf/](#cf) | an OISST-style store as xarray writes it | GDAL warps per day | `wxy-warp`, `wxy-cli` |
 | [points/](#points) | random points over each COG | GDAL point reads, by cell and interpolated | `wxy-warp` |
 | [polygons/](#polygons) | random polygons with holes | the cells GDAL's rasterizer burns | `wxy-warp` |
+| [index/](#index) | index space against coordinate space: a ROMS-style store, a rotated-pole store | ROMS depths, a GDAL geolocation warp, PROJ ob_tran | `wxy-zarr`, `wxy-cli` |
 
 ## cog/
 
@@ -193,3 +194,30 @@ runs, per mode and polygon).
 Design and roadmap: [wxylib/design](https://github.com/wxylib/design).
 
 License: MIT OR Apache-2.0.
+
+## index/
+
+Index space against coordinate space (design m07, section 5), made by
+`scripts/make_index_fixtures.py`: small Zarr v3 stores as a real
+producer writes them, plus the truth that producer threw away.
+
+- **I1 `roms-fan.zarr`**: a ROMS-style coastal grid, regular in index
+  space and curvilinear on the globe (playproj's `fan()`), with ROMS's own
+  names and CF attributes: `temp(s_rho, eta_rho, xi_rho)` (8 x 46 x 24)
+  placed by 2D `lon_rho` and `lat_rho`, and a terrain-following vertical
+  (`s_rho` as CF `ocean_s_coordinate_g2` with `formula_terms`, `Cs_r`,
+  `h`, `zeta`, `hc`, Vtransform 2, Vstretching 4). Oracles: every rho and
+  w depth (`roms-fan-z-rho.bin`, `roms-fan-z-w.bin`, float64) from the
+  NumPy port of ROMS set_scoord.F and set_depth.F in playproj's
+  `test/make-roms-fixture.py`, and GDAL's geolocation warp of the surface
+  layer to EPSG:4326, near and bilinear (`roms-fan-top.vrt` shows how GDAL
+  was given it).
+- **I3 `rotated.zarr`**: a 1 degree EURO-CORDEX window on a CF
+  `rotated_latitude_longitude` grid: `tas(rlat, rlon)`, 1D `rlon`, `rlat`,
+  the `rotated_pole` grid mapping and float32 2D `lon`, `lat`. The
+  manifest gives the generating affine and the PROJ `ob_tran` string;
+  osgeo.osr agrees with the stored 2D arrays to the float32 rounding
+  recorded there.
+
+Vertical positions are recorded but not yet read by wxylib: a reader of
+`formula_terms` waits on a numbered design document.

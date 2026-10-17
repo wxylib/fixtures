@@ -1,0 +1,111 @@
+{
+  "gdal": "3.12.4",
+  "osgeo": "3.12.4",
+  "zarr_format": 3,
+  "cases": [
+    {
+      "name": "roms-fan",
+      "store": "roms-fan.zarr",
+      "case": "I1",
+      "shape": {
+        "s_rho": 8,
+        "eta_rho": 46,
+        "xi_rho": 24
+      },
+      "construction": "playproj fan(ni=24, lon0=150.4, lat0=-33.2, bearing=105, spread=90, r0=0.9, r1=18) at cell centres, spherical",
+      "vertical": {
+        "Vtransform": 2,
+        "Vstretching": 4,
+        "theta_s": 6.5,
+        "theta_b": 1.5,
+        "hc": 200.0,
+        "N": 8,
+        "standard_name": "ocean_s_coordinate_g2"
+      },
+      "truth": {
+        "lon_rho": "roms-fan-lon-rho.bin",
+        "lat_rho": "roms-fan-lat-rho.bin",
+        "z_rho": "roms-fan-z-rho.bin",
+        "z_w": "roms-fan-z-w.bin",
+        "layout": "little-endian float64, C order; z_rho (s_rho, eta_rho, xi_rho), z_w (N + 1, eta_rho, xi_rho), bottom first as ROMS orders k",
+        "z_from": "NumPy port of ROMS set_scoord.F and set_depth.F (playproj test/make-roms-fixture.py), with zeta"
+      },
+      "warp": {
+        "layer": "temp[s_rho = N - 1] (surface)",
+        "geolocation": "PIXEL_CENTER",
+        "error_threshold": 0.125,
+        "crs": "EPSG:4326",
+        "geotransform": [
+          150.0,
+          0.1,
+          0.0,
+          -23.0,
+          0.0,
+          -0.1
+        ],
+        "width": 220,
+        "height": 250,
+        "dtype": "float32",
+        "nodata": "nan",
+        "results": [
+          {
+            "resampling": "near",
+            "file": "roms-fan-top-to-4326-near.bin",
+            "valid": 30981
+          },
+          {
+            "resampling": "bilinear",
+            "file": "roms-fan-top-to-4326-bilinear.bin",
+            "valid": 30981
+          }
+        ]
+      }
+    },
+    {
+      "name": "rotated",
+      "store": "rotated.zarr",
+      "case": "I3",
+      "shape": {
+        "rlat": 45,
+        "rlon": 47
+      },
+      "grid_mapping": {
+        "grid_north_pole_latitude": 39.25,
+        "grid_north_pole_longitude": -162.0,
+        "grid_mapping_name": "rotated_latitude_longitude"
+      },
+      "proj": "+proj=ob_tran +o_proj=longlat +o_lat_p=39.25 +o_lon_p=0 +lon_0=18.0 +R=6371229 +no_defs",
+      "affine": {
+        "frame": "rotated degrees (rlon, rlat), cell centres",
+        "rlon": [
+          -28.375,
+          1.0
+        ],
+        "rlat": [
+          -23.375,
+          1.0
+        ],
+        "geotransform": [
+          -28.875,
+          1.0,
+          0.0,
+          -23.875,
+          0.0,
+          1.0
+        ],
+        "note": "GDAL order over (column, row) corners; rlat ascends with the row index"
+      },
+      "check": {
+        "by": "osgeo.osr ob_tran of the affine's centres against the stored 2D lon, lat",
+        "max_abs_deg_float32": {
+          "lon": 1.9042727785745228e-06,
+          "lat": 3.814014618797046e-06
+        },
+        "max_abs_deg_float64": {
+          "lon": 2.842170943040401e-14,
+          "lat": 1.4210854715202004e-14
+        }
+      }
+    }
+  ]
+}

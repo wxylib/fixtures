@@ -1,0 +1,40 @@
+{
+  "shape": [],
+  "data_type": "int32",
+  "chunk_grid": {
+    "name": "regular",
+    "configuration": {
+      "chunk_shape": []
+    }
+  },
+  "chunk_key_encoding": {
+    "name": "default",
+    "configuration": {
+      "separator": "/"
+    }
+  },
+  "fill_value": 0,
+  "codecs": [
+    {
+      "name": "bytes",
+      "configuration": {
+        "endian": "little"
+      }
+    },
+    {
+      "name": "zstd",
+      "configuration": {
+        "level": 0,
+        "checksum": false
+      }
+    }
+  ],
+  "attributes": {
+    "grid_north_pole_latitude": 39.25,
+    "grid_north_pole_longitude": -162.0,
+    "grid_mapping_name": "rotated_latitude_longitude"
+  },
+  "zarr_format": 3,
+  "node_type": "array",
+  "storage_transformers": []
+}

@@ -1,0 +1,9 @@
+{
+  "attributes": {
+    "type": "ROMS/TOMS history file (synthetic)",
+    "Conventions": "CF-1.8",
+    "title": "wxylib fixtures I1 roms-fan"
+  },
+  "zarr_format": 3,
+  "node_type": "group"
+}
