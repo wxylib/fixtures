@@ -94,3 +94,16 @@ URIs GDAL opened; the `public` remap target makes them plain `https://`.
 `manifest.json` holds the SHA-256 of what GDAL reads for day 30 of each
 array, for the wxylib/core demo `cargo run -p wxy-virtual --example
 oisst_refs`. Not used in CI; regenerating needs network access.
+
+## curvilinear/
+
+Curvilinear warp oracles (wxylib stage S5b), made by
+`scripts/make_curvilinear_fixtures.py`: float32 grids placed by 2D
+longitude and latitude arrays at cell centres (a curved swath off
+south-eastern Australia, and a ring around the south pole crossing the
+antimeridian), and what GDAL's warper writes for them through its
+geolocation-array transformer (`GEOREFERENCING_CONVENTION=PIXEL_CENTER`,
+approximate transformer at 0.125 pixels), with nearest, bilinear and cubic,
+to EPSG:4326 (also coarse) and EPSG:3031. Each grid's arrays are raw
+little-endian files (`*-lon.bin`, `*-lat.bin` float64, `*-values.bin`
+float32) next to the GeoTIFFs GDAL read; `manifest.json` lists the cases.

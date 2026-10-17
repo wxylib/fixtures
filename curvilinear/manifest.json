@@ -1,0 +1,148 @@
+{
+  "gdal": "3.12.2",
+  "rasterio": "1.5.2",
+  "error_threshold": 0.125,
+  "geolocation": "PIXEL_CENTER",
+  "cases": [
+    {
+      "name": "swath-to-4326",
+      "source": "swath-120x160",
+      "shape": [
+        120,
+        160
+      ],
+      "source_crs": "EPSG:4326",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        139.0,
+        0.1,
+        0.0,
+        -37.0,
+        0.0,
+        -0.1
+      ],
+      "width": 210,
+      "height": 160,
+      "dtype": "float32",
+      "results": [
+        {
+          "resampling": "near",
+          "file": "swath-to-4326-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "swath-to-4326-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "swath-to-4326-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "swath-to-4326-coarse",
+      "source": "swath-120x160",
+      "shape": [
+        120,
+        160
+      ],
+      "source_crs": "EPSG:4326",
+      "crs": "EPSG:4326",
+      "geotransform": [
+        139.0,
+        0.3,
+        0.0,
+        -37.0,
+        0.0,
+        -0.3018867924528302
+      ],
+      "width": 70,
+      "height": 53,
+      "dtype": "float32",
+      "results": [
+        {
+          "resampling": "near",
+          "file": "swath-to-4326-coarse-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "swath-to-4326-coarse-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "swath-to-4326-coarse-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "swath-to-3031",
+      "source": "swath-120x160",
+      "shape": [
+        120,
+        160
+      ],
+      "source_crs": "EPSG:4326",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        800000.0,
+        25000.0,
+        0.0,
+        -2800000.0,
+        0.0,
+        -25000.0
+      ],
+      "width": 128,
+      "height": 128,
+      "dtype": "float32",
+      "results": [
+        {
+          "resampling": "near",
+          "file": "swath-to-3031-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "swath-to-3031-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "swath-to-3031-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "polar-to-3031",
+      "source": "polar-50x180",
+      "shape": [
+        50,
+        180
+      ],
+      "source_crs": "EPSG:4326",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        -3500000.0,
+        50000.0,
+        0.0,
+        3500000.0,
+        0.0,
+        -50000.0
+      ],
+      "width": 140,
+      "height": 140,
+      "dtype": "float32",
+      "results": [
+        {
+          "resampling": "near",
+          "file": "polar-to-3031-near.bin"
+        },
+        {
+          "resampling": "bilinear",
+          "file": "polar-to-3031-bilinear.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "polar-to-3031-cubic.bin"
+        }
+      ]
+    }
+  ]
+}
