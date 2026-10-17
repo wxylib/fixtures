@@ -1,0 +1,226 @@
+{
+ "format_version": "mdim-refs/0.2",
+ "arrays": [
+  {
+   "array": "temp",
+   "kind": "data",
+   "storage": "referenced",
+   "dims": [
+    "Time",
+    "st_ocean",
+    "yt_ocean",
+    "xt_ocean"
+   ],
+   "shape": [
+    32,
+    51,
+    1500,
+    3600
+   ],
+   "chunks": [
+    1,
+    1,
+    300,
+    300
+   ],
+   "dtype": "<i2",
+   "fill": "-32768",
+   "codec": {
+    "compressor": {
+     "id": "zlib",
+     "level": 1
+    },
+    "filters": [
+     {
+      "id": "shuffle",
+      "elementsize": 2
+     }
+    ]
+   },
+   "attrs": {
+    "scale_factor": 0.0078,
+    "add_offset": 245,
+    "_FillValue": -32768,
+    "units": "degrees C"
+   },
+   "affine": null,
+   "values": null
+  },
+  {
+   "array": "Time",
+   "kind": "coord",
+   "dims": [
+    "Time"
+   ],
+   "shape": [
+    32
+   ],
+   "chunks": [
+    32
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "bounds": "Time_bnds",
+    "calendar": "GREGORIAN",
+    "calendar_type": "GREGORIAN",
+    "cartesian_axis": "T",
+    "cell_methods": "Time: mean",
+    "long_name": "Time",
+    "units": "days since 1979-01-01 00:00:00"
+   },
+   "storage": "affine",
+   "affine": {
+    "start": 11323.5,
+    "step": 1.0
+   },
+   "values": null
+  },
+  {
+   "array": "st_ocean",
+   "kind": "coord",
+   "dims": [
+    "st_ocean"
+   ],
+   "shape": [
+    51
+   ],
+   "chunks": [
+    51
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "cartesian_axis": "Z",
+    "edges": "st_edges_ocean",
+    "long_name": "tcell zstar depth",
+    "positive": "down",
+    "units": "meters"
+   },
+   "storage": "inline",
+   "affine": null,
+   "values": [
+    2.5,
+    7.5,
+    12.5,
+    17.515390396118164,
+    22.667020797729492,
+    28.16938018798828,
+    34.2180061340332,
+    40.95497512817383,
+    48.45497512817383,
+    56.7180061340332,
+    65.66938018798828,
+    75.16702270507812,
+    85.01538848876953,
+    95.0,
+    105.0,
+    115.0,
+    125.0,
+    135.0,
+    145.0,
+    155.0,
+    165.0,
+    175.0,
+    185.0,
+    195.0,
+    205.1898956298828,
+    217.0544891357422,
+    233.19432067871094,
+    255.8842315673828,
+    286.6089782714844,
+    325.88421630859375,
+    373.1943359375,
+    427.0544738769531,
+    485.1899108886719,
+    545.5111083984375,
+    610.4156494140625,
+    685.9267578125,
+    775.9267578125,
+    880.4156494140625,
+    995.5111083984375,
+    1115.3133544921875,
+    1238.3538818359375,
+    1368.157470703125,
+    1507.73388671875,
+    1658.157470703125,
+    1818.3538818359375,
+    1985.3133544921875,
+    2165.18017578125,
+    2431.10107421875,
+    2894.841796875,
+    3603.10107421875,
+    4509.18017578125
+   ]
+  },
+  {
+   "array": "yt_ocean",
+   "kind": "coord",
+   "dims": [
+    "yt_ocean"
+   ],
+   "shape": [
+    1500
+   ],
+   "chunks": [
+    1500
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "cartesian_axis": "Y",
+    "domain_decomposition": [
+     1,
+     1500,
+     1,
+     150
+    ],
+    "long_name": "tcell latitude",
+    "units": "degrees_N"
+   },
+   "storage": "affine",
+   "affine": {
+    "start": -74.94999694824219,
+    "step": 0.09999999809106057
+   },
+   "values": null
+  },
+  {
+   "array": "xt_ocean",
+   "kind": "coord",
+   "dims": [
+    "xt_ocean"
+   ],
+   "shape": [
+    3600
+   ],
+   "chunks": [
+    3600
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "cartesian_axis": "X",
+    "domain_decomposition": [
+     1,
+     3600,
+     1,
+     1800
+    ],
+    "long_name": "tcell longitude",
+    "units": "degrees_E"
+   },
+   "storage": "affine",
+   "affine": {
+    "start": 0.05000000074505806,
+    "step": 0.1000000036999958
+   },
+   "values": null
+  }
+ ],
+ "remap": []
+}
