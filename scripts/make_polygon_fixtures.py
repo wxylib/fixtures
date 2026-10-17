@@ -32,7 +32,9 @@ N = 12
 
 def star(rng, cx, cy, r, k):
     """A closed star-shaped ring of k vertices around (cx, cy)."""
-    a = np.sort(rng.uniform(0, 2 * np.pi, k))
+    # jittered angles, no gap wider than 81 degrees for k >= 8, so the
+    # ring keeps a hole of radius 0.15 r inside it (valid polygons)
+    a = (np.arange(k) + rng.uniform(0, 0.8, k)) * 2 * np.pi / k
     rad = r * rng.uniform(0.4, 1.0, k)
     x, y = cx + rad * np.cos(a), cy + rad * np.sin(a)
     ring = list(zip(x, y))
@@ -46,11 +48,11 @@ def polygons(rng, box):
         cx = rng.uniform(box[0] - 0.05 * w, box[2] + 0.05 * w)
         cy = rng.uniform(box[1] - 0.05 * h, box[3] + 0.05 * h)
         r = rng.uniform(0.03, 0.25) * min(w, h)
-        ext = star(rng, cx, cy, r, int(rng.integers(5, 30)))
+        ext = star(rng, cx, cy, r, int(rng.integers(8, 30)))
         rings = [ext]
         if i % 3 == 0:
             # a hole, wound the other way
-            rings.append(star(rng, cx, cy, 0.3 * r, 6)[::-1])
+            rings.append(star(rng, cx, cy, 0.15 * r, 8)[::-1])
         if i % 4 == 1:
             # a rectangle with edges on cell boundaries is in the native
             # cases below; here a clockwise exterior

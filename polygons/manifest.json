@@ -7,63 +7,63 @@
       "source": "cog/planar-u8-deflate-2band.tif",
       "crs": "EPSG:4326",
       "polygons": 12,
-      "cells": 6902
+      "cells": 10045
     },
     {
       "name": "planar-u8-deflate-2band-native",
       "source": "cog/planar-u8-deflate-2band.tif",
       "crs": "EPSG:3857",
       "polygons": 14,
-      "cells": 10218
+      "cells": 9629
     },
     {
       "name": "polar-f32-zstd-bigtiff-4326",
       "source": "cog/polar-f32-zstd-bigtiff.tif",
       "crs": "EPSG:4326",
       "polygons": 12,
-      "cells": 2593
+      "cells": 6703
     },
     {
       "name": "polar-f32-zstd-bigtiff-native",
       "source": "cog/polar-f32-zstd-bigtiff.tif",
       "crs": "EPSG:3031",
       "polygons": 14,
-      "cells": 44103
+      "cells": 62683
     },
     {
       "name": "rgb-u8-deflate-pixel-4326",
       "source": "cog/rgb-u8-deflate-pixel.tif",
       "crs": "EPSG:4326",
       "polygons": 12,
-      "cells": 10230
+      "cells": 15151
     },
     {
       "name": "rgb-u8-deflate-pixel-native",
       "source": "cog/rgb-u8-deflate-pixel.tif",
       "crs": "EPSG:3577",
       "polygons": 14,
-      "cells": 8711
+      "cells": 7901
     },
     {
       "name": "utm-u16-lzw-pred2-3band-4326",
       "source": "cog/utm-u16-lzw-pred2-3band.tif",
       "crs": "EPSG:4326",
       "polygons": 12,
-      "cells": 10802
+      "cells": 9095
     },
     {
       "name": "utm-u16-lzw-pred2-3band-native",
       "source": "cog/utm-u16-lzw-pred2-3band.tif",
       "crs": "EPSG:32755",
       "polygons": 14,
-      "cells": 16826
+      "cells": 8984
     },
     {
       "name": "world-int16-deflate-4326",
       "source": "cog/world-int16-deflate.tif",
       "crs": "EPSG:4326",
       "polygons": 14,
-      "cells": 34695
+      "cells": 55557
     }
   ]
 }
