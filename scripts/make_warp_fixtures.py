@@ -18,7 +18,7 @@ import shutil
 import numpy as np
 import rasterio
 from rasterio.transform import from_bounds
-from rasterio.warp import Resampling, reproject
+from rasterio.warp import Resampling, reproject, transform
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COG = os.path.join(ROOT, "cog")
@@ -51,11 +51,55 @@ CASES = [
     # the same at about 50 m: uint16 kernels stretched over 5 by 4 cells
     dict(name="utm-to-4326-coarse", source="utm-u16-lzw-pred2-3band.tif",
          crs="EPSG:4326", bounds=(147.000, -43.440, 147.036, -43.424), size=(58, 45)),
+    # gdalwarp's default overview choice (-ovr AUTO): the coarsest
+    # overview still finer than the target, then the warp from it
+    dict(name="utm-to-4326-ovr", source="utm-u16-lzw-pred2-3band.tif", overview="auto",
+         crs="EPSG:4326", bounds=(147.000, -43.440, 147.036, -43.424), size=(58, 45)),
+    dict(name="world-to-4326-ovr", source="world-int16-deflate.tif", overview="auto",
+         crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, 90.0), size=(100, 50)),
+    dict(name="polar-to-4326-ovr", source="polar-f32-zstd-bigtiff.tif", overview="auto",
+         crs="EPSG:4326", bounds=(-180.0, -90.0, 180.0, -60.0), size=(90, 15)),
     # Australian Albers, three uint8 bands, to EPSG:3857 at about 3 cells to 1
     dict(name="rgb-to-3857-coarse", source="rgb-u8-deflate-pixel.tif",
          crs="EPSG:3857", bounds=(14695200.0, 2300.0, 14697100.0, 3900.0), size=(63, 53)),
 ]
 METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
+
+
+def auto_overview(src, dst_transform, crs, w, h):
+    """gdalwarp's -ovr AUTO choice for an explicit target extent and size
+    (apps/gdalwarp_lib.cpp, GDAL 3.12): transform a 10 by 10 lattice of
+    target pixel corners to source pixels; the smaller of the x and y source
+    spans per target cell is the ratio to meet; the coarsest overview whose
+    width ratio stays below it (plus 0.1) wins. Returns the overview index,
+    or None for full resolution."""
+    cols, rows = [], []
+    for ix in range(10):
+        for iy in range(10):
+            cols.append(w * ix / 9.0)
+            rows.append(h * iy / 9.0)
+    gx = [dst_transform.c + c * dst_transform.a + r * dst_transform.b for c, r in zip(cols, rows)]
+    gy = [dst_transform.f + c * dst_transform.d + r * dst_transform.e for c, r in zip(cols, rows)]
+    sx, sy = transform(crs, src.crs, gx, gy)
+    inv = ~src.transform
+    px = [(inv * (x, y)) for x, y in zip(sx, sy) if np.isfinite(x) and np.isfinite(y)]
+    xs, ys = [p[0] for p in px], [p[1] for p in px]
+    target = min((max(xs) - min(xs)) / w, (max(ys) - min(ys)) / h)
+    if target <= 1.0:
+        return None
+    best, best_ratio = -1, 0.0
+    widths = []
+    for k in range(len(src.overviews(1))):
+        with rasterio.open(src.name, overview_level=k) as o:
+            widths.append(o.width)
+    for k in range(-1, len(widths)):
+        ratio = 1.0 if k < 0 else src.width / widths[k]
+        if ratio >= target + 0.1 or ratio <= best_ratio:
+            continue
+        best, best_ratio = k, ratio
+        if abs(target - ratio) < 0.1:
+            break
+    return best if best >= 0 else None
 
 
 def make_world360(path):
@@ -94,7 +138,13 @@ def main():
         w, h = c["size"]
         dst_transform = from_bounds(*c["bounds"], w, h)
         folder, prefix = (OUT, "warp/") if c.get("made") else (COG, "cog/")
-        with rasterio.open(os.path.join(folder, c["source"])) as src:
+        path = os.path.join(folder, c["source"])
+        level = None
+        if c.get("overview") == "auto":
+            with rasterio.open(path) as full:
+                level = auto_overview(full, dst_transform, c["crs"], w, h)
+        opener = {} if level is None else {"overview_level": level}
+        with rasterio.open(path, **opener) as src:
             count, dtype, nodata = src.count, src.dtypes[0], src.nodata
             rec = {
                 "name": c["name"],
@@ -110,6 +160,10 @@ def main():
                 # whole western hemisphere would be empty otherwise), so
                 # wxylib compares this case with its own wrap on
                 "wrap_globe": c["source"].startswith("world360"),
+                # gdalwarp's -ovr: "auto" cases warp from the overview its
+                # default choice picks (0 is the first overview)
+                "overview": c.get("overview", "none"),
+                "overview_level": level,
                 "results": [],
             }
             for m, alg in METHODS.items():
