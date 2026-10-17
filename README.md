@@ -130,3 +130,8 @@ file), and the values GDAL reads there as gdallocationinfo does
 (reproject, inverse geotransform, floor; every band). Per case:
 `*-x.bin`, `*-y.bin` (float64), `*-values.bin` (float64, bands x n) and
 `*-found.bin` (uint8, 1 on the file); `manifest.json` lists the cases.
+Interpolated reads are GDAL's own InterpolateAtGeolocation, called
+through ctypes in the GDAL rasterio bundles: `*-bilinear.bin`,
+`*-cubic.bin`, `*-cubicspline.bin` (float64, bands x n, NaN where GDAL has
+no value), with GDAL's (pixel, line) for each point in `*-pixel.bin` and
+`*-line.bin`.

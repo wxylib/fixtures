@@ -1,6 +1,11 @@
 {
   "gdal": "3.12.2",
   "rasterio": "1.5.2",
+  "interpolated": [
+    "bilinear",
+    "cubic",
+    "cubicspline"
+  ],
   "cases": [
     {
       "name": "planar-u8-deflate-2band-4326",
