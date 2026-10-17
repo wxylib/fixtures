@@ -11,6 +11,9 @@ does, with the approximate transformer at 0.125 pixels.
 
 For wxylib, each case's arrays are also written raw (little-endian
 float64 longitude and latitude, the source values in their own type).
+Cases with "cell": "edge" place the grid by its cell corners instead:
+arrays one row and column larger than the grid, read by GDAL with
+GEOREFERENCING_CONVENTION=TOP_LEFT_CORNER.
 
 Run from the repository root:
 
@@ -33,19 +36,20 @@ OUT = os.path.join(ROOT, "curvilinear")
 METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
 
 
-def swath(ny, nx):
+def swath(ny, nx, shift=0.0):
     """A curved, rotated swath over south-eastern Australia and the
-    Southern Ocean: rows bend, columns shear, spacing varies."""
-    j, i = np.mgrid[0:ny, 0:nx].astype("float64")
+    Southern Ocean: rows bend, columns shear, spacing varies. With
+    `shift` -0.5 and one more row and column, the cell corners."""
+    j, i = np.mgrid[0:ny, 0:nx].astype("float64") + shift
     lon = 140.0 + 0.11 * i + 0.03 * j + 0.0004 * (j - ny / 2) ** 2
     lat = -40.0 - 0.09 * j + 0.02 * i + 1.5 * np.sin(i / nx * np.pi)
     return lon, lat
 
 
-def polar(ny, nx):
+def polar(ny, nx, shift=0.0):
     """A swath running over the south pole region, to polar stereographic:
     rows are circles of latitude, columns meridians, slightly skewed."""
-    j, i = np.mgrid[0:ny, 0:nx].astype("float64")
+    j, i = np.mgrid[0:ny, 0:nx].astype("float64") + shift
     lon = -180.0 + 360.0 * (i + 0.5) / nx + 0.2 * j
     lon = (lon + 180.0) % 360.0 - 180.0
     lat = -60.0 - 25.0 * (j + 0.5) / ny
@@ -67,10 +71,15 @@ CASES = [
          bounds=(0.8e6, -6.0e6, 4.0e6, -2.8e6), size=(128, 128)),
     dict(name="polar-to-3031", grid=polar, shape=(50, 180), crs="EPSG:3031",
          bounds=(-3.5e6, -3.5e6, 3.5e6, 3.5e6), size=(140, 140)),
+    # cell edges: (ny + 1, nx + 1) corner arrays, TOP_LEFT_CORNER
+    dict(name="swath-edges-to-4326", grid=swath, shape=(120, 160), crs="EPSG:4326",
+         bounds=(139.0, -53.0, 160.0, -37.0), size=(210, 160), cell="edge"),
+    dict(name="swath-edges-to-3031", grid=swath, shape=(120, 160), crs="EPSG:3031",
+         bounds=(0.8e6, -6.0e6, 4.0e6, -2.8e6), size=(128, 128), cell="edge"),
 ]
 
 
-def write_geoloc_vrt(path, src_tif, lonlat_tif, ny, nx):
+def write_geoloc_vrt(path, src_tif, lonlat_tif, ny, nx, convention):
     wkt = CRS.from_epsg(4326).to_wkt()
     md = {
         "X_DATASET": lonlat_tif, "X_BAND": "1",
@@ -78,7 +87,7 @@ def write_geoloc_vrt(path, src_tif, lonlat_tif, ny, nx):
         "PIXEL_OFFSET": "0", "LINE_OFFSET": "0",
         "PIXEL_STEP": "1", "LINE_STEP": "1",
         "SRS": wkt,
-        "GEOREFERENCING_CONVENTION": "PIXEL_CENTER",
+        "GEOREFERENCING_CONVENTION": convention,
     }
     items = "\n".join(
         '    <MDI key="%s">%s</MDI>' % (k, v.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;"))
@@ -102,26 +111,32 @@ def main():
     shutil.rmtree(OUT, ignore_errors=True)
     os.makedirs(OUT)
     out = {"gdal": rasterio.__gdal_version__, "rasterio": rasterio.__version__,
-           "error_threshold": 0.125, "geolocation": "PIXEL_CENTER", "cases": []}
+           "error_threshold": 0.125,
+           "geolocation": "PIXEL_CENTER, or TOP_LEFT_CORNER for cell edges", "cases": []}
     grids = {}
     for c in CASES:
         ny, nx = c["shape"]
-        key = (c["grid"].__name__, ny, nx)
+        edge = c.get("cell") == "edge"
+        key = (c["grid"].__name__, ny, nx, edge)
         if key not in grids:
             lon, lat = c["grid"](ny, nx)
             v = field(lon, lat)
-            base = "%s-%dx%d" % key
+            base = "%s-%dx%d" % key[:3] + ("-edges" if edge else "")
+            if edge:
+                lon, lat = c["grid"](ny + 1, nx + 1, -0.5)
+            gy, gx = lon.shape
             src_tif = os.path.join(OUT, base + ".tif")
             lonlat_tif = os.path.join(OUT, base + "-lonlat.tif")
             prof = dict(driver="GTiff", width=nx, height=ny, count=1, dtype="float32")
             with rasterio.open(src_tif, "w", **prof) as d:
                 d.write(v, 1)
-            prof.update(count=2, dtype="float64")
+            prof.update(count=2, dtype="float64", width=gx, height=gy)
             with rasterio.open(lonlat_tif, "w", **prof) as d:
                 d.write(lon, 1)
                 d.write(lat, 2)
             vrt = os.path.join(OUT, base + ".vrt")
-            write_geoloc_vrt(vrt, src_tif, os.path.abspath(lonlat_tif), ny, nx)
+            write_geoloc_vrt(vrt, src_tif, os.path.abspath(lonlat_tif), ny, nx,
+                             "TOP_LEFT_CORNER" if edge else "PIXEL_CENTER")
             lon.astype("<f8").tofile(os.path.join(OUT, base + "-lon.bin"))
             lat.astype("<f8").tofile(os.path.join(OUT, base + "-lat.bin"))
             v.astype("<f4").tofile(os.path.join(OUT, base + "-values.bin"))
@@ -133,6 +148,7 @@ def main():
             "name": c["name"],
             "source": base,
             "shape": [ny, nx],
+            "cell": "edge" if edge else "centre",
             "source_crs": "EPSG:4326",
             "crs": c["crs"],
             "geotransform": list(dst_transform.to_gdal()),

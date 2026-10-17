@@ -107,3 +107,6 @@ approximate transformer at 0.125 pixels), with nearest, bilinear and cubic,
 to EPSG:4326 (also coarse) and EPSG:3031. Each grid's arrays are raw
 little-endian files (`*-lon.bin`, `*-lat.bin` float64, `*-values.bin`
 float32) next to the GeoTIFFs GDAL read; `manifest.json` lists the cases.
+Cases with `"cell": "edge"` place the swath by its cell corners instead:
+`*-edges-lon.bin` and `*-edges-lat.bin` are one row and column larger
+than the grid, read by GDAL with `GEOREFERENCING_CONVENTION=TOP_LEFT_CORNER`.
