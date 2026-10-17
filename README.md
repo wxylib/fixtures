@@ -49,8 +49,11 @@ GDAL's warper (through `rasterio.warp.reproject`, approximate transformer
 at 0.125 pixels) writes for COG sources onto target grids, with nearest,
 bilinear and cubic. Some targets are near 1:1 with the source; others are
 coarser, where GDAL scales its kernels (stage S5), read an overview, or
-need the source window split into chunks. `manifest.json` gives each
-case's source, target CRS, geotransform, size and overview; each result is
+need the source window split into chunks: `polar-to-4326-global` splits
+into 16 where most of the target misses the source, and
+`world-to-3031-wm1` into 4 under a 1 MB warp memory limit (gdalwarp
+`-wm 1`). `manifest.json` gives each case's source, target CRS,
+geotransform, size, overview and `warp_memory_mb`; each result is
 a raw little-endian `.bin` file of the target's cell type, C order (band, row, col).
 
 ## zarr/

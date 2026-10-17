@@ -23,6 +23,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -58,6 +59,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -93,6 +95,7 @@
       "wrap_globe": true,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -128,6 +131,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -163,6 +167,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -198,6 +203,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -233,6 +239,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -268,6 +275,7 @@
       "wrap_globe": false,
       "overview": "auto",
       "overview_level": 1,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -303,6 +311,7 @@
       "wrap_globe": false,
       "overview": "auto",
       "overview_level": 1,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -338,6 +347,7 @@
       "wrap_globe": false,
       "overview": "auto",
       "overview_level": 1,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -373,6 +383,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -408,6 +419,7 @@
       "wrap_globe": false,
       "overview": "none",
       "overview_level": null,
+      "warp_memory_mb": 64,
       "results": [
         {
           "resampling": "near",
@@ -420,6 +432,38 @@
         {
           "resampling": "cubic",
           "file": "rgb-to-3857-coarse-cubic.bin"
+        }
+      ]
+    },
+    {
+      "name": "world-to-3031-wm1",
+      "source": "cog/world-int16-deflate.tif",
+      "crs": "EPSG:3031",
+      "geotransform": [
+        -4000000.0,
+        6666.666666666667,
+        0.0,
+        4000000.0,
+        0.0,
+        -6666.666666666667
+      ],
+      "width": 1200,
+      "height": 1200,
+      "count": 1,
+      "dtype": "int16",
+      "nodata": null,
+      "wrap_globe": false,
+      "overview": "none",
+      "overview_level": null,
+      "warp_memory_mb": 1,
+      "results": [
+        {
+          "resampling": "near",
+          "file": "world-to-3031-wm1-near.bin"
+        },
+        {
+          "resampling": "cubic",
+          "file": "world-to-3031-wm1-cubic.bin"
         }
       ]
     }

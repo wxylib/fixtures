@@ -68,6 +68,12 @@ CASES = [
     # Australian Albers, three uint8 bands, to EPSG:3857 at about 3 cells to 1
     dict(name="rgb-to-3857-coarse", source="rgb-u8-deflate-pixel.tif",
          crs="EPSG:3857", bounds=(14695200.0, 2300.0, 14697100.0, 3900.0), size=(63, 53)),
+    # the world to south polar stereographic under a 1 MB warp memory limit
+    # (gdalwarp -wm 1): GDAL's planner halves the target until each chunk's
+    # working memory fits, so the warp runs as several chunks
+    dict(name="world-to-3031-wm1", source="world-int16-deflate.tif", wm=1,
+         methods=("near", "cubic"),
+         crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(1200, 1200)),
 ]
 METHODS = {"near": Resampling.nearest, "bilinear": Resampling.bilinear, "cubic": Resampling.cubic}
 
@@ -170,6 +176,8 @@ def main():
                 # default choice picks (0 is the first overview)
                 "overview": c.get("overview", "none"),
                 "overview_level": level,
+                # gdalwarp's -wm, in MB (GDAL's default is 64)
+                "warp_memory_mb": c.get("wm", 64),
                 "results": [],
             }
             for m, alg in METHODS.items():
@@ -186,6 +194,7 @@ def main():
                         src_nodata=nodata,
                         dst_nodata=nodata,
                         num_threads=1,
+                        warp_mem_limit=c.get("wm", 0),
                     )
                 name = "%s-%s.bin" % (c["name"], m)
                 dst.astype(dst.dtype.newbyteorder("<")).tofile(os.path.join(OUT, name))
