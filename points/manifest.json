@@ -1,0 +1,78 @@
+{
+  "gdal": "3.12.2",
+  "rasterio": "1.5.2",
+  "cases": [
+    {
+      "name": "planar-u8-deflate-2band-4326",
+      "source": "cog/planar-u8-deflate-2band.tif",
+      "crs": "EPSG:4326",
+      "n": 400,
+      "bands": 2,
+      "found": 290
+    },
+    {
+      "name": "planar-u8-deflate-2band-native",
+      "source": "cog/planar-u8-deflate-2band.tif",
+      "crs": "EPSG:3857",
+      "n": 400,
+      "bands": 2,
+      "found": 284
+    },
+    {
+      "name": "polar-f32-zstd-bigtiff-4326",
+      "source": "cog/polar-f32-zstd-bigtiff.tif",
+      "crs": "EPSG:4326",
+      "n": 400,
+      "bands": 1,
+      "found": 282
+    },
+    {
+      "name": "polar-f32-zstd-bigtiff-native",
+      "source": "cog/polar-f32-zstd-bigtiff.tif",
+      "crs": "EPSG:3031",
+      "n": 400,
+      "bands": 1,
+      "found": 276
+    },
+    {
+      "name": "rgb-u8-deflate-pixel-4326",
+      "source": "cog/rgb-u8-deflate-pixel.tif",
+      "crs": "EPSG:4326",
+      "n": 400,
+      "bands": 3,
+      "found": 271
+    },
+    {
+      "name": "rgb-u8-deflate-pixel-native",
+      "source": "cog/rgb-u8-deflate-pixel.tif",
+      "crs": "EPSG:3577",
+      "n": 400,
+      "bands": 3,
+      "found": 278
+    },
+    {
+      "name": "utm-u16-lzw-pred2-3band-4326",
+      "source": "cog/utm-u16-lzw-pred2-3band.tif",
+      "crs": "EPSG:4326",
+      "n": 400,
+      "bands": 3,
+      "found": 269
+    },
+    {
+      "name": "utm-u16-lzw-pred2-3band-native",
+      "source": "cog/utm-u16-lzw-pred2-3band.tif",
+      "crs": "EPSG:32755",
+      "n": 400,
+      "bands": 3,
+      "found": 272
+    },
+    {
+      "name": "world-int16-deflate-4326",
+      "source": "cog/world-int16-deflate.tif",
+      "crs": "EPSG:4326",
+      "n": 400,
+      "bands": 1,
+      "found": 332
+    }
+  ]
+}

@@ -120,3 +120,13 @@ an OISST-style month (time x zlev x lat x lon, packed int16 with
 ascending, longitude 0 to 360, chunked two days deep). The `.bin` files
 hold what GDAL's warper writes for every day, from a north-up GeoTIFF of
 that day, to EPSG:3031 with nearest and bilinear (int16, days stacked).
+
+## points/
+
+Point-read oracles (wxylib stage S4c), made by
+`scripts/make_point_fixtures.py`: 400 random points over each COG in
+`cog/`, given in EPSG:4326 and in the file's own CRS (some fall off the
+file), and the values GDAL reads there as gdallocationinfo does
+(reproject, inverse geotransform, floor; every band). Per case:
+`*-x.bin`, `*-y.bin` (float64), `*-values.bin` (float64, bands x n) and
+`*-found.bin` (uint8, 1 on the file); `manifest.json` lists the cases.
