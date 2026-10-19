@@ -191,7 +191,8 @@ each polygon alone, by cell centre and with ALL_TOUCHED. Per case:
 per polygon) and `*-cells.json` (flat cell indices as [start, length]
 runs, per mode and polygon).
 
-Design and roadmap: [wxylib/design](https://github.com/wxylib/design).
+Documentation: **https://wxylib.github.io/docs/**, one place for what works, how-tos,
+explainers, the design documents and how to help.
 
 License: MIT OR Apache-2.0.
 
