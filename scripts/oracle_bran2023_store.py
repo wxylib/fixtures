@@ -13,7 +13,14 @@ day's chunk at row 1200, and row 750 of depth 10 on the last day.
 S3 settings come from the environment as GDAL reads them
 (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_S3_ENDPOINT,
 AWS_VIRTUAL_HOSTING=NO); the chunks are read from the netCDF files the
-VRT names, so this also needs access to thredds.nci.org.au.
+VRT names, so this also needs access to thredds.nci.org.au, and GDAL's
+HDF5 driver (conda-forge splits it out: `libgdal-hdf5`).
+
+Run on 2026-10-21 with GDAL 3.13.3 from conda-forge; wxy-virtual's
+`bran_refs` gave the same values, direct and through Icechunk:
+
+    chunk-t0-z0-y4-x0: sha256 d521d3e25758e62408faaa4076c1b2c759cad64b7240148122feb00adc728f65
+    row-tlast-z10-y750: sha256 9321b226f15218495f3a2da02d73b2a58a11c44a330186212a6d37fb786b940c
 """
 
 import hashlib
