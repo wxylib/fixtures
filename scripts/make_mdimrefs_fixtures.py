@@ -218,7 +218,7 @@ def scan(vrt_path, vrt_root, data=DATA, source_of=mirror_source):
                 raise ValueError(f"{fname}: placement is not on the chunk grid {chunks}")
             placements.append(dict(source=source, source_array=src.find("SourceArray").text,
                                    src_offset=src_offset, count=count,
-                                   dest=dict(offset=dest, count=count)))
+                                   dest=dest))
             ds = gdal.OpenEx(os.path.join(os.path.dirname(vrt_path), fname), gdal.OF_MULTIDIM_RASTER)
             a = ds.GetRootGroup().OpenMDArray(name)
             if a.GetBlockSize() != chunks:
@@ -241,7 +241,8 @@ def scan(vrt_path, vrt_root, data=DATA, source_of=mirror_source):
                     rows.append(dict(source=source, key=list(local), present=0,
                                      offset=None, size=None, info=None))
                 else:
-                    text = json.dumps(list(info.GetInfo() or []))
+                    # block-info text form, "K=V; K=V" (spec `info`)
+                    text = "; ".join(info.GetInfo() or [])
                     infos.add(text)
                     rows.append(dict(source=source, key=list(local), present=1,
                                      offset=info.GetOffset(), size=info.GetSize(), info=text))
@@ -255,7 +256,7 @@ def scan(vrt_path, vrt_root, data=DATA, source_of=mirror_source):
         out[name] = dict(
             meta=dict(array=name, kind="data", storage="referenced", dims=dims, shape=gshape,
                       chunks=chunks, dtype=dtype, fill=fill,
-                      codec=codec_of(json.loads(next(iter(infos))) if infos else [], int(dtype[2:])),
+                      codec=codec_of(next(iter(infos)).split("; ") if infos else [], int(dtype[2:])),
                       attrs={k: v for k, v in attrs_of(first).items() if k != "_FillValue"},
                       affine=None, values=None),
             rows=rows,
@@ -268,7 +269,7 @@ def view_sql(name, n, chunks):
     """refs_<name>: chunk table joined to its placement, keys made global,
     restricted to source chunks inside the slab."""
     jx = lambda col, i: f"json_extract(p.{col}, '$[{i}]')"
-    jd = lambda i: f"json_extract(p.dest, '$.offset[{i}]')"
+    jd = lambda i: jx("dest", i)
     dims = ", ".join(f"t.dim_{i} - {jx('src_offset', i)} / {c} + {jd(i)} / {c} AS dim_{i}"
                      for i, c in enumerate(chunks))
     inside = " AND ".join(f"t.dim_{i} * {c} >= {jx('src_offset', i)} AND "
