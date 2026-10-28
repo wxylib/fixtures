@@ -1,0 +1,80 @@
+# Regenerate GDAL oracle sets with GDAL HEAD, in hypertidy/gdal-r-ci's
+# gdal-r-python:dev image (GDAL, PROJ and GEOS built from source, rebuilt
+# daily, osgeo bindings in /opt/gdal-py). Run by hand from the Actions tab,
+# or by a pull request that changes this file or a script; the outputs are
+# pushed to a new branch for review as a pull request.
+name: oracles
+
+on:
+  workflow_dispatch:
+    inputs:
+      sets:
+        description: "Fixture sets to regenerate (scripts/make_<set>_fixtures.py), in order"
+        default: "curvilinear cf index"
+      image:
+        description: "Container image"
+        default: "ghcr.io/hypertidy/gdal-r-python:dev"
+  pull_request:
+    paths:
+      - ".github/workflows/oracles.yml"
+      - "scripts/make_curvilinear_fixtures.py"
+      - "scripts/make_cf_fixtures.py"
+      - "scripts/make_index_fixtures.py"
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.image || 'ghcr.io/hypertidy/gdal-r-python:dev' }}
+    env:
+      PY: /opt/gdal-py/bin/python
+      SETS: ${{ inputs.sets || 'curvilinear cf index' }}
+    steps:
+      - name: git
+        run: |
+          command -v git || (apt-get update && apt-get install -y --no-install-recommends git ca-certificates)
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+      - name: Python packages
+        run: |
+          need=""
+          for m in numpy pandas xarray zarr netCDF4 pyarrow; do
+            $PY -c "import $m" 2>/dev/null || need="$need $m"
+          done
+          echo "missing:$need"
+          if [ -n "$need" ]; then
+            if command -v uv >/dev/null; then uv pip install --python $PY $need
+            else $PY -m pip install $need; fi
+          fi
+      - name: GDAL
+        run: |
+          $PY - <<'PY'
+          from osgeo import gdal
+          print(gdal.VersionInfo("--version"))
+          for d in ("GTiff", "VRT", "netCDF", "Zarr", "HDF5"):
+              print(d, gdal.GetDriverByName(d) is not None)
+          PY
+      - name: Regenerate
+        run: |
+          for s in $SETS; do
+            echo "::group::$s"
+            $PY scripts/make_${s}_fixtures.py
+            echo "::endgroup::"
+          done
+          git status --short | head -100
+      - name: Push a branch
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          v=$($PY -c "from osgeo import gdal; print(gdal.__version__)")
+          b="oracles/gdal-$v-${GITHUB_RUN_ID}"
+          git checkout -b "$b"
+          git add -A
+          git commit -m "regenerate $SETS with GDAL $v" || { echo "no changes"; exit 0; }
+          git push origin "$b"
+          echo "pushed $b" >> "$GITHUB_STEP_SUMMARY"

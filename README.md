@@ -7,6 +7,13 @@ Every case is a small input plus what GDAL gives for it; the wxylib/core
 tests must reproduce GDAL's numbers exactly. Each directory has a script
 in `scripts/` that regenerates it and a `manifest.json` listing its cases.
 
+The warp-like oracles (warp/, curvilinear/, cf/, index/) track GDAL HEAD
+(3.14dev), whose per-chunk kernel scale is the one rwarp ports. The
+`oracles` workflow regenerates them in hypertidy/gdal-r-ci's
+`gdal-r-python:dev` image and pushes the result to a new
+`oracles/gdal-<version>-<run>` branch: run it from the Actions tab and
+name the sets, for example `curvilinear cf index`.
+
 | Directory | Inputs | Oracle | Checks |
 |-----------|--------|--------|--------|
 | [cog/](#cog) | five small GeoTIFFs (COG and plain) | GDAL window reads | `wxy-tiff`, `wxy-virtual` |
