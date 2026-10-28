@@ -36,6 +36,8 @@ jobs:
       - name: git
         run: |
           command -v git || (apt-get update && apt-get install -y --no-install-recommends git ca-certificates)
+      - name: safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref || github.ref }}
@@ -68,7 +70,6 @@ jobs:
           git status --short | head -100
       - name: Push a branch
         run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           v=$($PY -c "from osgeo import gdal; print(gdal.__version__)")

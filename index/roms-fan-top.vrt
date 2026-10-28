@@ -1,8 +1,8 @@
 <VRTDataset rasterXSize="24" rasterYSize="46">
   <Metadata domain="GEOLOCATION">
-    <MDI key="X_DATASET">/home/claude/fixtures/index/roms-fan-lonlat.tif</MDI>
+    <MDI key="X_DATASET">/__w/fixtures/fixtures/index/roms-fan-lonlat.tif</MDI>
     <MDI key="X_BAND">1</MDI>
-    <MDI key="Y_DATASET">/home/claude/fixtures/index/roms-fan-lonlat.tif</MDI>
+    <MDI key="Y_DATASET">/__w/fixtures/fixtures/index/roms-fan-lonlat.tif</MDI>
     <MDI key="Y_BAND">2</MDI>
     <MDI key="PIXEL_OFFSET">0</MDI>
     <MDI key="LINE_OFFSET">0</MDI>
