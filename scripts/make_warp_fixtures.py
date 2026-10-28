@@ -77,7 +77,9 @@ CASES = [
          methods=("near", "cubic"),
          crs="EPSG:3031", bounds=(-4.0e6, -4.0e6, 4.0e6, 4.0e6), size=(1200, 1200)),
 ]
-METHODS = ("near", "bilinear", "cubic")
+# lanczos, average and mode are rwarp's kernels on each GDAL chunk in
+# wxylib (hypertidy/rwarp#3, wxylib/core#19)
+METHODS = ("near", "bilinear", "cubic", "lanczos", "average", "mode")
 
 
 def geotransform(bounds, w, h):
