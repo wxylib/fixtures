@@ -1,7 +1,6 @@
 {
-  "gdal": "3.12.2",
-  "rasterio": "1.5.2",
-  "xarray": "2026.9.0",
+  "gdal": "3.14.0dev-739fcf03bf",
+  "xarray": "2026.4.1.dev32+g71cfb13ac",
   "store": "oisst-like.zarr",
   "array": "/sst",
   "crs": "EPSG:3031",

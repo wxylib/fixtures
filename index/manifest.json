@@ -1,6 +1,6 @@
 {
-  "gdal": "3.12.4",
-  "osgeo": "3.12.4",
+  "gdal": "3.14.0dev-739fcf03bf",
+  "osgeo": "3.14.0dev-739fcf03bf",
   "zarr_format": 3,
   "cases": [
     {

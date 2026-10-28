@@ -1,6 +1,6 @@
 {
-  "gdal": "3.12.4",
-  "osgeo": "3.12.4",
+  "gdal": "3.14.0dev-739fcf03bf",
+  "osgeo": "3.14.0dev-739fcf03bf",
   "error_threshold": 0.125,
   "geolocation": "PIXEL_CENTER, or TOP_LEFT_CORNER for cell edges",
   "cases": [
