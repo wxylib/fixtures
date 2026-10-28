@@ -1,6 +1,6 @@
 {
-  "gdal": "3.12.4",
-  "osgeo": "3.12.4",
+  "gdal": "3.14.0dev-739fcf03bf",
+  "osgeo": "3.14.0dev-739fcf03bf",
   "error_threshold": 0.125,
   "cases": [
     {
@@ -36,6 +36,18 @@
         {
           "resampling": "cubic",
           "file": "world-to-3031-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "world-to-3031-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "world-to-3031-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "world-to-3031-mode.bin"
         }
       ]
     },
@@ -72,6 +84,18 @@
         {
           "resampling": "cubic",
           "file": "polar-to-4326-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "polar-to-4326-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "polar-to-4326-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "polar-to-4326-mode.bin"
         }
       ]
     },
@@ -108,6 +132,18 @@
         {
           "resampling": "cubic",
           "file": "world360-to-3031-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "world360-to-3031-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "world360-to-3031-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "world360-to-3031-mode.bin"
         }
       ]
     },
@@ -144,6 +180,18 @@
         {
           "resampling": "cubic",
           "file": "worldnd-to-3031-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "worldnd-to-3031-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "worldnd-to-3031-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "worldnd-to-3031-mode.bin"
         }
       ]
     },
@@ -180,6 +228,18 @@
         {
           "resampling": "cubic",
           "file": "polar-to-4326-global-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "polar-to-4326-global-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "polar-to-4326-global-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "polar-to-4326-global-mode.bin"
         }
       ]
     },
@@ -216,6 +276,18 @@
         {
           "resampling": "cubic",
           "file": "utm-to-4326-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "utm-to-4326-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "utm-to-4326-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "utm-to-4326-mode.bin"
         }
       ]
     },
@@ -252,6 +324,18 @@
         {
           "resampling": "cubic",
           "file": "utm-to-4326-coarse-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "utm-to-4326-coarse-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "utm-to-4326-coarse-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "utm-to-4326-coarse-mode.bin"
         }
       ]
     },
@@ -288,6 +372,18 @@
         {
           "resampling": "cubic",
           "file": "utm-to-4326-ovr-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "utm-to-4326-ovr-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "utm-to-4326-ovr-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "utm-to-4326-ovr-mode.bin"
         }
       ]
     },
@@ -324,6 +420,18 @@
         {
           "resampling": "cubic",
           "file": "world-to-4326-ovr-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "world-to-4326-ovr-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "world-to-4326-ovr-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "world-to-4326-ovr-mode.bin"
         }
       ]
     },
@@ -360,6 +468,18 @@
         {
           "resampling": "cubic",
           "file": "polar-to-4326-ovr-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "polar-to-4326-ovr-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "polar-to-4326-ovr-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "polar-to-4326-ovr-mode.bin"
         }
       ]
     },
@@ -396,6 +516,18 @@
         {
           "resampling": "cubic",
           "file": "world-to-3857-origin-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "world-to-3857-origin-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "world-to-3857-origin-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "world-to-3857-origin-mode.bin"
         }
       ]
     },
@@ -432,6 +564,18 @@
         {
           "resampling": "cubic",
           "file": "rgb-to-3857-coarse-cubic.bin"
+        },
+        {
+          "resampling": "lanczos",
+          "file": "rgb-to-3857-coarse-lanczos.bin"
+        },
+        {
+          "resampling": "average",
+          "file": "rgb-to-3857-coarse-average.bin"
+        },
+        {
+          "resampling": "mode",
+          "file": "rgb-to-3857-coarse-mode.bin"
         }
       ]
     },
