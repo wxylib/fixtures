@@ -1,0 +1,1037 @@
+{
+ "gdal": "3.12.2",
+ "backend": "rasterio 1.5.2",
+ "note": "Requests use nearest resampling; window = [col, row, width, height], buf = [width, height].",
+ "sources": {
+  "tile0": {
+   "file": "src/tile0.tif",
+   "raw": "src/tile0.bin",
+   "size": [
+    20,
+    15
+   ],
+   "bands": 1,
+   "dtype": "uint8",
+   "geotransform": [
+    100.0,
+    1.0,
+    0.0,
+    -10.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "tile1": {
+   "file": "src/tile1.tif",
+   "raw": "src/tile1.bin",
+   "size": [
+    20,
+    15
+   ],
+   "bands": 1,
+   "dtype": "uint8",
+   "geotransform": [
+    120.0,
+    1.0,
+    0.0,
+    -10.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "tile2": {
+   "file": "src/tile2.tif",
+   "raw": "src/tile2.bin",
+   "size": [
+    20,
+    15
+   ],
+   "bands": 1,
+   "dtype": "uint8",
+   "geotransform": [
+    100.0,
+    1.0,
+    0.0,
+    -25.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "tile3": {
+   "file": "src/tile3.tif",
+   "raw": "src/tile3.bin",
+   "size": [
+    20,
+    15
+   ],
+   "bands": 1,
+   "dtype": "uint8",
+   "geotransform": [
+    120.0,
+    1.0,
+    0.0,
+    -25.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "small": {
+   "file": "src/small.tif",
+   "raw": "src/small.bin",
+   "size": [
+    10,
+    10
+   ],
+   "bands": 1,
+   "dtype": "int16",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    10.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "odd": {
+   "file": "src/odd.tif",
+   "raw": "src/odd.bin",
+   "size": [
+    30,
+    30
+   ],
+   "bands": 1,
+   "dtype": "int16",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    30.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "rgb": {
+   "file": "src/rgb.tif",
+   "raw": "src/rgb.bin",
+   "size": [
+    16,
+    12
+   ],
+   "bands": 3,
+   "dtype": "uint8",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ]
+  },
+  "withnd": {
+   "file": "src/withnd.tif",
+   "raw": "src/withnd.bin",
+   "size": [
+    16,
+    12
+   ],
+   "bands": 1,
+   "dtype": "float32",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "c01-mosaic.vrt",
+   "desc": "2 x 2 mosaic of SimpleSources, as gdalbuildvrt writes",
+   "dsn": "c01-mosaic.vrt",
+   "size": [
+    40,
+    30
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      40,
+      30
+     ],
+     "buf": [
+      40,
+      30
+     ],
+     "file": "oracle/c01-mosaic-r0.bin",
+     "shape": [
+      1,
+      30,
+      40
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      33,
+      25
+     ],
+     "buf": [
+      33,
+      25
+     ],
+     "file": "oracle/c01-mosaic-r1.bin",
+     "shape": [
+      1,
+      25,
+      33
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      40,
+      30
+     ],
+     "buf": [
+      20,
+      10
+     ],
+     "file": "oracle/c01-mosaic-r2.bin",
+     "shape": [
+      1,
+      10,
+      20
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Byte",
+   "geotransform": [
+    100.0,
+    1.0,
+    0.0,
+    -10.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c02-overlap.vrt",
+   "desc": "two sources overlap; the later one wins",
+   "dsn": "c02-overlap.vrt",
+   "size": [
+    40,
+    30
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      40,
+      30
+     ],
+     "buf": [
+      40,
+      30
+     ],
+     "file": "oracle/c02-overlap-r0.bin",
+     "shape": [
+      1,
+      30,
+      40
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      33,
+      25
+     ],
+     "buf": [
+      33,
+      25
+     ],
+     "file": "oracle/c02-overlap-r1.bin",
+     "shape": [
+      1,
+      25,
+      33
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      40,
+      30
+     ],
+     "buf": [
+      20,
+      10
+     ],
+     "file": "oracle/c02-overlap-r2.bin",
+     "shape": [
+      1,
+      10,
+      20
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Byte",
+   "geotransform": [
+    100.0,
+    1.0,
+    0.0,
+    -10.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c03-upsample.vrt",
+   "desc": "SrcRect 10 x 10 into DstRect 20 x 20 (implicit 2x nearest)",
+   "dsn": "c03-upsample.vrt",
+   "size": [
+    20,
+    20
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      20,
+      20
+     ],
+     "file": "oracle/c03-upsample-r0.bin",
+     "shape": [
+      1,
+      20,
+      20
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      13,
+      15
+     ],
+     "buf": [
+      13,
+      15
+     ],
+     "file": "oracle/c03-upsample-r1.bin",
+     "shape": [
+      1,
+      15,
+      13
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      10,
+      7
+     ],
+     "file": "oracle/c03-upsample-r2.bin",
+     "shape": [
+      1,
+      7,
+      10
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    0.0,
+    0.5,
+    0.0,
+    10.0,
+    0.0,
+    -0.5
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c04-downsample.vrt",
+   "desc": "SrcRect 30 x 30 into DstRect 20 x 20 (factor 1.5, as in COP30)",
+   "dsn": "c04-downsample.vrt",
+   "size": [
+    20,
+    20
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      20,
+      20
+     ],
+     "file": "oracle/c04-downsample-r0.bin",
+     "shape": [
+      1,
+      20,
+      20
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      13,
+      15
+     ],
+     "buf": [
+      13,
+      15
+     ],
+     "file": "oracle/c04-downsample-r1.bin",
+     "shape": [
+      1,
+      15,
+      13
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      10,
+      7
+     ],
+     "file": "oracle/c04-downsample-r2.bin",
+     "shape": [
+      1,
+      7,
+      10
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    0.0,
+    1.5,
+    0.0,
+    30.0,
+    0.0,
+    -1.5
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c05-fractional.vrt",
+   "desc": "fractional DstRect offset and fractional SrcRect window",
+   "dsn": "c05-fractional.vrt",
+   "size": [
+    24,
+    24
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      24,
+      24
+     ],
+     "buf": [
+      24,
+      24
+     ],
+     "file": "oracle/c05-fractional-r0.bin",
+     "shape": [
+      1,
+      24,
+      24
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      17,
+      19
+     ],
+     "buf": [
+      17,
+      19
+     ],
+     "file": "oracle/c05-fractional-r1.bin",
+     "shape": [
+      1,
+      19,
+      17
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      24,
+      24
+     ],
+     "buf": [
+      12,
+      8
+     ],
+     "file": "oracle/c05-fractional-r2.bin",
+     "shape": [
+      1,
+      8,
+      12
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    24.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c06-complex.vrt",
+   "desc": "ComplexSource: NODATA, ScaleOffset, ScaleRatio; band NoDataValue",
+   "dsn": "c06-complex.vrt",
+   "size": [
+    16,
+    12
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      16,
+      12
+     ],
+     "file": "oracle/c06-complex-r0.bin",
+     "shape": [
+      1,
+      12,
+      16
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      9,
+      7
+     ],
+     "buf": [
+      9,
+      7
+     ],
+     "file": "oracle/c06-complex-r1.bin",
+     "shape": [
+      1,
+      7,
+      9
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      8,
+      4
+     ],
+     "file": "oracle/c06-complex-r2.bin",
+     "shape": [
+      1,
+      4,
+      8
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Float32",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": -1.0
+  },
+  {
+   "name": "c07-lut.vrt",
+   "desc": "ComplexSource with a LUT (linear interpolation between entries)",
+   "dsn": "c07-lut.vrt",
+   "size": [
+    16,
+    12
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      16,
+      12
+     ],
+     "file": "oracle/c07-lut-r0.bin",
+     "shape": [
+      1,
+      12,
+      16
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      9,
+      7
+     ],
+     "buf": [
+      9,
+      7
+     ],
+     "file": "oracle/c07-lut-r1.bin",
+     "shape": [
+      1,
+      7,
+      9
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      8,
+      4
+     ],
+     "file": "oracle/c07-lut-r2.bin",
+     "shape": [
+      1,
+      4,
+      8
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Float32",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c08-bands.vrt",
+   "desc": "band selection and reordering from a 3-band source",
+   "dsn": "c08-bands.vrt",
+   "size": [
+    16,
+    12
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      16,
+      12
+     ],
+     "file": "oracle/c08-bands-r0.bin",
+     "shape": [
+      2,
+      12,
+      16
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      9,
+      7
+     ],
+     "buf": [
+      9,
+      7
+     ],
+     "file": "oracle/c08-bands-r1.bin",
+     "shape": [
+      2,
+      7,
+      9
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      8,
+      4
+     ],
+     "file": "oracle/c08-bands-r2.bin",
+     "shape": [
+      2,
+      4,
+      8
+     ]
+    }
+   ],
+   "bands": 2,
+   "dtype": "Byte",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "c09-nested.vrt",
+   "desc": "a VRT whose source is c01-mosaic.vrt, cropped across all four tiles",
+   "dsn": "c09-nested.vrt",
+   "size": [
+    20,
+    20
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      20,
+      20
+     ],
+     "file": "oracle/c09-nested-r0.bin",
+     "shape": [
+      1,
+      20,
+      20
+     ]
+    },
+    {
+     "window": [
+      3,
+      2,
+      13,
+      15
+     ],
+     "buf": [
+      13,
+      15
+     ],
+     "file": "oracle/c09-nested-r1.bin",
+     "shape": [
+      1,
+      15,
+      13
+     ]
+    },
+    {
+     "window": [
+      0,
+      0,
+      20,
+      20
+     ],
+     "buf": [
+      10,
+      7
+     ],
+     "file": "oracle/c09-nested-r2.bin",
+     "shape": [
+      1,
+      7,
+      10
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Byte",
+   "geotransform": [
+    110.0,
+    1.0,
+    0.0,
+    -15.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "v01-bands",
+   "desc": "vrt:// string",
+   "dsn": "vrt://src/rgb.tif?bands=3,1",
+   "size": [
+    16,
+    12
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      16,
+      12
+     ],
+     "file": "oracle/v01-bands-r0.bin",
+     "shape": [
+      2,
+      12,
+      16
+     ]
+    }
+   ],
+   "bands": 2,
+   "dtype": "Byte",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "v02-srcwin",
+   "desc": "vrt:// string",
+   "dsn": "vrt://src/odd.tif?srcwin=4,5,12,9",
+   "size": [
+    12,
+    9
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      12,
+      9
+     ],
+     "buf": [
+      12,
+      9
+     ],
+     "file": "oracle/v02-srcwin-r0.bin",
+     "shape": [
+      1,
+      9,
+      12
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    4.0,
+    1.0,
+    0.0,
+    25.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "v03-outsize",
+   "desc": "vrt:// string",
+   "dsn": "vrt://src/odd.tif?outsize=50%,50%",
+   "size": [
+    15,
+    15
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      15,
+      15
+     ],
+     "buf": [
+      15,
+      15
+     ],
+     "file": "oracle/v03-outsize-r0.bin",
+     "shape": [
+      1,
+      15,
+      15
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    0.0,
+    2.0,
+    0.0,
+    30.0,
+    0.0,
+    -2.0
+   ],
+   "nodata": null
+  },
+  {
+   "name": "v04-srcwin-outsize",
+   "desc": "vrt:// string",
+   "dsn": "vrt://src/odd.tif?srcwin=3,3,21,21&outsize=14,14",
+   "size": [
+    14,
+    14
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      14,
+      14
+     ],
+     "buf": [
+      14,
+      14
+     ],
+     "file": "oracle/v04-srcwin-outsize-r0.bin",
+     "shape": [
+      1,
+      14,
+      14
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Int16",
+   "geotransform": [
+    3.0,
+    1.5,
+    0.0,
+    27.0,
+    0.0,
+    -1.5
+   ],
+   "nodata": null
+  },
+  {
+   "name": "v05-nodata",
+   "desc": "vrt:// string",
+   "dsn": "vrt://src/withnd.tif?a_nodata=-9999",
+   "size": [
+    16,
+    12
+   ],
+   "requests": [
+    {
+     "window": [
+      0,
+      0,
+      16,
+      12
+     ],
+     "buf": [
+      16,
+      12
+     ],
+     "file": "oracle/v05-nodata-r0.bin",
+     "shape": [
+      1,
+      12,
+      16
+     ]
+    }
+   ],
+   "bands": 1,
+   "dtype": "Float32",
+   "geotransform": [
+    0.0,
+    1.0,
+    0.0,
+    12.0,
+    0.0,
+    -1.0
+   ],
+   "nodata": -9999.0
+  }
+ ]
+}
