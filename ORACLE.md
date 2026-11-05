@@ -6,7 +6,7 @@ against them. Questions and answers are kept apart: one set of questions,
 one answer set per oracle run. GDAL 3.8 (the version in the browser
 builds), 3.12 and 3.14dev can then answer the same questions side by
 side, and the difference between two answer sets is a finding in itself.
-The design is in wxylib/design `docs/m26-oracle-harness.md`.
+The design is in wxylib/design `docs/m27-oracle-harness.md`.
 
 ```
 <set>/

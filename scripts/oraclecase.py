@@ -1,5 +1,5 @@
 """oraclecase: ask a reference library the questions in a fixture set, keep
-its answers, and compare answer sets (format: ORACLE.md, design m26).
+its answers, and compare answer sets (format: ORACLE.md, design m27).
 
 A set is a directory with a cases.json (the questions). Each oracle run
 writes answers/<oracle-id>/answers.json plus one file per array or feature
