@@ -1,0 +1,206 @@
+{
+ "format_version": "mdim-refs/0.2",
+ "arrays": [
+  {
+   "array": "Time",
+   "kind": "coord",
+   "storage": "affine",
+   "dims": [
+    "Time"
+   ],
+   "shape": [
+    5
+   ],
+   "chunks": [
+    5
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "days since 1979-01-01 00:00:00",
+    "calendar": "GREGORIAN"
+   },
+   "affine": {
+    "start": 11323.5,
+    "step": 1.0
+   },
+   "values": null
+  },
+  {
+   "array": "salt",
+   "kind": "data",
+   "storage": "referenced",
+   "dims": [
+    "Time",
+    "st_ocean",
+    "yt_ocean",
+    "xt_ocean"
+   ],
+   "shape": [
+    5,
+    4,
+    40,
+    60
+   ],
+   "chunks": [
+    1,
+    1,
+    10,
+    15
+   ],
+   "dtype": "<i2",
+   "fill": "-32768",
+   "codec": {
+    "compressor": {
+     "id": "zlib",
+     "level": 1
+    },
+    "filters": [
+     {
+      "id": "shuffle",
+      "elementsize": 2
+     }
+    ]
+   },
+   "attrs": {
+    "long_name": "Practical Salinity",
+    "units": "psu",
+    "scale_factor": 0.0012207403779029846,
+    "add_offset": 35.0
+   },
+   "affine": null,
+   "values": null
+  },
+  {
+   "array": "st_ocean",
+   "kind": "coord",
+   "storage": "inline",
+   "dims": [
+    "st_ocean"
+   ],
+   "shape": [
+    4
+   ],
+   "chunks": [
+    4
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "meters",
+    "positive": "down"
+   },
+   "affine": null,
+   "values": [
+    2.5,
+    7.5,
+    17.5,
+    40.0
+   ]
+  },
+  {
+   "array": "temp",
+   "kind": "data",
+   "storage": "referenced",
+   "dims": [
+    "Time",
+    "st_ocean",
+    "yt_ocean",
+    "xt_ocean"
+   ],
+   "shape": [
+    5,
+    4,
+    40,
+    60
+   ],
+   "chunks": [
+    1,
+    1,
+    10,
+    15
+   ],
+   "dtype": "<i2",
+   "fill": "-32768",
+   "codec": {
+    "compressor": {
+     "id": "zlib",
+     "level": 1
+    },
+    "filters": [
+     {
+      "id": "shuffle",
+      "elementsize": 2
+     }
+    ]
+   },
+   "attrs": {
+    "long_name": "Potential temperature",
+    "units": "degrees C",
+    "scale_factor": 0.007782219909131527,
+    "add_offset": 210.0
+   },
+   "affine": null,
+   "values": null
+  },
+  {
+   "array": "xt_ocean",
+   "kind": "coord",
+   "storage": "affine",
+   "dims": [
+    "xt_ocean"
+   ],
+   "shape": [
+    60
+   ],
+   "chunks": [
+    60
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "degrees_E"
+   },
+   "affine": {
+    "start": 140.25,
+    "step": 0.5
+   },
+   "values": null
+  },
+  {
+   "array": "yt_ocean",
+   "kind": "coord",
+   "storage": "affine",
+   "dims": [
+    "yt_ocean"
+   ],
+   "shape": [
+    40
+   ],
+   "chunks": [
+    40
+   ],
+   "dtype": "<f8",
+   "fill": null,
+   "codec": null,
+   "attrs": {
+    "units": "degrees_N"
+   },
+   "affine": {
+    "start": -49.75,
+    "step": 0.5
+   },
+   "values": null
+  }
+ ],
+ "remap": [
+  {
+   "target": "fixture",
+   "prefix": "/mirror/bran/",
+   "replacement": "nc/"
+  }
+ ]
+}

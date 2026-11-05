@@ -1,0 +1,174 @@
+{
+ "oracle": "netCDF-C via netCDF4-python (mask and scale off); byte ranges from HDF5",
+ "netCDF4": "1.7.5.1.post1",
+ "netcdf_c": "4.10.1",
+ "h5py": "3.16.0",
+ "hdf5": "2.0.0",
+ "format_version": "mdim-refs/0.2",
+ "remap_target": "fixture",
+ "sources": {
+  "temp": [
+   "ocean_temp_2010_01.nc",
+   "ocean_temp_2010_02.nc"
+  ],
+  "salt": [
+   "ocean_salt_2010_01.nc",
+   "ocean_salt_2010_02.nc"
+  ]
+ },
+ "arrays": {
+  "temp": {
+   "shape": [
+    5,
+    4,
+    40,
+    60
+   ],
+   "chunks": [
+    1,
+    1,
+    10,
+    15
+   ],
+   "dtype": "int16",
+   "fill": -32768,
+   "scale_factor": 0.007782219909131527,
+   "add_offset": 210.0,
+   "present": 319,
+   "absent": 1,
+   "per_file": [
+    191,
+    128
+   ]
+  },
+  "salt": {
+   "shape": [
+    5,
+    4,
+    40,
+    60
+   ],
+   "chunks": [
+    1,
+    1,
+    10,
+    15
+   ],
+   "dtype": "int16",
+   "fill": -32768,
+   "scale_factor": 0.0012207403779029846,
+   "add_offset": 35.0,
+   "present": 304,
+   "absent": 16,
+   "per_file": [
+    192,
+    112
+   ]
+  }
+ },
+ "unwritten": {
+  "temp": [
+   [
+    2,
+    3,
+    1,
+    0
+   ]
+  ],
+  "salt": [
+   [
+    4,
+    2,
+    null,
+    null
+   ]
+  ]
+ },
+ "windows": [
+  {
+   "array": "temp",
+   "start": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    5,
+    4,
+    40,
+    60
+   ],
+   "file": "oracle/temp-w0.bin",
+   "fill_cells": 2490
+  },
+  {
+   "array": "temp",
+   "start": [
+    1,
+    1,
+    5,
+    7
+   ],
+   "count": [
+    3,
+    3,
+    22,
+    40
+   ],
+   "file": "oracle/temp-w1.bin",
+   "fill_cells": 80
+  },
+  {
+   "array": "temp",
+   "start": [
+    2,
+    3,
+    8,
+    0
+   ],
+   "count": [
+    1,
+    1,
+    15,
+    20
+   ],
+   "file": "oracle/temp-w2.bin",
+   "fill_cells": 150
+  },
+  {
+   "array": "salt",
+   "start": [
+    3,
+    0,
+    0,
+    0
+   ],
+   "count": [
+    2,
+    4,
+    40,
+    60
+   ],
+   "file": "oracle/salt-w3.bin",
+   "fill_cells": 3210
+  },
+  {
+   "array": "salt",
+   "start": [
+    0,
+    2,
+    33,
+    52
+   ],
+   "count": [
+    5,
+    1,
+    7,
+    8
+   ],
+   "file": "oracle/salt-w4.bin",
+   "fill_cells": 280
+  }
+ ]
+}
