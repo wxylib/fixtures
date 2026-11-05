@@ -1,0 +1,614 @@
+{
+ "format": "oracle-case/0",
+ "set": "warpgrid",
+ "description": "The target grid gdalwarp infers from what it is given (-t_srs, -te, -te_srs, -tr, -ts, -tap), over five source grids and six target CRSs. wxylib/design m28.",
+ "cases": [
+  {
+   "id": "suggest/world-0.5/4326",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326"
+   ]
+  },
+  {
+   "id": "suggest/world-0.5/3857",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3857"
+   ]
+  },
+  {
+   "id": "suggest/world-0.5/3031",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031"
+   ]
+  },
+  {
+   "id": "suggest/world-0.5/laea-hobart",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=laea +lat_0=-42.9 +lon_0=147.3 +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/world-0.5/moll",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=moll +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/world-0.25-0to360/4326",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"1440\" rasterYSize=\"720\"><SRS>+proj=longlat +datum=WGS84 +lon_wrap=180 +no_defs</SRS><GeoTransform>0.0, 0.25, 0.0, 90.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326"
+   ]
+  },
+  {
+   "id": "suggest/world-0.25-0to360/3857",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"1440\" rasterYSize=\"720\"><SRS>+proj=longlat +datum=WGS84 +lon_wrap=180 +no_defs</SRS><GeoTransform>0.0, 0.25, 0.0, 90.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3857"
+   ]
+  },
+  {
+   "id": "suggest/world-0.25-0to360/3031",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"1440\" rasterYSize=\"720\"><SRS>+proj=longlat +datum=WGS84 +lon_wrap=180 +no_defs</SRS><GeoTransform>0.0, 0.25, 0.0, 90.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031"
+   ]
+  },
+  {
+   "id": "suggest/world-0.25-0to360/laea-hobart",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"1440\" rasterYSize=\"720\"><SRS>+proj=longlat +datum=WGS84 +lon_wrap=180 +no_defs</SRS><GeoTransform>0.0, 0.25, 0.0, 90.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=laea +lat_0=-42.9 +lon_0=147.3 +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/world-0.25-0to360/moll",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"1440\" rasterYSize=\"720\"><SRS>+proj=longlat +datum=WGS84 +lon_wrap=180 +no_defs</SRS><GeoTransform>0.0, 0.25, 0.0, 90.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=moll +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/4326",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/3857",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3857"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/3031",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/laea-hobart",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=laea +lat_0=-42.9 +lon_0=147.3 +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/moll",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=moll +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/antarctic-25km/32755",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"480\" rasterYSize=\"480\"><SRS>EPSG:3031</SRS><GeoTransform>-6000000.0, 25000.0, 0.0, 6000000.0, 0.0, -25000.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:32755"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/4326",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/3857",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3857"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/3031",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/laea-hobart",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=laea +lat_0=-42.9 +lon_0=147.3 +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/moll",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=moll +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/utm55s-10m/32755",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:32755"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/4326",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/3857",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3857"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/3031",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/laea-hobart",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=laea +lat_0=-42.9 +lon_0=147.3 +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/moll",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "+proj=moll +datum=WGS84"
+   ]
+  },
+  {
+   "id": "suggest/pacific-150to210/32755",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"240\" rasterYSize=\"120\"><SRS>EPSG:4326</SRS><GeoTransform>150.0, 0.25, 0.0, -30.0, 0.0, -0.25</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:32755"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te-tr",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4",
+    "-tr",
+    "0.0001",
+    "0.0001"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te-tr-not-multiple",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4",
+    "-tr",
+    "0.00013700000000000002",
+    "0.00013700000000000002"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te-tr-tap",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4",
+    "-tr",
+    "0.00013700000000000002",
+    "0.00013700000000000002",
+    "-tap"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te-ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te-ts-w0",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te",
+    "146.99",
+    "-43.42",
+    "148.36",
+    "-42.4",
+    "-ts",
+    "1000",
+    "0"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/ts-w0",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-ts",
+    "1000",
+    "0"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/tr-ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-tr",
+    "0.0001",
+    "0.0001",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/tap-alone",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-tap"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/te_srs",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-te_srs",
+    "EPSG:4326",
+    "-te",
+    "140",
+    "-70",
+    "160",
+    "-60"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/tr",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-tr",
+    "0.0001",
+    "0.0001"
+   ]
+  },
+  {
+   "id": "matrix/utm55s-10m/4326/tr-tap",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"10980\" rasterYSize=\"10980\"><SRS>EPSG:32755</SRS><GeoTransform>499980.0, 10.0, 0.0, 5300020.0, 0.0, -10.0</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:4326",
+    "-tr",
+    "0.0001",
+    "0.0001",
+    "-tap"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te-tr",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0",
+    "-tr",
+    "25000",
+    "25000"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te-tr-not-multiple",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0",
+    "-tr",
+    "34250.0",
+    "34250.0"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te-tr-tap",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0",
+    "-tr",
+    "34250.0",
+    "34250.0",
+    "-tap"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te-ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te-ts-w0",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te",
+    "-4000000.0",
+    "-4000000.0",
+    "4000000.0",
+    "4000000.0",
+    "-ts",
+    "1000",
+    "0"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/ts-w0",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-ts",
+    "1000",
+    "0"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/tr-ts",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-tr",
+    "25000",
+    "25000",
+    "-ts",
+    "1000",
+    "1000"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/tap-alone",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-tap"
+   ]
+  },
+  {
+   "id": "matrix/world-0.5/3031/te_srs",
+   "op": "warp.grid",
+   "dsn": "<VRTDataset rasterXSize=\"720\" rasterYSize=\"360\"><SRS>EPSG:4326</SRS><GeoTransform>-180.0, 0.5, 0.0, 90.0, 0.0, -0.5</GeoTransform><VRTRasterBand dataType=\"Byte\" band=\"1\"/></VRTDataset>",
+   "args": [
+    "-t_srs",
+    "EPSG:3031",
+    "-te_srs",
+    "EPSG:4326",
+    "-te",
+    "140",
+    "-70",
+    "160",
+    "-60"
+   ]
+  }
+ ]
+}

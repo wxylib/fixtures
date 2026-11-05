@@ -211,7 +211,19 @@ def op_vector(gdal, case, sdir, rel, ans):
     ans["features"] = {"file": rel + ".json", "sha256": sha256(path)}
 
 
-OPS = {"raster.read": op_raster, "raster.info": op_raster,
+def op_warp_grid(gdal, case, sdir, rel, ans):
+    """The target grid gdalwarp settles on: a warp to VRT, so no pixels move."""
+    src = gdal.OpenEx(resolve_dsn(case["dsn"], sdir), gdal.OF_RASTER,
+                      open_options=case.get("open_options", []))
+    out = gdal.Warp("", src, options=["-of", "VRT"] + list(case.get("args", [])))
+    gt = out.GetGeoTransform()
+    nx, ny = out.RasterXSize, out.RasterYSize
+    ans["grid"] = {"geotransform": list(gt), "size": [nx, ny],
+                   "extent": [gt[0], gt[3] + ny * gt[5], gt[0] + nx * gt[1], gt[3]],
+                   "crs": crs_of(out.GetSpatialRef())}
+
+
+OPS = {"raster.read": op_raster, "raster.info": op_raster, "warp.grid": op_warp_grid,
        "mdim.read": op_mdim, "mdim.info": op_mdim, "vector.read": op_vector}
 
 
@@ -309,6 +321,8 @@ def diff(args):
                         line = "values: %d of %d differ, max %g" % ((d > 0).sum(), d.size, d.max())
                 else:
                     line = "features differ"
+        if "grid" in x and line == "same":
+            line = grid_diff(x["grid"], y["grid"])
         xi, yi = comparable(x.get("info")), comparable(y.get("info"))
         if xi != yi and line == "same":
             line = "info differs: " + ", ".join(sorted(
@@ -320,6 +334,21 @@ def diff(args):
             print("%-40s %s" % (cid, line))
     print("%d same, %d differ, %d not answered by both (%s vs %s)"
           % (same, changed, unanswered, args.a, args.b))
+
+
+def grid_diff(p, q):
+    """Two warp.grid answers: same size and geotransform to 1e-9 relative
+    (of the larger cell size, for the origin), and the same CRS code."""
+    if p["size"] != q["size"]:
+        return "grid size %s -> %s" % (p["size"], q["size"])
+    cell = max(abs(p["geotransform"][1]), abs(p["geotransform"][5]), 1e-300)
+    for i, (u, v) in enumerate(zip(p["geotransform"], q["geotransform"])):
+        scale = cell if i in (0, 3) else max(abs(u), abs(v), 1e-300)
+        if abs(u - v) > 1e-9 * scale:
+            return "grid geotransform[%d] %r -> %r" % (i, u, v)
+    if comparable({"crs": p["crs"]}) != comparable({"crs": q["crs"]}):
+        return "grid crs differs"
+    return "same"
 
 
 def comparable(info):
