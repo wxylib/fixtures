@@ -1,0 +1,527 @@
+{
+ "format": "oracle-case/0",
+ "set": "cog",
+ "oracle": {
+  "name": "gdal",
+  "version": "3.14.0dev-b4f950833f",
+  "release": "3.14.0dev-b4f950833f",
+  "via": "osgeo.gdal",
+  "python": "3.14.4",
+  "numpy": "2.5.4",
+  "proj": "9.9.0"
+ },
+ "recorded": "2026-11-05",
+ "answers": {
+  "world-int16-deflate/info": {
+   "status": "ok",
+   "info": {
+    "size": [
+     720,
+     360
+    ],
+    "bands": [
+     {
+      "dtype": "int16",
+      "nodata": null,
+      "block": [
+       128,
+       128
+      ],
+      "overviews": [
+       [
+        360,
+        180
+       ],
+       [
+        180,
+        90
+       ],
+       [
+        90,
+        45
+       ]
+      ],
+      "scale": null,
+      "offset": null
+     }
+    ],
+    "geotransform": [
+     -180.0,
+     0.5,
+     0.0,
+     90.0,
+     0.0,
+     -0.5
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "world-int16-deflate/w0": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/world-int16-deflate__w0.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "194f02b464f257354cd62d7c256d5b5f0691ab2d7c338e63f4890d98bf08d4e6"
+   }
+  },
+  "world-int16-deflate/w1": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/world-int16-deflate__w1.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "531b3cec0c85ef8fc5e1a4e1e619fe1a9192c4bcb5c5326bde25149829442fa1"
+   }
+  },
+  "world-int16-deflate/w2": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/world-int16-deflate__w2.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "04e588cb939439cef5369a224a738ee4566d334f17bb7ea39fe921647651bd09"
+   }
+  },
+  "polar-f32-zstd-bigtiff/info": {
+   "status": "ok",
+   "info": {
+    "size": [
+     500,
+     400
+    ],
+    "bands": [
+     {
+      "dtype": "float32",
+      "nodata": -9999.0,
+      "block": [
+       128,
+       128
+      ],
+      "overviews": [
+       [
+        250,
+        200
+       ],
+       [
+        125,
+        100
+       ]
+      ],
+      "scale": null,
+      "offset": null
+     }
+    ],
+    "geotransform": [
+     -3000000.0,
+     12000.0,
+     0.0,
+     2400000.0,
+     0.0,
+     -12000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "polar-f32-zstd-bigtiff/w0": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/polar-f32-zstd-bigtiff__w0.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "aa2b1f18d11c762e745a7de7b5eebbd8969938c117a9403618d5acc49603fddf"
+   }
+  },
+  "polar-f32-zstd-bigtiff/w1": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/polar-f32-zstd-bigtiff__w1.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f62c9507658720b5b772a31f925d9d1d73c1cabc13c002b4e691d0506ceaa519"
+   }
+  },
+  "polar-f32-zstd-bigtiff/w2": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/polar-f32-zstd-bigtiff__w2.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f8387267de56313cface0b4489bd399df295aa03052cd7bbc82b7f68c46e40ac"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/info": {
+   "status": "ok",
+   "info": {
+    "size": [
+     300,
+     200
+    ],
+    "bands": [
+     {
+      "dtype": "uint16",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [
+       [
+        150,
+        100
+       ],
+       [
+        75,
+        50
+       ],
+       [
+        37,
+        25
+       ]
+      ],
+      "scale": null,
+      "offset": null
+     },
+     {
+      "dtype": "uint16",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [
+       [
+        150,
+        100
+       ],
+       [
+        75,
+        50
+       ],
+       [
+        37,
+        25
+       ]
+      ],
+      "scale": null,
+      "offset": null
+     },
+     {
+      "dtype": "uint16",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [
+       [
+        150,
+        100
+       ],
+       [
+        75,
+        50
+       ],
+       [
+        37,
+        25
+       ]
+      ],
+      "scale": null,
+      "offset": null
+     }
+    ],
+    "geotransform": [
+     499980.0,
+     10.0,
+     0.0,
+     5192220.0,
+     0.0,
+     -10.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / UTM zone 55S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",147],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32755\"]]",
+     "code": "EPSG:32755"
+    }
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w0": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/utm-u16-lzw-pred2-3band__w0.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "5c7da05972704a2b7c1c74ab017709196501f57424243635fbecdb0e40ed70a7"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w1": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/utm-u16-lzw-pred2-3band__w1.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "1c302534e9a81f63043ef154797ee2cd9561892e57e7809de10ac6f4603d1676"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w2": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/utm-u16-lzw-pred2-3band__w2.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "508fdd25a58aeda6f3782ce1e2affd5f56207c9534b7cbca65a7e3a95f5d42a0"
+   }
+  },
+  "planar-u8-deflate-2band/info": {
+   "status": "ok",
+   "info": {
+    "size": [
+     200,
+     150
+    ],
+    "bands": [
+     {
+      "dtype": "uint8",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [],
+      "scale": null,
+      "offset": null
+     },
+     {
+      "dtype": "uint8",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [],
+      "scale": null,
+      "offset": null
+     }
+    ],
+    "geotransform": [
+     0.0,
+     1.0,
+     0.0,
+     150.0,
+     0.0,
+     -1.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   }
+  },
+  "planar-u8-deflate-2band/w0": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/planar-u8-deflate-2band__w0.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "e109e93d28ee633309fb215085f0aa85bd7f562ddc1b23795b552f862cebca2b"
+   }
+  },
+  "planar-u8-deflate-2band/w1": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/planar-u8-deflate-2band__w1.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     77,
+     103
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "ae1cc5e03d27eb9bdbe0b8ac1a7210d77b8f13fcdc5ec55b2385c539fab4de0b"
+   }
+  },
+  "planar-u8-deflate-2band/w2": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/planar-u8-deflate-2band__w2.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f6c2cb0dff57f674a3ae418a1c257d5deaab4c0f63698fda679e1e2ce86e99d6"
+   }
+  },
+  "rgb-u8-deflate-pixel/info": {
+   "status": "ok",
+   "info": {
+    "size": [
+     230,
+     170
+    ],
+    "bands": [
+     {
+      "dtype": "uint8",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [],
+      "scale": null,
+      "offset": null
+     },
+     {
+      "dtype": "uint8",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [],
+      "scale": null,
+      "offset": null
+     },
+     {
+      "dtype": "uint8",
+      "nodata": null,
+      "block": [
+       64,
+       64
+      ],
+      "overviews": [],
+      "scale": null,
+      "offset": null
+     }
+    ],
+    "geotransform": [
+     1000.0,
+     10.0,
+     0.0,
+     3700.0,
+     0.0,
+     -10.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"GDA94 / Australian Albers\",GEOGCS[\"GDA94\",DATUM[\"Geocentric_Datum_of_Australia_1994\",SPHEROID[\"GRS 1980\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6283\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4283\"]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"latitude_of_center\",0],PARAMETER[\"longitude_of_center\",132],PARAMETER[\"standard_parallel_1\",-18],PARAMETER[\"standard_parallel_2\",-36],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3577\"]]",
+     "code": "EPSG:3577"
+    }
+   }
+  },
+  "rgb-u8-deflate-pixel/w0": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/rgb-u8-deflate-pixel__w0.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "8c4486cf56871dc3925ce1c64224a84cfd5d3964562c9b8e66956edbc748317b"
+   }
+  },
+  "rgb-u8-deflate-pixel/w1": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/rgb-u8-deflate-pixel__w1.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "ea02a1a25dcfbb4f9c4ea8ea9ba26308b03d5a115574e6ee6f37ca97d94cdddd"
+   }
+  },
+  "rgb-u8-deflate-pixel/w2": {
+   "status": "ok",
+   "values": {
+    "file": "answers/gdal-3.14.0dev-b4f950833f/rgb-u8-deflate-pixel__w2.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "163b6c9046c0e21b6a88751c2ef90694feb59f247a8953e6e5fbaf7b8345d730"
+   }
+  }
+ }
+}
