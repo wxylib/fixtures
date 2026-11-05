@@ -1,0 +1,1325 @@
+{
+ "format": "oracle-case/0",
+ "set": "warpgrid",
+ "oracle": {
+  "name": "gdal",
+  "version": "3.14.0dev-b4f950833f",
+  "release": "3.14.0dev-b4f950833f",
+  "via": "osgeo.gdal",
+  "python": "3.14.4",
+  "numpy": "2.5.4",
+  "proj": "9.9.0"
+ },
+ "recorded": "2026-11-05",
+ "answers": {
+  "suggest/world-0.5/4326": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -180.0,
+     0.5,
+     0.0,
+     90.0,
+     0.0,
+     -0.5
+    ],
+    "size": [
+     720,
+     360
+    ],
+    "extent": [
+     -180.0,
+     -90.0,
+     180.0,
+     90.0
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "suggest/world-0.5/3857": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -20037508.342789244,
+     57331.92658881043,
+     0.0,
+     20037508.342789248,
+     0.0,
+     -57331.926588810435
+    ],
+    "size": [
+     699,
+     699
+    ],
+    "extent": [
+     -20037508.342789244,
+     -20037508.342789248,
+     20037508.342789244,
+     20037508.342789248
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   },
+   "messages": [
+    {
+     "level": "warning",
+     "code": 1,
+     "msg": "Clamping output bounds to (-20037508.342789,-20037508.342789) -> (20037508.342789, 20037508.342789)"
+    }
+   ]
+  },
+  "suggest/world-0.5/3031": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4.012486351763636e+23,
+     1.409843994656963e+21,
+     0.0,
+     4.012486351763636e+23,
+     0.0,
+     -1.409843994656963e+21
+    ],
+    "size": [
+     569,
+     569
+    ],
+    "extent": [
+     -4.012486351763636e+23,
+     -4.009525977834484e+23,
+     4.009525977834484e+23,
+     4.012486351763636e+23
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "suggest/world-0.5/laea-hobart": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -12387175.410384186,
+     44030.93396154842,
+     0.0,
+     12732213.13878947,
+     0.0,
+     -44030.93396154842
+    ],
+    "size": [
+     560,
+     578
+    ],
+    "extent": [
+     -12387175.410384186,
+     -12717666.690985518,
+     12270147.608082931,
+     12732213.13878947
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Lambert_Azimuthal_Equal_Area\"],PARAMETER[\"latitude_of_center\",-42.9],PARAMETER[\"longitude_of_center\",147.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/world-0.5/moll": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -18040068.169145804,
+     22409.097099461687,
+     0.0,
+     9020047.847897757,
+     0.0,
+     -22407.705143619743
+    ],
+    "size": [
+     1610,
+     805
+    ],
+    "extent": [
+     -18040068.169145804,
+     -9018154.792716138,
+     18038578.160987515,
+     9020047.847897757
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Mollweide\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/world-0.25-0to360/4326": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -179.99972534179688,
+     0.24999967380111587,
+     0.0,
+     90.0,
+     0.0,
+     -0.24999984741212103
+    ],
+    "size": [
+     1440,
+     720
+    ],
+    "extent": [
+     -179.99972534179688,
+     -89.99989013672715,
+     179.99980493181,
+     90.0
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "suggest/world-0.25-0to360/3857": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -20037508.341676053,
+     300037.18760655023,
+     0.0,
+     242528680.94374272,
+     0.0,
+     -302310.19660356955
+    ],
+    "size": [
+     133,
+     1605
+    ],
+    "extent": [
+     -20037508.341676053,
+     -242679184.6049864,
+     19867437.60999513,
+     242528680.94374272
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   }
+  },
+  "suggest/world-0.25-0to360/3031": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4.012486351763636e+23,
+     7.049219973284815e+20,
+     0.0,
+     4.012486351763636e+23,
+     0.0,
+     -7.049219973284815e+20
+    ],
+    "size": [
+     1138,
+     1138
+    ],
+    "extent": [
+     -4.012486351763636e+23,
+     -4.009525977834484e+23,
+     4.009525977834484e+23,
+     4.012486351763636e+23
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "suggest/world-0.25-0to360/laea-hobart": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -12391156.630802762,
+     22017.188656507034,
+     0.0,
+     12732213.13878947,
+     0.0,
+     -22017.188656507034
+    ],
+    "size": [
+     1121,
+     1156
+    ],
+    "extent": [
+     -12391156.630802762,
+     -12719656.948132662,
+     12290111.853141624,
+     12732213.13878947
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Lambert_Azimuthal_Equal_Area\"],PARAMETER[\"latitude_of_center\",-42.9],PARAMETER[\"longitude_of_center\",147.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/world-0.25-0to360/moll": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -18040068.169145804,
+     25055.65788122098,
+     0.0,
+     9020047.847897757,
+     0.0,
+     -25055.65788122098
+    ],
+    "size": [
+     1440,
+     720
+    ],
+    "extent": [
+     -18040068.169145804,
+     -9020025.826581348,
+     18040079.179812405,
+     9020047.847897757
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Mollweide\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/antarctic-25km/4326": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -180.0,
+     0.5397301349325337,
+     0.0,
+     -21.221412983781313,
+     0.0,
+     -0.5399220583217417
+    ],
+    "size": [
+     667,
+     127
+    ],
+    "extent": [
+     -180.0,
+     -89.7915143906425,
+     180.0,
+     -21.221412983781313
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "suggest/antarctic-25km/3857": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -20037508.34167605,
+     64489.910360858674,
+     0.0,
+     -2418299.3874405273,
+     0.0,
+     -64489.910360858674
+    ],
+    "size": [
+     621,
+     273
+    ],
+    "extent": [
+     -20037508.34167605,
+     -20024044.915954947,
+     20010725.992417186,
+     -2418299.3874405273
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   }
+  },
+  "suggest/antarctic-25km/3031": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -6000000.0,
+     25000.0,
+     0.0,
+     6000000.0,
+     0.0,
+     -25000.0
+    ],
+    "size": [
+     480,
+     480
+    ],
+    "extent": [
+     -6000000.0,
+     -6000000.0,
+     6000000.0,
+     6000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "suggest/antarctic-25km/laea-hobart": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -7837162.3909085095,
+     19594.776692128176,
+     0.0,
+     2305388.37812827,
+     0.0,
+     -19594.776692128176
+    ],
+    "size": [
+     756,
+     653
+    ],
+    "extent": [
+     -7837162.3909085095,
+     -10490000.80183143,
+     6976488.788340392,
+     2305388.37812827
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Lambert_Azimuthal_Equal_Area\"],PARAMETER[\"latitude_of_center\",-42.9],PARAMETER[\"longitude_of_center\",147.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/antarctic-25km/moll": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -15502674.638046963,
+     46643.82672889391,
+     0.0,
+     -2600837.8804726456,
+     0.0,
+     -46305.827984481635
+    ],
+    "size": [
+     665,
+     138
+    ],
+    "extent": [
+     -15502674.638046963,
+     -8991042.142331112,
+     15515470.136667488,
+     -2600837.8804726456
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Mollweide\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/antarctic-25km/32755": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -9288345.186695447,
+     22703.34074458896,
+     0.0,
+     7605398.412790185,
+     0.0,
+     -22703.34074458896
+    ],
+    "size": [
+     862,
+     670
+    ],
+    "extent": [
+     -9288345.186695447,
+     -7605839.886084419,
+     10281934.535140237,
+     7605398.412790185
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / UTM zone 55S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",147],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32755\"]]",
+     "code": "EPSG:32755"
+    }
+   }
+  },
+  "suggest/utm55s-10m/4326": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99975285182316,
+     0.0001078057328464156,
+     0.0,
+     -42.444377512790965,
+     0.0,
+     -0.0001078057328464156
+    ],
+    "size": [
+     12584,
+     9244
+    ],
+    "extent": [
+     146.99975285182316,
+     -43.44093370722323,
+     148.35638019396245,
+     -42.444377512790965
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "suggest/utm55s-10m/3857": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     16363937.634202018,
+     13.668913454640727,
+     0.0,
+     -5227779.228443322,
+     0.0,
+     -13.668913454640727
+    ],
+    "size": [
+     11049,
+     11087
+    ],
+    "extent": [
+     16363937.634202018,
+     -5379326.471914924,
+     16514965.458962344,
+     -5227779.228443322
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   }
+  },
+  "suggest/utm55s-10m/3031": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     2805013.8621157827,
+     11.571945537942698,
+     0.0,
+     -4483170.867024413,
+     0.0,
+     -11.571945537942698
+    ],
+    "size": [
+     15177,
+     15176
+    ],
+    "extent": [
+     2805013.8621157827,
+     -4658786.712508231,
+     2980641.279545139,
+     -4483170.867024413
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "suggest/utm55s-10m/laea-hobart": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -24698.411225075826,
+     10.003382679418376,
+     0.0,
+     50093.125059057995,
+     0.0,
+     -10.003382679418376
+    ],
+    "size": [
+     11019,
+     11019
+    ],
+    "extent": [
+     -24698.411225075826,
+     -60134.14868545309,
+     85528.86251943526,
+     50093.125059057995
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Lambert_Azimuthal_Equal_Area\"],PARAMETER[\"latitude_of_center\",-42.9],PARAMETER[\"longitude_of_center\",147.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/utm55s-10m/moll": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     12072253.00867147,
+     6.969328440714505,
+     0.0,
+     -5060747.303038954,
+     0.0,
+     -6.969328440714505
+    ],
+    "size": [
+     33567,
+     15714
+    ],
+    "extent": [
+     12072253.00867147,
+     -5170263.330156341,
+     12306192.456440933,
+     -5060747.303038954
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Mollweide\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/utm55s-10m/32755": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     499980.0,
+     10.0,
+     0.0,
+     5300020.0,
+     0.0,
+     -10.0
+    ],
+    "size": [
+     10980,
+     10980
+    ],
+    "extent": [
+     499980.0,
+     5190220.0,
+     609780.0,
+     5300020.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / UTM zone 55S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",147],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32755\"]]",
+     "code": "EPSG:32755"
+    }
+   }
+  },
+  "suggest/pacific-150to210/4326": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     150.0,
+     0.25,
+     0.0,
+     -30.0,
+     0.0,
+     -0.25
+    ],
+    "size": [
+     240,
+     120
+    ],
+    "extent": [
+     150.0,
+     -60.0,
+     210.0,
+     -30.0
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "suggest/pacific-150to210/3857": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -20037503.246987358,
+     125395.14207644593,
+     0.0,
+     -3503549.8435043753,
+     0.0,
+     -125789.46642259829
+    ],
+    "size": [
+     319,
+     39
+    ],
+    "extent": [
+     -20037503.246987358,
+     -8409339.033985708,
+     19963547.075398892,
+     -3503549.8435043753
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+     "code": "EPSG:3857"
+    }
+   }
+  },
+  "suggest/pacific-150to210/3031": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -3582136.4883761737,
+     23141.205339755794,
+     0.0,
+     -2886578.7421461614,
+     0.0,
+     -23141.205339755794
+    ],
+    "size": [
+     310,
+     185
+    ],
+    "extent": [
+     -3582136.4883761737,
+     -7167701.730000983,
+     3591637.1669481224,
+     -2886578.7421461614
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "suggest/pacific-150to210/laea-hobart": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     152364.95407551384,
+     20260.731753276294,
+     0.0,
+     1424724.6574872006,
+     0.0,
+     -20260.731753276294
+    ],
+    "size": [
+     261,
+     231
+    ],
+    "extent": [
+     152364.95407551384,
+     -3255504.3775196234,
+     5440415.941680626,
+     1424724.6574872006
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Lambert_Azimuthal_Equal_Area\"],PARAMETER[\"latitude_of_center\",-42.9],PARAMETER[\"longitude_of_center\",147.3],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/pacific-150to210/moll": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     9728458.957730586,
+     27973.206634365048,
+     0.0,
+     -3643853.5640796954,
+     0.0,
+     -27973.206634365048
+    ],
+    "size": [
+     242,
+     116
+    ],
+    "extent": [
+     9728458.957730586,
+     -6888745.533666041,
+     16497974.963246927,
+     -3643853.5640796954
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"unknown\",GEOGCS[\"unknown\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Mollweide\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+    }
+   }
+  },
+  "suggest/pacific-150to210/32755": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     667294.8211244536,
+     21428.279146704568,
+     0.0,
+     6677424.095615236,
+     0.0,
+     -21428.279146704568
+    ],
+    "size": [
+     297,
+     235
+    ],
+    "extent": [
+     667294.8211244536,
+     1641778.4961396623,
+     7031493.727695711,
+     6677424.095615236
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / UTM zone 55S\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Transverse_Mercator\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",147],PARAMETER[\"scale_factor\",0.9996],PARAMETER[\"false_easting\",500000],PARAMETER[\"false_northing\",10000000],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"32755\"]]",
+     "code": "EPSG:32755"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99,
+     0.00010576700378290779,
+     0.0,
+     -42.4,
+     0.0,
+     -0.0001057652426379099
+    ],
+    "size": [
+     12953,
+     9644
+    ],
+    "extent": [
+     146.99,
+     -43.42,
+     148.36,
+     -42.4
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te-tr": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99,
+     0.0001,
+     0.0,
+     -42.4,
+     0.0,
+     -0.0001
+    ],
+    "size": [
+     13700,
+     10200
+    ],
+    "extent": [
+     146.99,
+     -43.42,
+     148.36,
+     -42.4
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te-tr-not-multiple": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99,
+     0.00013700000000000002,
+     0.0,
+     -42.4,
+     0.0,
+     -0.00013700000000000002
+    ],
+    "size": [
+     10000,
+     7445
+    ],
+    "extent": [
+     146.99,
+     -43.419965,
+     148.36,
+     -42.4
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te-tr-tap": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.98990300000003,
+     0.00013700000000000002,
+     0.0,
+     -42.39999300000001,
+     0.0,
+     -0.00013700000000000002
+    ],
+    "size": [
+     10001,
+     7446
+    ],
+    "extent": [
+     146.98990300000003,
+     -43.42009500000001,
+     148.36004000000003,
+     -42.39999300000001
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te-ts": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99,
+     0.0013700000000000045,
+     0.0,
+     -42.4,
+     0.0,
+     -0.0010200000000000031
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     146.99,
+     -43.42,
+     148.36,
+     -42.4
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/te-ts-w0": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99,
+     0.0013700000000000045,
+     0.0,
+     -42.4,
+     0.0,
+     -0.0013700000000000045
+    ],
+    "size": [
+     1000,
+     745
+    ],
+    "extent": [
+     146.99,
+     -43.42065,
+     148.36,
+     -42.4
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/ts": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99975285182316,
+     0.0013566273421392906,
+     0.0,
+     -42.444377512790965,
+     0.0,
+     -0.0009965561944322659
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     146.99975285182316,
+     -43.44093370722323,
+     148.35638019396245,
+     -42.444377512790965
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/ts-w0": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99975285182316,
+     0.0013566273421392906,
+     0.0,
+     -42.444377512790965,
+     0.0,
+     -0.0013566273421392906
+    ],
+    "size": [
+     1000,
+     735
+    ],
+    "extent": [
+     146.99975285182316,
+     -43.44149860926334,
+     148.35638019396245,
+     -42.444377512790965
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/tr-ts": {
+   "status": "error",
+   "error": "-tr and -ts options cannot be used at the same time."
+  },
+  "matrix/utm55s-10m/4326/tap-alone": {
+   "status": "error",
+   "error": "-tap option cannot be used without using -tr."
+  },
+  "matrix/utm55s-10m/4326/te_srs": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     140.0,
+     0.0001336835843242629,
+     0.0,
+     -60.0,
+     0.0,
+     -0.00013368269076519972
+    ],
+    "size": [
+     149607,
+     74804
+    ],
+    "extent": [
+     140.0,
+     -70.0,
+     160.0,
+     -60.0
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/tr": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99975285182316,
+     0.0001,
+     0.0,
+     -42.444377512790965,
+     0.0,
+     -0.0001
+    ],
+    "size": [
+     13566,
+     9965
+    ],
+    "extent": [
+     146.99975285182316,
+     -43.44087751279096,
+     148.35635285182315,
+     -42.444377512790965
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/utm55s-10m/4326/tr-tap": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     146.99980000000002,
+     0.0001,
+     0.0,
+     -42.444300000000005,
+     0.0,
+     -0.0001
+    ],
+    "size": [
+     13566,
+     9966
+    ],
+    "extent": [
+     146.99980000000002,
+     -43.440900000000006,
+     148.3564,
+     -42.444300000000005
+    ],
+    "crs": {
+     "wkt": "GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AXIS[\"Latitude\",NORTH],AXIS[\"Longitude\",EAST],AUTHORITY[\"EPSG\",\"4326\"]]",
+     "code": "EPSG:4326"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4000000.0,
+     7648.183556405354,
+     0.0,
+     4000000.0,
+     0.0,
+     -7648.183556405354
+    ],
+    "size": [
+     1046,
+     1046
+    ],
+    "extent": [
+     -4000000.0,
+     -4000000.0,
+     4000000.0,
+     4000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te-tr": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4000000.0,
+     25000.0,
+     0.0,
+     4000000.0,
+     0.0,
+     -25000.0
+    ],
+    "size": [
+     320,
+     320
+    ],
+    "extent": [
+     -4000000.0,
+     -4000000.0,
+     4000000.0,
+     4000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te-tr-not-multiple": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4000000.0,
+     34250.0,
+     0.0,
+     4000000.0,
+     0.0,
+     -34250.0
+    ],
+    "size": [
+     234,
+     234
+    ],
+    "extent": [
+     -4000000.0,
+     -4014500.0,
+     4014500.0,
+     4000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te-tr-tap": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4007250.0,
+     34250.0,
+     0.0,
+     4007250.0,
+     0.0,
+     -34250.0
+    ],
+    "size": [
+     234,
+     234
+    ],
+    "extent": [
+     -4007250.0,
+     -4007250.0,
+     4007250.0,
+     4007250.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te-ts": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4000000.0,
+     8000.0,
+     0.0,
+     4000000.0,
+     0.0,
+     -8000.0
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     -4000000.0,
+     -4000000.0,
+     4000000.0,
+     4000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/te-ts-w0": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4000000.0,
+     8000.0,
+     0.0,
+     4000000.0,
+     0.0,
+     -8000.0
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     -4000000.0,
+     -4000000.0,
+     4000000.0,
+     4000000.0
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/ts": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4.012486351763636e+23,
+     8.02201232959812e+20,
+     0.0,
+     4.012486351763636e+23,
+     0.0,
+     -8.02201232959812e+20
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     -4.012486351763636e+23,
+     -4.009525977834484e+23,
+     4.009525977834484e+23,
+     4.012486351763636e+23
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/ts-w0": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     -4.012486351763636e+23,
+     8.02201232959812e+20,
+     0.0,
+     4.012486351763636e+23,
+     0.0,
+     -8.02201232959812e+20
+    ],
+    "size": [
+     1000,
+     1000
+    ],
+    "extent": [
+     -4.012486351763636e+23,
+     -4.009525977834484e+23,
+     4.009525977834484e+23,
+     4.012486351763636e+23
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  },
+  "matrix/world-0.5/3031/tr-ts": {
+   "status": "error",
+   "error": "-tr and -ts options cannot be used at the same time."
+  },
+  "matrix/world-0.5/3031/tap-alone": {
+   "status": "error",
+   "error": "-tap option cannot be used without using -tr."
+  },
+  "matrix/world-0.5/3031/te_srs": {
+   "status": "ok",
+   "grid": {
+    "geotransform": [
+     750561.2370946457,
+     40939.29462619668,
+     0.0,
+     -1681080.1238375704,
+     0.0,
+     -41458.32360048612
+    ],
+    "size": [
+     34,
+     35
+    ],
+    "extent": [
+     750561.2370946457,
+     -3132121.4498545844,
+     2142497.254385333,
+     -1681080.1238375704
+    ],
+    "crs": {
+     "wkt": "PROJCS[\"WGS 84 / Antarctic Polar Stereographic\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Polar_Stereographic\"],PARAMETER[\"latitude_of_origin\",-71],PARAMETER[\"central_meridian\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",NORTH],AXIS[\"Northing\",NORTH],AUTHORITY[\"EPSG\",\"3031\"]]",
+     "code": "EPSG:3031"
+    }
+   }
+  }
+ }
+}
