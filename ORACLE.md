@@ -56,6 +56,7 @@ the set directory's absolute path, for chains such as
 | `mdim.info` | `array` (full name, such as `/sst`) | `info`: dims (name, size), dtype, nodata, scale, offset, crs |
 | `mdim.read` | `array`, `start`, `count`, `step` (default: all) | `values`, shape in the array's dimension order |
 | `vector.read` | `layer` (default: all), `bbox`, `where` | `features`: a JSON file of layers, each with fields, crs, geometry type and features (fid, properties, ISO WKT) |
+| `warp.grid` | `args`: gdalwarp arguments that set the target grid (`-t_srs`, `-te`, `-te_srs`, `-tr`, `-ts`, `-tap`) | `grid`: geotransform, size, extent [xmin, ymin, xmax, ymax], crs; compared to 1e-9 relative |
 
 **compare.** What an implementation must reach: `{"kind": "exact"}` (the
 default; NaN equals NaN), `{"kind": "abs", "tol": 1e-6}` or
