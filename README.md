@@ -25,6 +25,7 @@ name the sets, for example `curvilinear cf index`.
 | [points/](#points) | random points over each COG | GDAL point reads, by cell and interpolated | `wxy-warp` |
 | [polygons/](#polygons) | random polygons with holes | the cells GDAL's rasterizer burns | `wxy-warp` |
 | [index/](#index) | index space against coordinate space: a ROMS-style store, a rotated-pole store | ROMS depths, a GDAL geolocation warp, PROJ ob_tran | `wxy-zarr`, `wxy-cli` |
+| [vrt/](#vrt) | small GeoTIFF sources, classic VRT documents, `vrt://` strings | GDAL reads, full, windowed and downsampled (nearest) | `vrt-model` |
 
 ## cog/
 
@@ -229,3 +230,33 @@ producer writes them, plus the truth that producer threw away.
 
 Vertical positions are recorded but not yet read by wxylib: a reader of
 `formula_terms` waits on a numbered design document.
+
+## vrt/
+
+The VRT conformance corpus (design m25, first step 1), made by
+`scripts/make_vrt_fixtures.py`. Sources in `vrt/src/` are uncompressed
+GeoTIFFs with no overviews, each also written raw (`.bin`, little-endian,
+C order, band-major) so a test can read pixels without a TIFF reader. Each
+case is a VRT document (relative source paths) or a `vrt://` string, read
+by GDAL for three requests: the full raster, a window, and the full raster
+into a smaller buffer (nearest). `vrt/manifest.json` records the GDAL
+version, the backend used to reach it, each case and each request's oracle
+file in `vrt/oracle/`, in the VRT band data type.
+
+| Case | What it exercises |
+|------|-------------------|
+| c01-mosaic | 2 x 2 mosaic of SimpleSources, as gdalbuildvrt writes |
+| c02-overlap | overlapping sources; the later one wins |
+| c03-upsample | SrcRect 10 x 10 into DstRect 20 x 20 (implicit resampling) |
+| c04-downsample | SrcRect 30 x 30 into DstRect 20 x 20 (factor 1.5, as in COP30) |
+| c05-fractional | fractional SrcRect and DstRect offsets |
+| c06-complex | ComplexSource NODATA, ScaleOffset, ScaleRatio; band NoDataValue |
+| c07-lut | ComplexSource LUT |
+| c08-bands | band selection and reordering |
+| c09-nested | a VRT whose source is c01-mosaic.vrt |
+| v01-v05 | `vrt://` with `bands`, `srcwin`, `outsize`, both, and `a_nodata` |
+
+First set: GDAL 3.12.2 through rasterio 1.5.2 (osgeo.gdal was not
+installable where it was made; the script uses osgeo.gdal when present).
+Multidimensional and vector cases come next.
+
