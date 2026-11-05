@@ -19,7 +19,7 @@ name the sets, for example `curvilinear cf index`.
 | [cog/](#cog) | five small GeoTIFFs (COG and plain) | GDAL window reads | `wxy-tiff`, `wxy-virtual` |
 | [zarr/](#zarr) | three of the COGs as Zarr v3 | the same windows | `wxy-zarr` |
 | [warp/](#warp) | target grids over the COGs | GDAL warps (near, bilinear, cubic) | `wxy-warp`, `wxy-cli` |
-| [mdimrefs/](#mdimrefs) | byte-reference tables over netCDF4 (OISST) | GDAL reads of the mosaic | `wxy-virtual` |
+| [mdimrefs/](#mdimrefs) | byte-reference tables over netCDF4 (OISST; a synthetic Bluelink shape) | GDAL reads of the mosaic; netCDF-C reads | `wxy-virtual`, `wxy-refs` |
 | [curvilinear/](#curvilinear) | swaths placed by 2D lon/lat | GDAL geolocation-array warps | `wxy-warp` |
 | [cf/](#cf) | an OISST-style store as xarray writes it | GDAL warps per day | `wxy-warp`, `wxy-cli` |
 | [points/](#points) | random points over each COG | GDAL point reads, by cell and interpolated | `wxy-warp` |
@@ -144,6 +144,30 @@ chunks); `--oracle` adds the SHA-256 of what GDAL reads for each from the
 source netCDF, which needs network access to thredds.nci.org.au. For the
 wxylib/core demo `cargo run -p wxy-virtual --example bran_refs`. Not used
 in CI.
+
+### mdimrefs/bluelink-synthetic/
+
+The many-chunks-per-file case of BRAN2023 at CI size, made by
+`scripts/make_mdimrefs_bluelink.py`. Two variables, `temp` and `salt`,
+each in two monthly netCDF4 files (3 days, then 2), dims `Time`,
+`st_ocean` (4 uneven depths, inline), `yt_ocean`, `xt_ocean` (40 x 60,
+affine), int16 chunks of 1 x 1 x 10 x 15 with shuffle then deflate: 16
+chunks per depth and day, up to 192 per file. Packed with BRAN's float64
+`scale_factor` and `add_offset`, unrounded. Chunks never written: one
+`temp` chunk (day 2, depth 3, chunk row 1, column 0) and a whole `salt`
+depth (day 4, depth 2), so their rows have `present = 0` and readers give
+the fill value (-32768).
+
+No GDAL is needed: byte ranges come from HDF5's chunk index (h5py
+`get_chunk_info_by_coord`), and `oracle/*.bin` holds what netCDF-C reads
+for five windows (little-endian int16, C order, mask and scale off),
+assembled over the global time axis, including one across the month
+boundary and two over unwritten chunks. `manifest.json` records versions,
+reference counts per file and the fill cells in each window. Checked by
+wxylib/core `crates/wxy-refs/tests/bluelink.rs`. Regenerate with
+`pip install netCDF4 h5py numpy pyarrow`, then
+`python scripts/make_mdimrefs_bluelink.py`; the output is byte-for-byte
+reproducible with the versions in the manifest.
 
 ## curvilinear/
 
