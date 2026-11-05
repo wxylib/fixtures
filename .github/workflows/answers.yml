@@ -1,0 +1,72 @@
+# Answer the questions of oracle-case sets (sets with a cases.json, see
+# ORACLE.md) with GDAL HEAD, in hypertidy/gdal-r-ci's gdal-r-python:dev
+# image. The new answer set, answers/gdal-<version>/, is pushed to a new
+# branch for review, and its difference from every answer set already in
+# the repository is printed in the run summary.
+name: answers
+
+on:
+  workflow_dispatch:
+    inputs:
+      sets:
+        description: "Sets to answer (directories with a cases.json)"
+        default: "cog"
+      image:
+        description: "Container image"
+        default: "ghcr.io/hypertidy/gdal-r-python:dev"
+  pull_request:
+    paths:
+      - ".github/workflows/answers.yml"
+      - "scripts/oraclecase.py"
+      - "*/cases.json"
+
+permissions:
+  contents: write
+
+jobs:
+  answer:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.image || 'ghcr.io/hypertidy/gdal-r-python:dev' }}
+    env:
+      PY: /opt/gdal-py/bin/python
+      SETS: ${{ inputs.sets || 'cog' }}
+    steps:
+      - name: git
+        run: |
+          command -v git || (apt-get update && apt-get install -y --no-install-recommends git ca-certificates)
+      - name: safe directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
+      - name: numpy
+        run: |
+          $PY -c "import numpy" 2>/dev/null || $PY -m pip install numpy
+      - name: Answer
+        run: |
+          v=$($PY -c "from osgeo import gdal; print(gdal.__version__)")
+          echo "GDAL $v" >> "$GITHUB_STEP_SUMMARY"
+          for s in $SETS; do
+            echo "::group::$s"
+            $PY scripts/oraclecase.py record "$s"
+            echo "::endgroup::"
+            for old in $(ls "$s/answers"); do
+              [ "$old" = "gdal-$v" ] && continue
+              echo "### $s: $old vs gdal-$v" >> "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+              $PY scripts/oraclecase.py diff "$s" "$old" "gdal-$v" | tee -a "$GITHUB_STEP_SUMMARY"
+              echo '```' >> "$GITHUB_STEP_SUMMARY"
+            done
+          done
+      - name: Push a branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          v=$($PY -c "from osgeo import gdal; print(gdal.__version__)")
+          b="answers/gdal-$v-${GITHUB_RUN_ID}"
+          git checkout -b "$b"
+          git add -A
+          git commit -m "answer $SETS with GDAL $v" || { echo "no changes"; exit 0; }
+          git push origin "$b"
+          echo "pushed $b" >> "$GITHUB_STEP_SUMMARY"

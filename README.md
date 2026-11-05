@@ -14,6 +14,14 @@ The warp-like oracles (warp/, curvilinear/, cf/, index/) track GDAL HEAD
 `oracles/gdal-<version>-<run>` branch: run it from the Actions tab and
 name the sets, for example `curvilinear cf index`.
 
+Sets that have a `cases.json` follow the oracle-case format
+([ORACLE.md](ORACLE.md)): the questions in `cases.json`, and one answer
+set per oracle run in `answers/<oracle-id>/`, so several GDAL versions
+answer the same questions. `scripts/oraclecase.py` records, diffs and
+adopts; the `answers` workflow answers with GDAL HEAD. `cog/` is the
+first set described this way (answers from GDAL 3.12.2, as made, and
+3.8.4, the version in the browser builds: all 15 windows identical).
+
 | Directory | Inputs | Oracle | Checks |
 |-----------|--------|--------|--------|
 | [cog/](#cog) | five small GeoTIFFs (COG and plain) | GDAL window reads | `wxy-tiff`, `wxy-virtual` |
