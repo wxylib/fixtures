@@ -1,0 +1,242 @@
+{
+ "format": "oracle-case/0",
+ "set": "cog",
+ "description": "Window reads of the five COG fixtures (see README, cog/).",
+ "cases": [
+  {
+   "id": "world-int16-deflate/info",
+   "op": "raster.info",
+   "dsn": "world-int16-deflate.tif"
+  },
+  {
+   "id": "world-int16-deflate/w0",
+   "op": "raster.read",
+   "dsn": "world-int16-deflate.tif",
+   "window": [
+    0,
+    0,
+    50,
+    40
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "world-int16-deflate/w1",
+   "op": "raster.read",
+   "dsn": "world-int16-deflate.tif",
+   "window": [
+    97,
+    61,
+    130,
+    77
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "world-int16-deflate/w2",
+   "op": "raster.read",
+   "dsn": "world-int16-deflate.tif",
+   "window": [
+    650,
+    315,
+    70,
+    45
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "polar-f32-zstd-bigtiff/info",
+   "op": "raster.info",
+   "dsn": "polar-f32-zstd-bigtiff.tif"
+  },
+  {
+   "id": "polar-f32-zstd-bigtiff/w0",
+   "op": "raster.read",
+   "dsn": "polar-f32-zstd-bigtiff.tif",
+   "window": [
+    0,
+    0,
+    50,
+    40
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "polar-f32-zstd-bigtiff/w1",
+   "op": "raster.read",
+   "dsn": "polar-f32-zstd-bigtiff.tif",
+   "window": [
+    97,
+    61,
+    130,
+    77
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "polar-f32-zstd-bigtiff/w2",
+   "op": "raster.read",
+   "dsn": "polar-f32-zstd-bigtiff.tif",
+   "window": [
+    430,
+    355,
+    70,
+    45
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "utm-u16-lzw-pred2-3band/info",
+   "op": "raster.info",
+   "dsn": "utm-u16-lzw-pred2-3band.tif"
+  },
+  {
+   "id": "utm-u16-lzw-pred2-3band/w0",
+   "op": "raster.read",
+   "dsn": "utm-u16-lzw-pred2-3band.tif",
+   "window": [
+    0,
+    0,
+    50,
+    40
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "utm-u16-lzw-pred2-3band/w1",
+   "op": "raster.read",
+   "dsn": "utm-u16-lzw-pred2-3band.tif",
+   "window": [
+    97,
+    61,
+    130,
+    77
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "utm-u16-lzw-pred2-3band/w2",
+   "op": "raster.read",
+   "dsn": "utm-u16-lzw-pred2-3band.tif",
+   "window": [
+    230,
+    155,
+    70,
+    45
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "planar-u8-deflate-2band/info",
+   "op": "raster.info",
+   "dsn": "planar-u8-deflate-2band.tif"
+  },
+  {
+   "id": "planar-u8-deflate-2band/w0",
+   "op": "raster.read",
+   "dsn": "planar-u8-deflate-2band.tif",
+   "window": [
+    0,
+    0,
+    50,
+    40
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "planar-u8-deflate-2band/w1",
+   "op": "raster.read",
+   "dsn": "planar-u8-deflate-2band.tif",
+   "window": [
+    97,
+    61,
+    103,
+    77
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "planar-u8-deflate-2band/w2",
+   "op": "raster.read",
+   "dsn": "planar-u8-deflate-2band.tif",
+   "window": [
+    130,
+    105,
+    70,
+    45
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "rgb-u8-deflate-pixel/info",
+   "op": "raster.info",
+   "dsn": "rgb-u8-deflate-pixel.tif"
+  },
+  {
+   "id": "rgb-u8-deflate-pixel/w0",
+   "op": "raster.read",
+   "dsn": "rgb-u8-deflate-pixel.tif",
+   "window": [
+    0,
+    0,
+    50,
+    40
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "rgb-u8-deflate-pixel/w1",
+   "op": "raster.read",
+   "dsn": "rgb-u8-deflate-pixel.tif",
+   "window": [
+    97,
+    61,
+    130,
+    77
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  },
+  {
+   "id": "rgb-u8-deflate-pixel/w2",
+   "op": "raster.read",
+   "dsn": "rgb-u8-deflate-pixel.tif",
+   "window": [
+    160,
+    125,
+    70,
+    45
+   ],
+   "compare": {
+    "kind": "exact"
+   }
+  }
+ ]
+}

@@ -1,0 +1,237 @@
+{
+ "format": "oracle-case/0",
+ "set": "cog",
+ "oracle": {
+  "name": "gdal",
+  "version": "3.12.2",
+  "via": "rasterio 1.5.2"
+ },
+ "recorded": "adopted from manifest.json",
+ "answers": {
+  "world-int16-deflate/w0": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/world-int16-deflate-w0.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "194f02b464f257354cd62d7c256d5b5f0691ab2d7c338e63f4890d98bf08d4e6"
+   }
+  },
+  "world-int16-deflate/w1": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/world-int16-deflate-w1.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "531b3cec0c85ef8fc5e1a4e1e619fe1a9192c4bcb5c5326bde25149829442fa1"
+   }
+  },
+  "world-int16-deflate/w2": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/world-int16-deflate-w2.bin",
+    "dtype": "int16",
+    "shape": [
+     1,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "04e588cb939439cef5369a224a738ee4566d334f17bb7ea39fe921647651bd09"
+   }
+  },
+  "polar-f32-zstd-bigtiff/w0": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/polar-f32-zstd-bigtiff-w0.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "aa2b1f18d11c762e745a7de7b5eebbd8969938c117a9403618d5acc49603fddf"
+   }
+  },
+  "polar-f32-zstd-bigtiff/w1": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/polar-f32-zstd-bigtiff-w1.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f62c9507658720b5b772a31f925d9d1d73c1cabc13c002b4e691d0506ceaa519"
+   }
+  },
+  "polar-f32-zstd-bigtiff/w2": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/polar-f32-zstd-bigtiff-w2.bin",
+    "dtype": "float32",
+    "shape": [
+     1,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f8387267de56313cface0b4489bd399df295aa03052cd7bbc82b7f68c46e40ac"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w0": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/utm-u16-lzw-pred2-3band-w0.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "5c7da05972704a2b7c1c74ab017709196501f57424243635fbecdb0e40ed70a7"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w1": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/utm-u16-lzw-pred2-3band-w1.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "1c302534e9a81f63043ef154797ee2cd9561892e57e7809de10ac6f4603d1676"
+   }
+  },
+  "utm-u16-lzw-pred2-3band/w2": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/utm-u16-lzw-pred2-3band-w2.bin",
+    "dtype": "uint16",
+    "shape": [
+     3,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "508fdd25a58aeda6f3782ce1e2affd5f56207c9534b7cbca65a7e3a95f5d42a0"
+   }
+  },
+  "planar-u8-deflate-2band/w0": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/planar-u8-deflate-2band-w0.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "e109e93d28ee633309fb215085f0aa85bd7f562ddc1b23795b552f862cebca2b"
+   }
+  },
+  "planar-u8-deflate-2band/w1": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/planar-u8-deflate-2band-w1.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     77,
+     103
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "ae1cc5e03d27eb9bdbe0b8ac1a7210d77b8f13fcdc5ec55b2385c539fab4de0b"
+   }
+  },
+  "planar-u8-deflate-2band/w2": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/planar-u8-deflate-2band-w2.bin",
+    "dtype": "uint8",
+    "shape": [
+     2,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "f6c2cb0dff57f674a3ae418a1c257d5deaab4c0f63698fda679e1e2ce86e99d6"
+   }
+  },
+  "rgb-u8-deflate-pixel/w0": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/rgb-u8-deflate-pixel-w0.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     40,
+     50
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "8c4486cf56871dc3925ce1c64224a84cfd5d3964562c9b8e66956edbc748317b"
+   }
+  },
+  "rgb-u8-deflate-pixel/w1": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/rgb-u8-deflate-pixel-w1.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     77,
+     130
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "ea02a1a25dcfbb4f9c4ea8ea9ba26308b03d5a115574e6ee6f37ca97d94cdddd"
+   }
+  },
+  "rgb-u8-deflate-pixel/w2": {
+   "status": "ok",
+   "values": {
+    "file": "oracle/rgb-u8-deflate-pixel-w2.bin",
+    "dtype": "uint8",
+    "shape": [
+     3,
+     45,
+     70
+    ],
+    "order": "C",
+    "endian": "little",
+    "sha256": "163b6c9046c0e21b6a88751c2ef90694feb59f247a8953e6e5fbaf7b8345d730"
+   }
+  }
+ }
+}
