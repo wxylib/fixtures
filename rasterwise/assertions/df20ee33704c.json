@@ -1,0 +1,42 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7.nc",
+  "array": "precipRateNearSurfMean"
+ },
+ "case": "gpm-dpr-swapped-axes",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/gpm-dpr-swapped-axes/case.yaml",
+ "asserts": {
+  "crs": "EPSG:4326",
+  "dims": "transpose (nlon, nlat) to (lat, lon); reverse lat",
+  "slice": {
+   "AD": 0,
+   "chn": 0
+  }
+ },
+ "evidence": "documented: 1D nlat and nlon coordinate variables",
+ "emit": {
+  "mdim_vrt": "df20ee33704c.mdim.vrt"
+ },
+ "check": {
+  "kind": "equals",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "geotransform": [
+   -180.0,
+   0.25,
+   0.0,
+   67.0,
+   0.0,
+   -0.25
+  ],
+  "crs": "4326",
+  "classic_equals": true,
+  "shape": [
+   536,
+   1440
+  ],
+  "pass": true
+ }
+}

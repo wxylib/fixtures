@@ -1,0 +1,54 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "0804ca23ec395440ebbc7ee98ac14ec8055c51e9442650c72542afb13aeee0bc",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/0804ca23ec395440ebbc7ee98ac14ec8055c51e9442650c72542afb13aeee0bc.img",
+  "array": null
+ },
+ "case": "ucsd-topo-raw-mercator-headers-disagree",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/ucsd-topo-raw-mercator-headers-disagree/case.yaml",
+ "asserts": {
+  "crs": "EPSG:3857",
+  "geotransform": [
+   0.0,
+   1855.3248465545596,
+   0.0,
+   16030006.674231391,
+   0.0,
+   -1855.3248465545596
+  ],
+  "dtype": "Int16",
+  "shape": [
+   17280,
+   21600
+  ],
+  "layout": "raw big-endian, rows north to south",
+  "view": "the companion .raw.vrt is the stored 0..360 grid; the main VRT swaps its halves to -180..180"
+ },
+ "evidence": "documented layout; grid checked against the resampled topo_19.1.nc",
+ "emit": {
+  "vrt": "0804ca23ec39.vrt",
+  "companions": [
+   "0804ca23ec39.raw.vrt"
+  ],
+  "config": {
+   "GDAL_VRT_RAWRASTERBAND_ALLOWED_SOURCE": "ALL"
+  },
+  "config_note": "GDAL 3.10 and later refuse a raw source outside the VRT's directory unless this option is set"
+ },
+ "check": {
+  "kind": "warp",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "window": [
+   140,
+   35,
+   145,
+   40
+  ],
+  "cells": 90000,
+  "rms_m": 4.241,
+  "median_abs_m": 1.269,
+  "pass": true
+ }
+}

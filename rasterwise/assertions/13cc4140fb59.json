@@ -1,0 +1,36 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "13cc4140fb59f5a42dd525303e0ca42ed50cb64018b9ac9808241724cf5afe70",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/13cc4140fb59f5a42dd525303e0ca42ed50cb64018b9ac9808241724cf5afe70.nc",
+  "array": "sea_ice_concentration"
+ },
+ "case": "cryosat2-sea-ice-cryptic-curvilinear",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/cryosat2-sea-ice-cryptic-curvilinear/case.yaml",
+ "asserts": {
+  "crs": "EPSG:3412",
+  "geotransform": [
+   -3950000.0,
+   25000.0,
+   0.0,
+   -3950000.0,
+   0.0,
+   25000.0
+  ],
+  "row_order": "south-up as GDAL's netCDF driver presents it"
+ },
+ "evidence": "fitted grid: the file's 2D lat/lon are the NSIDC 25 km south grid",
+ "emit": {
+  "vrt_url": "vrt://NETCDF:\"/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/13cc4140fb59f5a42dd525303e0ca42ed50cb64018b9ac9808241724cf5afe70.nc\":sea_ice_concentration?a_srs=EPSG:3412&a_gt=-3950000.0,25000.0,0.0,-3950000.0,0.0,25000.0"
+ },
+ "check": {
+  "kind": "coords",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "cells": 104912,
+  "max_m": 43.318,
+  "rms_m": 13.605,
+  "tol_m": 50,
+  "pass": true
+ }
+}

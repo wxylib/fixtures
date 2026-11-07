@@ -1,0 +1,18 @@
+<VRTDataset rasterXSize="21600" rasterYSize="17280">
+  <SRS>EPSG:3857</SRS>
+  <GeoTransform>-20037508.342789244, 1855.3248465545596, 0.0, 16030006.674231391, 0.0, -1855.3248465545596</GeoTransform>
+  <VRTRasterBand dataType="Int16" band="1">
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">0804ca23ec39.raw.vrt</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SrcRect xOff="10800" yOff="0" xSize="10800" ySize="17280"/>
+      <DstRect xOff="0" yOff="0" xSize="10800" ySize="17280"/>
+    </SimpleSource>
+    <SimpleSource>
+      <SourceFilename relativeToVRT="1">0804ca23ec39.raw.vrt</SourceFilename>
+      <SourceBand>1</SourceBand>
+      <SrcRect xOff="0" yOff="0" xSize="10800" ySize="17280"/>
+      <DstRect xOff="10800" yOff="0" xSize="10800" ySize="17280"/>
+    </SimpleSource>
+  </VRTRasterBand>
+</VRTDataset>

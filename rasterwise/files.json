@@ -1,0 +1,530 @@
+{
+ "source": {
+  "repo": "rgdal-dev/rasterwise",
+  "commit": "091f2fca3bf03e9d65cdfe2027a8bacfd80576fe"
+ },
+ "files": [
+  {
+   "id": "369b6a0bef60",
+   "sha256": "369b6a0bef60ec6703e9e5d193f5c37ae94dc84c15da0d05cb123db6e1de7734",
+   "size": 7789577,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "data-raw/dt_global_allsat_phy_l4_19930101_20190101.nc",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/369b6a0bef60ec6703e9e5d193f5c37ae94dc84c15da0d05cb123db6e1de7734.nc"
+  },
+  {
+   "id": "da47930e9aba",
+   "sha256": "da47930e9aba281b200020455f44351f055227fe0267a95d63301e4194e42977",
+   "size": 338174,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "data-raw/spherical.nc",
+   "case": "laea-globe-transposed-inf-lonlat",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/da47930e9aba281b200020455f44351f055227fe0267a95d63301e4194e42977.nc"
+  },
+  {
+   "id": "c4c2a2400882",
+   "sha256": "c4c2a24008825550c956a126b36ebe9f435bb7669fe452b33f8982f5372ebcc4",
+   "size": 24736,
+   "format": "netcdf3",
+   "canonical_path": "derived/ncmeta/rasterwise-bad_examples_62-example3.nc",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/c4c2a24008825550c956a126b36ebe9f435bb7669fe452b33f8982f5372ebcc4.nc"
+  },
+  {
+   "id": "a8a8cd6fe2b0",
+   "sha256": "a8a8cd6fe2b0c4d1463e1f8a879ffcad77bc81666051ffece2b734f97643949c",
+   "size": 996,
+   "format": "netcdf3",
+   "canonical_path": "derived/ncmeta/rasterwise-high-dim-test-1.nc",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/a8a8cd6fe2b0c4d1463e1f8a879ffcad77bc81666051ffece2b734f97643949c.nc"
+  },
+  {
+   "id": "bd84d4abe210",
+   "sha256": "bd84d4abe210bef13fc74c404b70f2b290590bcb433c4c03f9ee93cb1923f7df",
+   "size": 1108,
+   "format": "netcdf3",
+   "canonical_path": "derived/ncmeta/rasterwise-timeseries.nc",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/bd84d4abe210bef13fc74c404b70f2b290590bcb433c4c03f9ee93cb1923f7df.nc"
+  },
+  {
+   "id": "549a1b01dda6",
+   "sha256": "549a1b01dda6aa14aaa58037d5458d7d257834185f1e875d7f4fbc41e7e40477",
+   "size": 840508,
+   "format": "netcdf3",
+   "canonical_path": "extdata/19911203.nc",
+   "case": "nsidc-polar-grid-no-coords-flipped",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/549a1b01dda6aa14aaa58037d5458d7d257834185f1e875d7f4fbc41e7e40477.nc"
+  },
+  {
+   "id": "5e5e6e71163d",
+   "sha256": "5e5e6e71163d8eb49dde1b74b64f096d7326b72b896bd4fb5c920bb1eec9f6cf",
+   "size": 10776,
+   "format": "netcdf3",
+   "canonical_path": "extdata/1D/test.nc",
+   "case": "wod-profile-cast-not-a-grid",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/5e5e6e71163d8eb49dde1b74b64f096d7326b72b896bd4fb5c920bb1eec9f6cf.nc"
+  },
+  {
+   "id": "0ca0d4aa0124",
+   "sha256": "0ca0d4aa0124af62f2ded9f6893024b876fb72b602bbc88230dc39eeb6124aec",
+   "size": 44955316,
+   "format": "netcdf3",
+   "canonical_path": "extdata/EURO-CORDEX_81_DOMAIN000_54/EURO-CORDEX_81_DOMAIN000.nc",
+   "case": "regcm-lcc-cross-dot-points",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/0ca0d4aa0124af62f2ded9f6893024b876fb72b602bbc88230dc39eeb6124aec.nc"
+  },
+  {
+   "id": "d93689de2da7",
+   "sha256": "d93689de2da74e0ea9f800ff53f7b47264e512d31d032aa79a58bfeebb893496",
+   "size": 164913452,
+   "format": "hdf4",
+   "canonical_path": "extdata/HDF4/ladsweb/MOD021KM.A2015091.0010.006.2015091134552.hdf",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/d93689de2da74e0ea9f800ff53f7b47264e512d31d032aa79a58bfeebb893496.hdf"
+  },
+  {
+   "id": "5d49cbcda738",
+   "sha256": "5d49cbcda73866fba063e0f821d4b802924d77b0201de3bb9ee560dc66884ee7",
+   "size": 165104,
+   "format": "netcdf3",
+   "canonical_path": "extdata/R13352.nc",
+   "case": "argo-profiles-char-dim-dropped;rgdal-2007-netcdf-crash-tiff-named-nc",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/5d49cbcda73866fba063e0f821d4b802924d77b0201de3bb9ee560dc66884ee7.nc"
+  },
+  {
+   "id": "6fc294f03328",
+   "sha256": "6fc294f033288a26318a9a557d2c6787c0ff05a7d41d4e3bc1a330506ddac006",
+   "size": 153852,
+   "format": "netcdf3",
+   "canonical_path": "extdata/bad_examples_62/example1.nc",
+   "case": "regional-climate-grid-encodings",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/6fc294f033288a26318a9a557d2c6787c0ff05a7d41d4e3bc1a330506ddac006.nc"
+  },
+  {
+   "id": "46f5e1cadb06",
+   "sha256": "46f5e1cadb0601e9a5c30f15d78150c46294e040fddb217f4d35f7afd98c02d4",
+   "size": 65952,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/bad_examples_62/example2.nc",
+   "case": "regional-climate-grid-encodings",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/46f5e1cadb0601e9a5c30f15d78150c46294e040fddb217f4d35f7afd98c02d4.nc"
+  },
+  {
+   "id": "a7ac72b0d8db",
+   "sha256": "a7ac72b0d8db97dac2c6f12c9ba5c4b4ac3217443a56b017a1a4b4a2fb5d6407",
+   "size": 464473,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/bad_examples_62/example3.nc",
+   "case": "regional-climate-grid-encodings",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/a7ac72b0d8db97dac2c6f12c9ba5c4b4ac3217443a56b017a1a4b4a2fb5d6407.nc"
+  },
+  {
+   "id": "8ad498d23324",
+   "sha256": "8ad498d2332470f0371e64562f3f8abf2b5bf66d54c81d5a53d328d2097ccf18",
+   "size": 497572,
+   "format": "netcdf3",
+   "canonical_path": "extdata/copernicus/cout-perc1_ref_EUR-44_rcp85_IMPACT2C_QM-EOBS_1971-2000_remap0.5.nc",
+   "case": "copernicus-fdc-ensemble-as-variables",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/8ad498d2332470f0371e64562f3f8abf2b5bf66d54c81d5a53d328d2097ccf18.nc"
+  },
+  {
+   "id": "077840ba933a",
+   "sha256": "077840ba933a0d4ba2651b68206a9f1602cb69ece899b44f2e0ac591c6188348",
+   "size": 857364,
+   "format": "netcdf3",
+   "canonical_path": "extdata/copernicus/cout-perc1_ref_EUR-44_rcp85_IMPACT2C_QM-EOBS_1971-2000_remap215.nc",
+   "case": "copernicus-fdc-catchment-id-as-longitude",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/077840ba933a0d4ba2651b68206a9f1602cb69ece899b44f2e0ac591c6188348.nc"
+  },
+  {
+   "id": "4cb5979532ce",
+   "sha256": "4cb5979532ced516ece9a7a04f1962cd6a1a6ab01095905cc41f4a0ff7785ee2",
+   "size": 497572,
+   "format": "netcdf3",
+   "canonical_path": "extdata/copernicus/cout-perc5_ref_EUR-44_rcp85_IMPACT2C_QM-EOBS_1971-2000_remap0.5.nc",
+   "case": "copernicus-fdc-ensemble-as-variables",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/4cb5979532ced516ece9a7a04f1962cd6a1a6ab01095905cc41f4a0ff7785ee2.nc"
+  },
+  {
+   "id": "d491c7b26d01",
+   "sha256": "d491c7b26d010a31de0a17cdb26a63b7f79bdcf48ecfd7c94f7d0e89b696912a",
+   "size": 857364,
+   "format": "netcdf3",
+   "canonical_path": "extdata/copernicus/cout-perc5_ref_EUR-44_rcp85_IMPACT2C_QM-EOBS_1971-2000_remap215.nc",
+   "case": "copernicus-fdc-catchment-id-as-longitude",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/d491c7b26d010a31de0a17cdb26a63b7f79bdcf48ecfd7c94f7d0e89b696912a.nc"
+  },
+  {
+   "id": "d7dcc72ce30b",
+   "sha256": "d7dcc72ce30b707c02c69c32a77bcbde638bb06ea9cbc530fcc68501e6481414",
+   "size": 7923224,
+   "format": "netcdf3",
+   "canonical_path": "extdata/dt_ref_global_merged_madt_uv_19921014_19921014_20060315.nc",
+   "case": "aviso-mercator-as-lonlat;rgdal-2007-netcdf-crash-tiff-named-nc",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/d7dcc72ce30b707c02c69c32a77bcbde638bb06ea9cbc530fcc68501e6481414.nc"
+  },
+  {
+   "id": "aee348002973",
+   "sha256": "aee3480029732d72666c15403dcfa5881e212f9b1531a8588b724fb375413594",
+   "size": 244060,
+   "format": "netcdf3",
+   "canonical_path": "extdata/file.nc",
+   "case": "raster-pkg-generic-z-no-crs",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/aee3480029732d72666c15403dcfa5881e212f9b1531a8588b724fb375413594.nc"
+  },
+  {
+   "id": "cfe075db7f20",
+   "sha256": "cfe075db7f203ab1c970b819888d513f83bdff5d100e616fc337b84645482814",
+   "size": 3527924,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/get1index_64/test.nc",
+   "case": "cordex-rotated-pole-stripped",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/cfe075db7f203ab1c970b819888d513f83bdff5d100e616fc337b84645482814.nc"
+  },
+  {
+   "id": "fae2e2fc0b30",
+   "sha256": "fae2e2fc0b30d100a75bb3d6c0ad6a051649f2dff5394bcd066d955e9c6eb411",
+   "size": 996,
+   "format": "netcdf3",
+   "canonical_path": "extdata/high-dim/test-1.nc",
+   "case": "netcdf-5d-extra-dim-band-metadata",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/fae2e2fc0b30d100a75bb3d6c0ad6a051649f2dff5394bcd066d955e9c6eb411.nc"
+  },
+  {
+   "id": "cc8761e5b094",
+   "sha256": "cc8761e5b094dcbeaa7e8b00e59082fbe95aa5c6721acf467db952ad50f3fe49",
+   "size": 2440116,
+   "format": "netcdf3",
+   "canonical_path": "extdata/hmr_ita.nc",
+   "case": "mesan-rotated-pole-as-curvilinear",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/cc8761e5b094dcbeaa7e8b00e59082fbe95aa5c6721acf467db952ad50f3fe49.nc"
+  },
+  {
+   "id": "7ac6cca2ea00",
+   "sha256": "7ac6cca2ea001ab25a80795237bfcdc12d3b2456daaebf2c6e325ab8117f38c4",
+   "size": 2904294,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/inverted_73/regcm-nn-2100_reg4_22.nc",
+   "case": "regcm-ascending-lat-south-up",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/7ac6cca2ea001ab25a80795237bfcdc12d3b2456daaebf2c6e325ab8117f38c4.nc"
+  },
+  {
+   "id": "ba6453ee9460",
+   "sha256": "ba6453ee94605a850fed6ac328f74218dafd97e7fe1140f4ca2ca35fa2ae4159",
+   "size": 428217080,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/nc-to-cog/1889.daily_rain.nc",
+   "case": "silo-rain-year-chunks-slow-band-reads",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/ba6453ee94605a850fed6ac328f74218dafd97e7fe1140f4ca2ca35fa2ae4159.nc"
+  },
+  {
+   "id": "030cf5d72045",
+   "sha256": "030cf5d7204526aded7dec6198102303f9d91708ae4c960158cac0ab198d4766",
+   "size": 428203293,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/nc-to-cog/llt.nc",
+   "case": "silo-rain-year-chunks-slow-band-reads",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/030cf5d7204526aded7dec6198102303f9d91708ae4c960158cac0ab198d4766.nc"
+  },
+  {
+   "id": "5049578e7197",
+   "sha256": "5049578e719776eaf7df1ad3882c7c20f2aec53209c717d7d7f559a1f26ecc19",
+   "size": 48752606,
+   "format": "geotiff",
+   "canonical_path": "extdata/nc-to-cog/out.tif",
+   "case": "silo-rain-year-chunks-slow-band-reads",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/5049578e719776eaf7df1ad3882c7c20f2aec53209c717d7d7f559a1f26ecc19.tif"
+  },
+  {
+   "id": "f43715f25daf",
+   "sha256": "f43715f25daf39e50cc896be98ccee7f12a792ed7f4e359396321e01246d131d",
+   "size": 19562536,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/nhsce_v01r01_19661004_20140203.nc",
+   "case": "nhsce-polar-stereo-labelled-longlat",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/f43715f25daf39e50cc896be98ccee7f12a792ed7f4e359396321e01246d131d.nc"
+  },
+  {
+   "id": "9e5bac9b6135",
+   "sha256": "9e5bac9b61351cf130295b86b28d0fe0c7521d202b67259e2458cb4b806af876",
+   "size": 520774,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/ob_tran/example_ob_tran.nc",
+   "case": "rotated-pole-as-lonlat",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/9e5bac9b61351cf130295b86b28d0fe0c7521d202b67259e2458cb4b806af876.nc"
+  },
+  {
+   "id": "4e94d7b897c9",
+   "sha256": "4e94d7b897c9b7ff54460a704836acf1005805e4d43d8af44c82e2035aa023f3",
+   "size": 255551,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/ob_tran/example_ob_tran2.nc",
+   "case": "rotated-pole-as-lonlat",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/4e94d7b897c9b7ff54460a704836acf1005805e4d43d8af44c82e2035aa023f3.nc"
+  },
+  {
+   "id": "e3f71e978fee",
+   "sha256": "e3f71e978fee4e889ce0c0a46537eb38fcf582a74140e7d1e892e96115202978",
+   "size": 49758,
+   "format": "geotiff",
+   "canonical_path": "extdata/ob_tran/out.tif",
+   "case": "rotated-pole-as-lonlat",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/e3f71e978fee4e889ce0c0a46537eb38fcf582a74140e7d1e892e96115202978.tif"
+  },
+  {
+   "id": "01bf16d9b390",
+   "sha256": "01bf16d9b390122be82844c9994aacab9c8ddd0d9b771d3518eaebb03cec8ae6",
+   "size": 13760564,
+   "format": "netcdf3",
+   "canonical_path": "extdata/oscar_gdr_5d1993.nc",
+   "case": "oscar-pacific-0-360-dateline;rgdal-2007-netcdf-crash-tiff-named-nc",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/01bf16d9b390122be82844c9994aacab9c8ddd0d9b771d3518eaebb03cec8ae6.nc"
+  },
+  {
+   "id": "bec3c3cf8baa",
+   "sha256": "bec3c3cf8baa9a8d24066cf47022ebbc1ddff9b0d956af626d7443ab126c547f",
+   "size": 20408989,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/rectilinear/ACCfronts_nc4.nc",
+   "case": "acc-fronts-mercator",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/bec3c3cf8baa9a8d24066cf47022ebbc1ddff9b0d956af626d7443ab126c547f.nc"
+  },
+  {
+   "id": "10b6eb4ff393",
+   "sha256": "10b6eb4ff393722069f2c38ef2ea37971b8c091460f65fbcd1bd10d7a0f43453",
+   "size": 1733764,
+   "format": "netcdf3",
+   "canonical_path": "extdata/rectilinear/CM2.1_regionmask.nc",
+   "case": "cm21-tripolar-nominal-axes",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/10b6eb4ff393722069f2c38ef2ea37971b8c091460f65fbcd1bd10d7a0f43453.nc"
+  },
+  {
+   "id": "83f2a77cc9f3",
+   "sha256": "83f2a77cc9f3591cc72f5fd0dbf1a043e81f2f0665a69fb884181d7cae5387b4",
+   "size": 583584,
+   "format": "netcdf3",
+   "canonical_path": "extdata/rectilinear/test_3_.nc",
+   "case": "cm21-tripolar-nominal-axes",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/83f2a77cc9f3591cc72f5fd0dbf1a043e81f2f0665a69fb884181d7cae5387b4.nc"
+  },
+  {
+   "id": "0bc799977131",
+   "sha256": "0bc799977131422574b2603943d88cf965b9e9201f6e56007ca57e14eaa0b753",
+   "size": 784264,
+   "format": "netcdf3",
+   "canonical_path": "extdata/ssh05d19921006.nc",
+   "case": "rgdal-2007-netcdf-crash-tiff-named-nc;topex-ssh-noncf-fill-sentinels",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/0bc799977131422574b2603943d88cf965b9e9201f6e56007ca57e14eaa0b753.nc"
+  },
+  {
+   "id": "df20ee33704c",
+   "sha256": "df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7",
+   "size": 12359852,
+   "format": "netcdf3",
+   "canonical_path": "extdata/swapped/3A-DAY.nc",
+   "case": "gpm-dpr-swapped-axes",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7.nc"
+  },
+  {
+   "id": "33765f301d00",
+   "sha256": "33765f301d00219ae7bff2e404c8bb94b29c49d38b29ec7fb0ec5a51304df1d7",
+   "size": 10854,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "extdata/timeseries.nc",
+   "case": "cf-dsg-timeseries-read-as-grid",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/33765f301d00219ae7bff2e404c8bb94b29c49d38b29ec7fb0ec5a51304df1d7.nc"
+  },
+  {
+   "id": "13cc4140fb59",
+   "sha256": "13cc4140fb59f5a42dd525303e0ca42ed50cb64018b9ac9808241724cf5afe70",
+   "size": 2152693,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "issue-attachments/020/CS2WFA_25km_201007.nc",
+   "case": "cryosat2-sea-ice-cryptic-curvilinear",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/13cc4140fb59f5a42dd525303e0ca42ed50cb64018b9ac9808241724cf5afe70.nc"
+  },
+  {
+   "id": "8c6573fc07b2",
+   "sha256": "8c6573fc07b23ce2af731958105dc8a6c35b337c64d7223f726f1dccf1d9c135",
+   "size": 3655000,
+   "format": "binary",
+   "canonical_path": "raad/aad-modis-20day-fast-ice/geo/coastmask.img",
+   "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/8c6573fc07b23ce2af731958105dc8a6c35b337c64d7223f726f1dccf1d9c135.img"
+  },
+  {
+   "id": "9ea0d2cfeeea",
+   "sha256": "9ea0d2cfeeea9b0f88567f6db08bfc4cc17b7b17a2c5d36065973c809117b981",
+   "size": 7310000,
+   "format": "binary",
+   "canonical_path": "raad/aad-modis-20day-fast-ice/geo/lats.img",
+   "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/9ea0d2cfeeea9b0f88567f6db08bfc4cc17b7b17a2c5d36065973c809117b981.img"
+  },
+  {
+   "id": "57c853e81268",
+   "sha256": "57c853e812682947fbe9e4dc521c2795f43d6cfd843d29480943843b29d79104",
+   "size": 7310000,
+   "format": "binary",
+   "canonical_path": "raad/aad-modis-20day-fast-ice/geo/lons.img",
+   "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/57c853e812682947fbe9e4dc521c2795f43d6cfd843d29480943843b29d79104.img"
+  },
+  {
+   "id": "710a226e331a",
+   "sha256": "710a226e331a2a74e04c32c8c0252dd8ad784d452c2e97e7cefe84bffdc45dd9",
+   "size": 1827500,
+   "format": "binary",
+   "canonical_path": "raad/aad-modis-20day-fast-ice/imgs/2000_061-080_sqc.img",
+   "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/710a226e331a2a74e04c32c8c0252dd8ad784d452c2e97e7cefe84bffdc45dd9.img"
+  },
+  {
+   "id": "ddbb7f8b46a6",
+   "sha256": "ddbb7f8b46a6ee52bb00247189eefd0a56d78c4273bd662c8ef4e266eb91835c",
+   "size": 1827500,
+   "format": "binary",
+   "canonical_path": "raad/aad-modis-20day-fast-ice/imgs/2008_341-366_sqc.img",
+   "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/ddbb7f8b46a6ee52bb00247189eefd0a56d78c4273bd662c8ef4e266eb91835c.img"
+  },
+  {
+   "id": "475b21889f53",
+   "sha256": "475b21889f53e460f3e582e3114c969932378fdbf559a3d7cff73e72e15c3507",
+   "size": 873,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18.1.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/475b21889f53e460f3e582e3114c969932378fdbf559a3d7cff73e72e15c3507.vrt"
+  },
+  {
+   "id": "f6edf3e1d5d3",
+   "sha256": "f6edf3e1d5d3d6ddd52b08b2c3c78cb0e2f6280fe2f48da69b3e92c5a93e7d65",
+   "size": 1417,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18.1_atlantic.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/f6edf3e1d5d3d6ddd52b08b2c3c78cb0e2f6280fe2f48da69b3e92c5a93e7d65.vrt"
+  },
+  {
+   "id": "ecd61297dde5",
+   "sha256": "ecd61297dde5d5078ba992c365699a1169920500f005653eb94841dbeeda83b0",
+   "size": 884,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18.1_unpolished.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/ecd61297dde5d5078ba992c365699a1169920500f005653eb94841dbeeda83b0.vrt"
+  },
+  {
+   "id": "83715f6e095d",
+   "sha256": "83715f6e095d95eee860ad81e350f5ccea3453a21c46520d949d64385ae463df",
+   "size": 1439,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18.1_unpolishedatlantic.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/83715f6e095d95eee860ad81e350f5ccea3453a21c46520d949d64385ae463df.vrt"
+  },
+  {
+   "id": "2e831aaa0e34",
+   "sha256": "2e831aaa0e3424a3859667ad8e89e2456f23db90dc9605cc92cade3721990841",
+   "size": 882,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18_unpolished.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/2e831aaa0e3424a3859667ad8e89e2456f23db90dc9605cc92cade3721990841.vrt"
+  },
+  {
+   "id": "d7e78b893eba",
+   "sha256": "d7e78b893eba75098e6170b18a95705685c15d2ca6ad9177724cbe77f82f5a89",
+   "size": 1435,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_18_unpolishedatlantic.vrt",
+   "case": "",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/d7e78b893eba75098e6170b18a95705685c15d2ca6ad9177724cbe77f82f5a89.vrt"
+  },
+  {
+   "id": "ca35b9544ef0",
+   "sha256": "ca35b9544ef0b8398dbb2725cf6a37ec28ab468e063fccd43ca9f188c6a81388",
+   "size": 873,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_19.1.vrt",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/ca35b9544ef0b8398dbb2725cf6a37ec28ab468e063fccd43ca9f188c6a81388.vrt"
+  },
+  {
+   "id": "ee410a420ea7",
+   "sha256": "ee410a420ea7efe25207422a1d28cbbe11a89d7dc400012115514deccab89c58",
+   "size": 1415,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_19.1atlantic.vrt",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/ee410a420ea7efe25207422a1d28cbbe11a89d7dc400012115514deccab89c58.vrt"
+  },
+  {
+   "id": "c975a7d309ad",
+   "sha256": "c975a7d309ad80de46e4156f6d42d67063b0e9a8b364a243b275c4bde74c1fef",
+   "size": 551,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_20.1.vrt",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/c975a7d309ad80de46e4156f6d42d67063b0e9a8b364a243b275c4bde74c1fef.vrt"
+  },
+  {
+   "id": "96f682741270",
+   "sha256": "96f682741270dd1a7816df1ae21df5f0e0540a93ef09c0e12dcfabbe19640871",
+   "size": 1092,
+   "format": "vrt",
+   "canonical_path": "raad/ucsd-global-topo-1min/.vrt/topo_20.1_atlantic.vrt",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/96f682741270dd1a7816df1ae21df5f0e0540a93ef09c0e12dcfabbe19640871.vrt"
+  },
+  {
+   "id": "0804ca23ec39",
+   "sha256": "0804ca23ec395440ebbc7ee98ac14ec8055c51e9442650c72542afb13aeee0bc",
+   "size": 746496000,
+   "format": "binary",
+   "canonical_path": "raad/ucsd-global-topo-1min/topo_19.1.img",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/0804ca23ec395440ebbc7ee98ac14ec8055c51e9442650c72542afb13aeee0bc.img"
+  },
+  {
+   "id": "a8744b2763ea",
+   "sha256": "a8744b2763eaf3256a14985343098fa813e85a882e5d8e77ffe1267796a2a008",
+   "size": 548098492,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "raad/ucsd-global-topo-1min/topo_19.1.nc",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/a8744b2763eaf3256a14985343098fa813e85a882e5d8e77ffe1267796a2a008.nc"
+  },
+  {
+   "id": "477d7e804c65",
+   "sha256": "477d7e804c65e3ac4d67eff7a1fca27be7d3c1e4553cab5ca597ebe726825f66",
+   "size": 746496000,
+   "format": "binary",
+   "canonical_path": "raad/ucsd-global-topo-1min/topo_27.1.img",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/477d7e804c65e3ac4d67eff7a1fca27be7d3c1e4553cab5ca597ebe726825f66.img"
+  },
+  {
+   "id": "254ed798d283",
+   "sha256": "254ed798d28354174e299ae62439981d41eda444564d64d1336f2af38ebc556f",
+   "size": 553799095,
+   "format": "netcdf4/hdf5",
+   "canonical_path": "raad/ucsd-global-topo-1min/topo_27.1.nc",
+   "case": "ucsd-topo-raw-mercator-headers-disagree",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/254ed798d28354174e299ae62439981d41eda444564d64d1336f2af38ebc556f.nc"
+  },
+  {
+   "id": "f977f8c2f2a0",
+   "sha256": "f977f8c2f2a066001c71d7b26594da4bade84b80f97785494ac0e6e136d3b4c4",
+   "size": 24736,
+   "format": "tiff",
+   "canonical_path": "ranch/weird_nc/p_calibrate.nc",
+   "case": "argo-profiles-char-dim-dropped;rgdal-2007-netcdf-crash-tiff-named-nc",
+   "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/f977f8c2f2a066001c71d7b26594da4bade84b80f97785494ac0e6e136d3b4c4.nc"
+  }
+ ]
+}

@@ -1,0 +1,37 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "549a1b01dda6aa14aaa58037d5458d7d257834185f1e875d7f4fbc41e7e40477",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/549a1b01dda6aa14aaa58037d5458d7d257834185f1e875d7f4fbc41e7e40477.nc",
+  "array": "concentration"
+ },
+ "case": "nsidc-polar-grid-no-coords-flipped",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/nsidc-polar-grid-no-coords-flipped/case.yaml",
+ "asserts": {
+  "crs": "EPSG:3412",
+  "geotransform": [
+   -3950000.0,
+   12500.0,
+   0.0,
+   -3950000.0,
+   0.0,
+   12500.0
+  ],
+  "nodata": -128,
+  "row_order": "south-up as GDAL's netCDF driver presents it"
+ },
+ "evidence": "documented: global attribute grid = NSIDC; extent of the NSIDC south grid at 12.5 km",
+ "emit": {
+  "vrt_url": "vrt://NETCDF:\"/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/549a1b01dda6aa14aaa58037d5458d7d257834185f1e875d7f4fbc41e7e40477.nc\":concentration?a_srs=EPSG:3412&a_gt=-3950000.0,12500.0,0.0,-3950000.0,0.0,12500.0"
+ },
+ "check": {
+  "kind": "equals",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "shape": [
+   664,
+   632
+  ],
+  "pass": true
+ }
+}

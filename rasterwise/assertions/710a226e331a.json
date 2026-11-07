@@ -1,0 +1,49 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "710a226e331a2a74e04c32c8c0252dd8ad784d452c2e97e7cefe84bffdc45dd9",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/710a226e331a2a74e04c32c8c0252dd8ad784d452c2e97e7cefe84bffdc45dd9.img",
+  "array": null
+ },
+ "case": "aad-fast-ice-raw-cea-grid-as-lonlat-arrays",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/aad-fast-ice-raw-cea-grid-as-lonlat-arrays/case.yaml",
+ "asserts": {
+  "crs": "+proj=cea +lat_ts=-65 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs",
+  "geotransform": [
+   -472755.311,
+   2000.0,
+   0.0,
+   -13426012.821,
+   0.0,
+   -2000.0
+  ],
+  "dtype": "Byte",
+  "shape": [
+   425,
+   4300
+  ],
+  "layout": "raw, rows stored south to north; flipped by a negative line offset"
+ },
+ "evidence": "fitted grid: the companion lats.img/lons.img are this grid",
+ "emit": {
+  "vrt": "710a226e331a.vrt",
+  "companions": [
+   "9ea0d2cfeeea.vrt",
+   "57c853e81268.vrt"
+  ],
+  "config": {
+   "GDAL_VRT_RAWRASTERBAND_ALLOWED_SOURCE": "ALL"
+  },
+  "config_note": "GDAL 3.10 and later refuse a raw source outside the VRT's directory unless this option is set"
+ },
+ "check": {
+  "kind": "coords",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "cells": 1827500,
+  "max_m": 0.562,
+  "rms_m": 0.264,
+  "tol_m": 1,
+  "pass": true
+ }
+}

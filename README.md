@@ -34,6 +34,7 @@ first set described this way (answers from GDAL 3.12.2, as made, and
 | [polygons/](#polygons) | random polygons with holes | the cells GDAL's rasterizer burns | `wxy-warp` |
 | [index/](#index) | index space against coordinate space: a ROMS-style store, a rotated-pole store | ROMS depths, a GDAL geolocation warp, PROJ ob_tran | `wxy-zarr`, `wxy-cli` |
 | [vrt/](#vrt) | small GeoTIFF sources, classic VRT documents, `vrt://` strings | GDAL reads, full, windowed and downsampled (nearest) | `vrt-model` |
+| [rasterwise/](rasterwise/README.md) | the published rgdal-dev/rasterwise problem files, read in place by url | GDAL info and reads (oracle-case); Assertion documents with checks | storecard, wxy readers, the problem pages |
 
 ## cog/
 
