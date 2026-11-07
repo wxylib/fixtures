@@ -1,0 +1,11 @@
+<VRTDataset rasterXSize="21600" rasterYSize="17280">
+  <SRS>EPSG:3857</SRS>
+  <GeoTransform>0.0, 1855.3248465545596, 0.0, 16030006.674231391, 0.0, -1855.3248465545596</GeoTransform>
+  <VRTRasterBand dataType="Int16" band="1" subClass="VRTRawRasterBand">
+    <SourceFilename relativeToVRT="0">/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/477d7e804c65e3ac4d67eff7a1fca27be7d3c1e4553cab5ca597ebe726825f66.img</SourceFilename>
+    <ImageOffset>0</ImageOffset>
+    <PixelOffset>2</PixelOffset>
+    <LineOffset>43200</LineOffset>
+    <ByteOrder>MSB</ByteOrder>
+  </VRTRasterBand>
+</VRTDataset>

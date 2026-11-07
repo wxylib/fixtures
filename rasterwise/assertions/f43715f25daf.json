@@ -1,0 +1,36 @@
+{
+ "format": "rasterwise-assertion/0",
+ "target": {
+  "sha256": "f43715f25daf39e50cc896be98ccee7f12a792ed7f4e359396321e01246d131d",
+  "url": "https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/f43715f25daf39e50cc896be98ccee7f12a792ed7f4e359396321e01246d131d.nc",
+  "array": "snow_cover_extent"
+ },
+ "case": "nhsce-polar-stereo-labelled-longlat",
+ "recipe": "https://github.com/rgdal-dev/rasterwise/blob/main/cases/nhsce-polar-stereo-labelled-longlat/case.yaml",
+ "asserts": {
+  "crs": "+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +ellps=WGS84 +units=m +no_defs",
+  "geotransform": [
+   -8388172.4,
+   190640.28181818183,
+   0.0,
+   -8388172.4,
+   0.0,
+   190640.28181818183
+  ],
+  "row_order": "south-up as GDAL's netCDF driver presents it"
+ },
+ "evidence": "fitted grid: the file's 2D latitude/longitude are this polar stereographic grid",
+ "emit": {
+  "vrt_url": "vrt://NETCDF:\"/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/f43715f25daf39e50cc896be98ccee7f12a792ed7f4e359396321e01246d131d.nc\":snow_cover_extent?a_srs=+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +ellps=WGS84 +units=m +no_defs&a_gt=-8388172.4,190640.28181818183,0.0,-8388172.4,0.0,190640.28181818183"
+ },
+ "check": {
+  "kind": "coords",
+  "gdal": "3.8.4",
+  "date": "2026-11-07",
+  "cells": 7744,
+  "max_m": 7.462,
+  "rms_m": 4.087,
+  "tol_m": 10,
+  "pass": true
+ }
+}

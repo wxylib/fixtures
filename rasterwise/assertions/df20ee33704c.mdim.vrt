@@ -1,0 +1,36 @@
+<VRTDataset>
+  <Group name="/">
+    <Dimension name="lat" size="536" type="HORIZONTAL_Y" indexingVariable="lat"/>
+    <Dimension name="lon" size="1440" type="HORIZONTAL_X" indexingVariable="lon"/>
+    <Array name="lat">
+      <DataType>Float32</DataType>
+      <DimensionRef ref="lat"/>
+      <Source>
+        <SourceFilename relativeToVRT="0">/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7.nc</SourceFilename>
+        <SourceArray>/nlat</SourceArray>
+        <SourceView>[::-1]</SourceView>
+      </Source>
+    </Array>
+    <Array name="lon">
+      <DataType>Float32</DataType>
+      <DimensionRef ref="lon"/>
+      <Source>
+        <SourceFilename relativeToVRT="0">/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7.nc</SourceFilename>
+        <SourceArray>/nlon</SourceArray>
+      </Source>
+    </Array>
+    <Array name="precipRateNearSurfMean">
+      <DataType>Float32</DataType>
+      <DimensionRef ref="lat"/>
+      <DimensionRef ref="lon"/>
+      <SRS dataAxisToSRSAxisMapping="2,1">EPSG:4326</SRS>
+      <NoDataValue>-9999.900390625</NoDataValue>
+      <Source>
+        <SourceFilename relativeToVRT="0">/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/df20ee33704c86265fdd85de3254f5061649fd95ccb1cb7d5851cf824ac534e7.nc</SourceFilename>
+        <SourceArray>/precipRateNearSurfMean</SourceArray>
+        <SourceTranspose>0,1,3,2</SourceTranspose>
+        <SourceView>[0,0,::-1,:]</SourceView>
+      </Source>
+    </Array>
+  </Group>
+</VRTDataset>

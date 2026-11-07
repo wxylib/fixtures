@@ -1,0 +1,11 @@
+<VRTDataset rasterXSize="4300" rasterYSize="425">
+  <SRS>+proj=cea +lat_ts=-65 +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs</SRS>
+  <GeoTransform>-472755.311, 2000.0, 0.0, -13426012.821, 0.0, -2000.0</GeoTransform>
+  <VRTRasterBand dataType="Byte" band="1" subClass="VRTRawRasterBand">
+    <SourceFilename relativeToVRT="0">/vsicurl/https://github.com/rgdal-dev/rasterwise/releases/download/blobs-1/710a226e331a2a74e04c32c8c0252dd8ad784d452c2e97e7cefe84bffdc45dd9.img</SourceFilename>
+    <ImageOffset>1823200</ImageOffset>
+    <PixelOffset>1</PixelOffset>
+    <LineOffset>-4300</LineOffset>
+    <ByteOrder>LSB</ByteOrder>
+  </VRTRasterBand>
+</VRTDataset>
